@@ -1,0 +1,182 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html {
+  font-size: 62.5%; }
+  @media only screen and (max-width: 56.25em) {
+    html {
+      font-size: 50%; } }
+
+body {
+  font-family: "PT Sans", sans-serif;
+  box-sizing: border-box;
+  color: #212529;
+  background-color: #f8f9fa;
+  display: grid;
+  place-items: center; }
+
+.cards {
+  max-width: 90rem;
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem; }
+  @media only screen and (max-width: 56.25em) {
+    .cards {
+      grid-template-columns: repeat(2, 1fr); } }
+  @media only screen and (max-width: 37.5em) {
+    .cards {
+      grid-template-columns: 1fr; } }
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 0rem 2rem rgba(54, 79, 199, 0.1);
+  display: grid;
+  grid-template-rows: auto repeat(3, max-content);
+  row-gap: 2rem;
+  text-align: center;
+  justify-items: center;
+  overflow: hidden;
+  transition: all 0.2s; }
+  .card:hover {
+    transform: translateY(-0.5rem) scale(1.05);
+    box-shadow: 0 2rem 4rem rgba(54, 79, 199, 0.3); }
+  .card__img {
+    width: 100%;
+    height: 95%; }
+  .card__name, .card__price {
+    border-bottom: 1px solid #364fc7; }
+  .card__name {
+    text-transform: uppercase;
+    font-size: 2.4rem; }
+  .card__price {
+    font-size: 2.8rem; }
+    .card__price span {
+      font-size: 0.5em; }
+  .card__btn:link, .card__btn:visited {
+    text-decoration: none;
+    font-family: inherit;
+    padding: 1.5rem 0;
+    width: 100%;
+    border: none;
+    background-color: #364fc7;
+    color: #f8f9fa;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s; }
+  .card__btn:hover, .card__btn:active {
+    background-color: #2b3f9f; }
+
+.cart {
+  position: absolute;
+  top: 100%;
+  right: 3rem;
+  width: 50%;
+  display: grid;
+  grid-template-rows: 4rem max-content 4rem;
+  gap: 0.5rem;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  text-transform: uppercase;
+  border-radius: 10px;
+  box-shadow: 0 0rem 1rem rgba(54, 79, 199, 0.5);
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden; }
+  @media only screen and (max-width: 56.25em) {
+    .cart {
+      width: 60%; } }
+  @media only screen and (max-width: 37.5em) {
+    .cart {
+      width: 90%; } }
+  .cart__active {
+    opacity: 1;
+    visibility: visible; }
+  .cart__description {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    align-items: center;
+    border-bottom: 2px solid #364fc7; }
+  .cart__title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2b3f9f; }
+  .cart__selections {
+    height: 30rem;
+    overflow-y: scroll; }
+  .cart__row {
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    justify-items: center;
+    color: #212529;
+    border-bottom: 1px solid #364fc7; }
+    .cart__row-img {
+      width: 100%; }
+    .cart__row-name, .cart__row-price, .cart__row-amount {
+      font-size: 1.4rem; }
+    .cart__row-delete:link, .cart__row-delete:visited {
+      font-size: 2.4rem;
+      color: #f00;
+      font-weight: 700;
+      text-decoration: none; }
+    .cart__row-delete:hover, .cart__row-delete:active {
+      transform: scale(1.1); }
+  .cart__empty-cart:link, .cart__empty-cart:visited {
+    background-color: none;
+    border: 1px solid #364fc7;
+    padding: 1rem;
+    width: 80%;
+    justify-self: center;
+    text-align: center;
+    text-decoration: none;
+    color: #2b3f9f;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+    display: inline-block;
+    border-radius: 5px; }
+  .cart__empty-cart:hover, .cart__empty-cart:active {
+    color: #f8f9fa;
+    background-color: #2b3f9f; }
+
+.nav_box {
+  position: relative;
+  width: 100%; }
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 5rem auto;
+  border-top: 1px solid #364fc7;
+  border-bottom: 2px solid #364fc7; }
+  .navigation__title {
+    font-size: 3rem;
+    font-style: oblique; }
+    .navigation__title span {
+      font-family: "Sansita Swashed", cursive;
+      font-size: 6rem;
+      text-transform: uppercase;
+      color: #364fc7;
+      margin-right: 1.5rem; }
+  .navigation__img-box {
+    background-color: beige;
+    padding: 1.4rem;
+    background-color: #f8f9fa;
+    border-radius: 100%;
+    border-bottom: 2px solid #364fc7;
+    cursor: pointer;
+    transition: all 0.2s; }
+    .navigation__img-box:hover {
+      transform: scale(1.05); }
+  .navigation__img {
+    width: 100%;
+    display: block; }

@@ -1,0 +1,11 @@
+{
+     "name": "shop-cart",
+     "version": "1.0.0",
+     "description": "basic shopping cart",
+     "main": "index.js",
+     "scripts": {
+          "compileSass": "node-sass sass/main.scss css/style.css -w"
+     },
+     "author": "Mario Valverde Rivera",
+     "license": "ISC"
+}
