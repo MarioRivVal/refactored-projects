@@ -180,3 +180,9 @@ body {
   .navigation__img {
     width: 100%;
     display: block; }
+
+.message {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem; }
