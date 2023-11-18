@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta
+               name="viewport"
+               content="width=device-width, initial-scale=1.0"
+          />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+               href="https://fonts.googleapis.com/css2?family=Ysabeau+Office:wght@100;200;400;500;600&display=swap"
+               rel="stylesheet"
+          />
+          <link rel="stylesheet" href="css/style.css" />
+          <title>email send</title>
+     </head>
+     <body>
+          <div class="container">
+               <h1>Send E-mail</h1>
+
+               <div class="main">
+                    <form action="" class="form" id="form">
+                         <div class="form__email">
+                              <label for="email" class="label">Email</label>
+                              <input
+                                   id="email"
+                                   type="email"
+                                   name="email"
+                                   class="input"
+                                   placeholder="rivalmoro@project.net"
+                              />
+                         </div>
+
+                         <div class="form__subject">
+                              <label for="subject" class="label">Subject</label>
+                              <input
+                                   id="subject"
+                                   type="text"
+                                   name="subject"
+                                   class="input"
+                                   placeholder="Details"
+                              />
+                         </div>
+
+                         <div class="form__textarea">
+                              <label for="textarea" class="label">Mesage</label>
+                              <textarea
+                                   id="textarea"
+                                   name="textarea"
+                                   class="textarea"
+                                   placeholder="Your text"
+                              ></textarea>
+                         </div>
+
+                         <div class="form__buttons">
+                              <button
+                                   id="submit"
+                                   type="submit"
+                                   class="btn-submit btn-submit--disabled"
+                                   disabled
+                              >
+                                   Send
+                              </button>
+                              <button type="reset" class="btn-reset">
+                                   Reset
+                              </button>
+                         </div>
+                    </form>
+               </div>
+          </div>
+          <div class="spinner">
+               <div class="spinner__box">
+                    <div class="sk-chase">
+                         <div class="sk-chase-dot"></div>
+                         <div class="sk-chase-dot"></div>
+                         <div class="sk-chase-dot"></div>
+                         <div class="sk-chase-dot"></div>
+                         <div class="sk-chase-dot"></div>
+                         <div class="sk-chase-dot"></div>
+                    </div>
+               </div>
+          </div>
+
+          <div class="check">
+               <div class="check__box">
+                    <svg
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg"
+                         class="check__icon"
+                    >
+                         <path
+                              d="M10.5 10.5L11.5 11.5L14 9M8.25 5H15.75C16.4404 5 17 5.58763 17 6.3125V19L12 15.5L7 19V6.3125C7 5.58763 7.55964 5 8.25 5Z"
+                              stroke="#fff"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                         />
+                    </svg>
+               </div>
+          </div>
+          <script src="js/script.js"></script>
+     </body>
+</html>
