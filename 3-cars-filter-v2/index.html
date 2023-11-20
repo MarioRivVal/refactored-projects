@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta
+               name="viewport"
+               content="width=device-width, initial-scale=1.0"
+          />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+               href="https://fonts.googleapis.com/css2?family=Arsenal:wght@400;700&family=Belanosima:wght@600;700&display=swap"
+               rel="stylesheet"
+          />
+          <link rel="stylesheet" href="css/style.css" />
+          <title>Car searching</title>
+     </head>
+     <body>
+          <!-- SECTION LOGO -->
+          <div class="title-box">
+               <img
+                    src="img/transparent.png"
+                    class="title-box__img"
+                    alt="auto's lights"
+               />
+               <p class="title-box__name"><span>n</span>ext<span>a</span>uto</p>
+          </div>
+          <!-- SECTION MAIN -->
+          <div class="container">
+               <button class="container__btn-filter">filter</button>
+               <div class="container__cards">
+                    <!-- SECTION FILTER -->
+               </div>
+               <form class="filter">
+                    <div class="filter__selection">
+                         <label for="brand" class="filter__label">brand</label>
+                         <select class="selection" name="brand" id="brand">
+                              <option value="">all</option>
+                              <option value="audi">audi</option>
+                              <option value="BMW">BMW</option>
+                              <option value="chevrolet">chevrolet</option>
+                              <option value="dodge">dodge</option>
+                              <option value="ford">ford</option>
+                              <option value="jeep">jeep</option>
+                              <option value="mercedes benz">
+                                   mercedes benz
+                              </option>
+                              <option value="porsche">porsche</option>
+                              <option value="tesla">tesla</option>
+                         </select>
+                    </div>
+                    <div class="filter__selection">
+                         <label for="engine" class="filter__label"
+                              >engine</label
+                         >
+                         <select class="selection" name="engine" id="engine">
+                              <option value="">all</option>
+                              <option value="fuel">fuel</option>
+                              <option value="electric">electric</option>
+                         </select>
+                    </div>
+                    <div class="filter__selection">
+                         <label for="transmission" class="filter__label"
+                              >transmission</label
+                         >
+                         <select
+                              class="selection"
+                              name="transmission"
+                              id="transmission"
+                         >
+                              <option value="">all</option>
+                              <option value="manual">manual</option>
+                              <option value="automatic">automatic</option>
+                         </select>
+                    </div>
+
+                    <button type="submit" class="filter__btn-search">
+                         search
+                    </button>
+               </form>
+          </div>
+          <script src="js/script.js" type="module"></script>
+     </body>
+</html>
