@@ -196,11 +196,14 @@ body {
   .filter__btn-search:hover {
     background-color: #d89f6e; }
 
-.filter {
+.filter-hidden {
+  display: none; }
+
+.filter-active {
   position: absolute;
   width: 50%;
   background-color: rgba(246, 247, 248, 0.97);
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding: 1.5rem;
@@ -212,7 +215,7 @@ body {
   color: #5d6d7e;
   z-index: 100; }
   @media only screen and (max-width: 37.5em) {
-    .filter {
+    .filter-active {
       width: 80%; } }
 
 .no-results-active {

@@ -8,12 +8,12 @@ import { autos } from "./data.js";
 class Model {
      constructor() {
           this.autos = autos;
-          this.initShowedCards = [];
-          this.filteredCards = [];
+          this.initShowedCars = [];
+          this.filteredCars = [];
           this.filterOptions = {
-               brand: "",
-               transmisson: "",
-               engine: "",
+               brand: "all",
+               transmission: "all",
+               engine: "all",
           };
      }
 
@@ -34,7 +34,8 @@ class View {
      _btnSearch = document.querySelector(".filter__btn-search");
 
      renderHTML(number, autos) {
-          return `  <div class="card">
+          const HTML = `  
+                         <div class="card">
                                 <div class="card__name">
                                     <p class="card__brand">${autos[number].brand}</p>
                                     <p class="card__model">${autos[number].model}</p>
@@ -51,7 +52,9 @@ class View {
                                     <p class="card__descript-year">${autos[number].year}</p>
                                     <p class="card__descript-price">€${autos[number].price}</p>
                                 </div>
-                            </div>`;
+                         </div>`;
+
+          this._cardsContainer.insertAdjacentHTML("afterbegin", HTML);
      }
 
      //-------------------------------//
@@ -62,6 +65,16 @@ class View {
      //-------------------------------//
      handlerSearchClick(handler) {
           this._btnSearch.addEventListener("click", handler);
+     }
+
+     //-------------------------------//
+
+     handlerSelectionChange(handler) {
+          this._allSelections.forEach((sel) =>
+               sel.addEventListener("change", () => {
+                    handler(sel);
+               })
+          );
      }
 }
 
@@ -80,33 +93,83 @@ class Controler {
 
                do {
                     card = this.model.randomNum();
-               } while (this.model.initShowedCards.includes(card));
-               this.model.initShowedCards.push(card);
+               } while (this.model.initShowedCars.includes(card));
+               this.model.initShowedCars.push(card);
           }
 
-          this.model.initShowedCards.forEach(
-               (number) =>
-                    (this.view._cardsContainer.innerHTML +=
-                         this.view.renderHTML(number, this.model.autos))
-          );
+          this.model.initShowedCars.forEach((number) => {
+               this.view.renderHTML(number, this.model.autos);
+          });
      }
 
      //-------------------------------//
 
-     // FIX
-     controlFilterFormClick() {
-          const state = this.view._filterForm;
+     createFilterOptions() {
+          this.model.filteredCars = [];
+          const filterKeys = Object.keys(this.model.filterOptions);
 
-          if (state.style.display === "none") console.log("yes");
+          this.model.autos.forEach((el, i) => {
+               const isMatch = filterKeys.every(
+                    (key) =>
+                         this.model.filterOptions[key] === "all" ||
+                         el[key] === this.model.filterOptions[key]
+               );
 
-          //   this.view._filterForm.classList.toggle("filter-active");
+               if (isMatch) {
+                    this.model.filteredCars.push(i);
+               }
+          });
+
+          this.runFilter();
+     }
+     //-------------------------------//
+
+     runFilter() {
+          this.view._cardsContainer.innerHTML = "";
+          this.checkNoResultsMessage();
+
+          this.model.filteredCars.forEach((number) => {
+               this.view.renderHTML(number, this.model.autos);
+          });
+
+          this.controlFilterBtnClick();
+     }
+     //-------------------------------//
+
+     checkNoResultsMessage() {
+          const errorMessageElement =
+               document.querySelector(".no-results-active");
+          const hasResults = this.model.filteredCars.length > 0;
+
+          if (errorMessageElement) {
+               if (hasResults) {
+                    this.view._container.removeChild(errorMessageElement);
+               }
+          } else if (!hasResults) {
+               const newErrorMessageElement = document.createElement("P");
+               newErrorMessageElement.classList.add("no-results-active");
+               newErrorMessageElement.textContent = "No results";
+               this.view._container.appendChild(newErrorMessageElement);
+          }
+     }
+     //-------------------------------//
+     controlFilterBtnClick() {
+          this.view._filterForm.classList.toggle("filter-hidden");
+          this.view._filterForm.classList.toggle("filter-active");
      }
      //-------------------------------//
 
      controlSearchClick(e) {
           e.preventDefault();
-          this.controlFilterFormClick();
-          console.log("click");
+          this.createFilterOptions();
+     }
+     //-------------------------------//
+     controlSelectionChange(select) {
+          const selection = select.value;
+
+          if (this.model.filterOptions[select.id] === selection) return;
+
+          this.model.filterOptions[select.id] = selection;
      }
 }
 
@@ -118,97 +181,10 @@ const init = function () {
      const view = new View();
      const controller = new Controler(model, view);
      controller.selectRandomCards();
-     view.handlefilterClick(controller.controlFilterFormClick.bind(controller));
+     view.handlefilterClick(controller.controlFilterBtnClick.bind(controller));
      view.handlerSearchClick(controller.controlSearchClick.bind(controller));
+     view.handlerSelectionChange(
+          controller.controlSelectionChange.bind(controller)
+     );
 };
 document.addEventListener("DOMContentLoaded", init);
-
-//     /////////////////
-//     // DOM' S ELEMENTS
-
-//     const btnFilter = document.querySelector(".container__btn-filter");
-//     const filterForm = document.querySelector(".filter");
-//     const container = document.querySelector(".container");
-//     const cardsContainer = document.querySelector(".container__cards");
-
-//     const allSelections = document.querySelectorAll(".selection");
-
-//     const btnSearch = document.querySelector(".filter__btn-search");
-
-//     ////////////
-//     // FUNTIONS
-
-//     const noResults = function () {
-//         let errorMessage = document.querySelector(".no-results-active");
-//         if (!errorMessage && filteredCards.length === 0) {
-//             const errorMessage = document.createElement("P");
-//             errorMessage.classList.add("no-results-active");
-//             errorMessage.textContent = "no results";
-//             container.appendChild(errorMessage);
-//             return;
-//         }
-//         if (errorMessage && filteredCards.length > 0)
-//             container.removeChild(errorMessage);
-//     };
-
-//     const createFilterOptions = function () {
-//         filteredCards = [];
-//         autos.forEach((el, i) => {
-//             if (
-//                 (filterOptions.brand === "" ||
-//                     el.brand === filterOptions.brand) &&
-//                 (filterOptions.transmission === "" ||
-//                     el.transmission === filterOptions.transmission) &&
-//                 (filterOptions.engine === "" ||
-//                     el.engine === filterOptions.engine)
-//             ) {
-//                 filteredCards.push(i);
-//             }
-//         });
-//     };
-
-//     const runFilter = function (e) {
-//         e.preventDefault();
-
-//         noResults();
-
-//         cardsContainer.innerHTML = "";
-//         filteredCards.forEach((n) => {
-//             cardsContainer.innerHTML += generateHtml(n);
-//         });
-
-//         filterForm.classList.remove("filter-active");
-//         filterForm.classList.add("filter-hidden");
-//     };
-
-//     /////////////////
-//     // EVENTS
-
-//     btnFilter.addEventListener("click", function () {
-//         createFilterOptions();
-
-//         filterForm.classList.toggle("filter-hidden");
-//         filterForm.classList.toggle("filter-active");
-//     });
-
-//     document.addEventListener("click", function (e) {
-//         if (!btnFilter.contains(e.target) && !filterForm.contains(e.target)) {
-//             filterForm.classList.remove("filter-active");
-//             filterForm.classList.add("filter-hidden");
-//         }
-//     });
-
-//     allSelections.forEach((sel) => {
-//         sel.addEventListener("change", function () {
-//             const selection = sel.value;
-
-//             if (filterOptions[sel.id] === selection) return;
-
-//             filterOptions[sel.id] = selection;
-
-//             createFilterOptions();
-//         });
-//     });
-
-//     btnSearch.addEventListener("click", runFilter);
-// });

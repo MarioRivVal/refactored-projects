@@ -123,15 +123,15 @@
 
 // FUNTIONALITY
 
-// .filter-active {
-//      display: flex;
-// }
+.filter-hidden {
+     display: none;
+}
 
-.filter {
+.filter-active {
      position: absolute;
      width: 50%;
      background-color: rgba($primary-color-light-grey-2, 0.97);
-     display: none;
+     display: flex;
      flex-direction: column;
      gap: 1.5rem;
      padding: 1.5rem;
