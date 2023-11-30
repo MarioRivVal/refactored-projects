@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta
+               name="viewport"
+               content="width=device-width, initial-scale=1.0"
+          />
+
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+               href="https://fonts.googleapis.com/css2?family=Lexend:wght@200;300;400;500;600&display=swap"
+               rel="stylesheet"
+          />
+          <link rel="stylesheet" href="css/style.css" />
+          <script defer src="js/script.js"></script>
+          <title>Vet Appointments App</title>
+     </head>
+     <body>
+          <div class="container">
+               <!-- SECTION PET DETAILS -->
+               <div class="box box-pet">
+                    <div class="title-box">
+                         <div class="yellow-line"></div>
+                         <h2 class="secondary-title">Pet</h2>
+                         <div class="yellow-line"></div>
+                    </div>
+                    <form action="#" class="form">
+                         <div class="form_group">
+                              <label
+                                   class="tertiary-title"
+                                   for="name-input"
+                                   id="name"
+                                   >Name</label
+                              >
+                              <input
+                                   type="text"
+                                   id="name-input"
+                                   name="name"
+                                   autofocus
+                              />
+                         </div>
+                         <div class="form_group">
+                              <label
+                                   class="tertiary-title"
+                                   for="species-input"
+                                   id="species"
+                                   >Species</label
+                              >
+                              <input
+                                   type="text"
+                                   id="species-input"
+                                   name="species"
+                              />
+                         </div>
+                         <div class="form_group">
+                              <label
+                                   class="tertiary-title"
+                                   for="owner-input"
+                                   id="owner"
+                                   >Owner</label
+                              >
+                              <input
+                                   type="text"
+                                   id="owner-input"
+                                   name="owner"
+                              />
+                         </div>
+                         <div class="form_group">
+                              <label
+                                   class="tertiary-title"
+                                   for="telephone-input"
+                                   id="telephone"
+                                   >Tel</label
+                              >
+                              <input
+                                   type="text"
+                                   id="telephone-input"
+                                   name="telephone"
+                              />
+                         </div>
+                         <div class="form_group">
+                              <label
+                                   class="tertiary-title"
+                                   for="date-input"
+                                   id="date"
+                                   >Date</label
+                              >
+                              <input type="date" id="date-input" name="date" />
+                         </div>
+                         <div class="form_group">
+                              <label
+                                   class="tertiary-title"
+                                   for="symptoms-input"
+                                   id="symptoms"
+                                   >Symptoms</label
+                              >
+                              <textarea
+                                   name="symptoms"
+                                   id="symptoms-input"
+                                   rows="10"
+                              ></textarea>
+                         </div>
+                         <button class="btn form_btn u-hover-btn" type="submit">
+                              Add new appointment
+                         </button>
+                    </form>
+               </div>
+
+               <!-- SECTION APPOINMENT LIST -->
+               <div class="box box-appointment">
+                    <div class="title-box">
+                         <div class="yellow-line"></div>
+                         <h2 class="secondary-title">Appointments</h2>
+                         <div class="yellow-line"></div>
+                    </div>
+               </div>
+               <div class="box_appointments"></div>
+          </div>
+     </body>
+</html>
