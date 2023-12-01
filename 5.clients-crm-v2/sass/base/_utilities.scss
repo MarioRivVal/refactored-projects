@@ -1,0 +1,22 @@
+.u-title-first {
+    font-size: $title-first;
+    line-height: 1;
+    text-transform: uppercase;
+}
+.u-title-second {
+    font-size: $title-second;
+    margin-top: -2rem;
+    margin-bottom: 6rem;
+
+    @include respond(tab-port) {
+        margin-bottom: 2rem;
+    }
+
+    & span {
+        text-transform: uppercase;
+    }
+}
+.u-title-third {
+    font-size: $title-third;
+    text-transform: uppercase;
+}

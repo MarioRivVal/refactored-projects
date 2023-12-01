@@ -1,0 +1,336 @@
+.container {
+     max-width: 190rem;
+     height: 100vh;
+     display: grid;
+     grid-template-columns: 24rem 1fr;
+     margin: 0 auto;
+
+     @include respond(tab-port) {
+          // grid-template-columns: 16rem 1fr;
+          grid-template-rows: 1fr 1fr;
+          grid-template-columns: none;
+     }
+
+     & > * {
+          padding: $spacing-medium $spacing-small;
+     }
+
+     &--left {
+          background-color: $color-primary;
+          color: $color-white;
+
+          @include respond(tab-port) {
+               grid-row: 1/2;
+          }
+
+          .title-box,
+          .button-box {
+               @include flexColumn;
+          }
+
+          .button-box {
+               gap: 2rem;
+
+               @include respond(tab-port) {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+               }
+          }
+     }
+
+     &--right {
+          position: relative;
+          background-color: $color-grey-light;
+          grid-column: 2/-1;
+          @include flexColumn;
+
+          @include respond(tab-port) {
+               grid-row: 2/3;
+          }
+
+          .clients {
+               width: 100%;
+
+               &_title {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    justify-items: center;
+                    background-color: $color-grey-lighter;
+                    padding: 0.5rem 0;
+                    border-radius: 5px;
+                    box-shadow: 0px 4px 10px 0px #00000033;
+
+                    li {
+                         list-style: none;
+                         font-size: $title-third;
+                    }
+               }
+               &_empty {
+                    height: 2rem;
+               }
+               &_list {
+                    box-shadow: 0px 4px 10px 0px #00000033;
+                    background-color: $color-white;
+                    border-radius: 5px;
+
+                    & > *:not(:last-child) {
+                         border-bottom: solid 1px $color-primary;
+                    }
+               }
+
+               &_row {
+                    position: relative;
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    justify-items: center;
+                    align-items: center;
+                    padding: 1.5rem 0;
+
+                    &:hover {
+                         background-color: $color-grey-lighter;
+                    }
+
+                    .icon-box {
+                         position: absolute;
+                         width: 2rem;
+                         height: 100%;
+                         top: 0;
+                         left: 0;
+                         background-color: $color-primary;
+                         display: flex;
+                         align-items: center;
+                         color: $color-white;
+                         border-radius: 5px 0 0 5px;
+                         cursor: pointer;
+                    }
+               }
+
+               &_data {
+                    font-size: $paragraph;
+
+                    &--name {
+                         font-weight: 600;
+                    }
+
+                    &--telephone,
+                    &--email {
+                         text-decoration: none;
+                         color: inherit;
+
+                         &:hover {
+                              color: $color-primary-dark;
+                         }
+                    }
+               }
+
+               &_options {
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    top: 0;
+                    left: 2rem; // 2rem
+                    height: 100%;
+                    width: 0rem; // 6rem
+                    // backdrop-filter: blur(10px);
+                    background-color: $color-grey-lighter;
+                    overflow: hidden;
+                    // z-index: -1;
+
+                    &--active {
+                         animation: appearRight 0.3s;
+                         animation-fill-mode: forwards;
+                    }
+               }
+
+               &_btn {
+                    font-size: $paragraph-small;
+                    text-transform: uppercase;
+                    width: 90%;
+                    border: none;
+                    padding: 0.2rem;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    color: $color-white;
+                    transition: all 0.2s;
+                    opacity: 1;
+                    overflow: hidden;
+
+                    &--delete {
+                         background-color: $color-secondary;
+
+                         &:hover {
+                              background-color: $color-secondary-darker;
+                         }
+                    }
+
+                    &--edit {
+                         background-color: $color-primary-dark;
+
+                         &:hover {
+                              background-color: $color-primary-darker;
+                         }
+                    }
+               }
+          }
+
+          .new-clients {
+               position: absolute;
+               left: 0;
+               top: 0;
+               width: 100%;
+               height: 100%;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               backdrop-filter: blur(10px);
+               background-color: rgba(51, 51, 51, 0.329);
+               opacity: 0;
+               visibility: hidden;
+               //    opacity: 1;
+               //    visibility: visible;
+               transition: all 0.2s;
+
+               //    &--active {
+               //         opacity: 1;
+               //         visibility: visible;
+               //    }
+
+               //    &--desabled {
+               //         opacity: 0;
+               //         visibility: hidden;
+               //    }
+
+               .form-box {
+                    position: absolute;
+               }
+
+               form {
+                    position: relative;
+                    width: 40rem;
+                    background-color: $color-white;
+                    box-shadow: 0px 4px 10px 0px #00000033;
+                    border-radius: 5px;
+                    padding: 2rem;
+
+                    .input-group {
+                         display: flex;
+                         flex-direction: column;
+                         margin-bottom: 1rem;
+                    }
+
+                    label {
+                         font-size: $paragraph;
+                         text-transform: uppercase;
+                    }
+
+                    input {
+                         color: inherit;
+                         font-size: $paragraph;
+                         padding: 0.5rem;
+                         border: none;
+                         border-bottom: 1px solid transparent;
+                         border-radius: 5px;
+
+                         &:focus {
+                              outline: none;
+                              border-bottom: solid 1px $color-primary;
+                         }
+                    }
+
+                    .alert-message {
+                         color: $color-secondary;
+                         position: absolute;
+                         font-size: $paragraph-small;
+                         left: 50%;
+                         transform: translateX(-50%);
+                    }
+
+                    .form_btn {
+                         background-color: $color-primary;
+                         width: 100%;
+                         margin-top: 4rem;
+                         transition: all 0.2s;
+                         height: 4rem;
+                         font-size: $title-third;
+
+                         &:hover {
+                              background-color: $color-primary-darker;
+                         }
+                    }
+               }
+               //    .form--active {
+               //         animation: popScale 0.3s;
+               //         animation-fill-mode: forwards;
+               //    }
+               //    .form--desabled {
+               //         animation: reduceScale 0.3s;
+               //         animation-fill-mode: forwards;
+               //    }
+
+               .message-box {
+                    position: absolute;
+                    backdrop-filter: blur(10px);
+                    background-color: rgba(51, 51, 51, 0.329);
+                    width: 100%;
+                    height: 100%;
+                    bottom: 0;
+                    left: 0;
+                    border-radius: 5px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    animation: popScale 0.3s;
+                    animation-fill-mode: forwards;
+
+                    .p {
+                         font-size: $title-third;
+                         text-transform: uppercase;
+                         color: $color-white;
+                         padding: 0.5rem;
+                         width: 90%;
+                         border-radius: 5px;
+                         text-align: center;
+                    }
+               }
+
+               .red {
+                    background-color: $color-secondary;
+               }
+               .yellow {
+                    background-color: $color-tertiary;
+               }
+               .green {
+                    background-color: $color-primary-dark;
+               }
+          }
+     }
+
+     .new-clients--active {
+          opacity: 1;
+          visibility: visible;
+     }
+
+     .btn {
+          background-color: $color-primary-dark;
+          width: 100%;
+          text-transform: uppercase;
+          text-align: center;
+          text-decoration: none;
+          font-size: $title-third;
+          color: inherit;
+          border-radius: 5px;
+          transition: all 0.2s;
+
+          @include respond(tab-port) {
+               width: 30%;
+               padding: 0.5rem 0;
+          }
+
+          &:hover {
+               background-color: $color-primary-darker;
+          }
+     }
+}

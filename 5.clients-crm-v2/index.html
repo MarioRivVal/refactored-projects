@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta
+               name="viewport"
+               content="width=device-width, initial-scale=1.0"
+          />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+               href="https://fonts.googleapis.com/css2?family=Palanquin:wght@300;400;500;600;700&display=swap"
+               rel="stylesheet"
+          />
+          <link rel="stylesheet" href="css/style.css" />
+          <script defer src="js/controller.js" type="module"></script>
+
+          <title>CRM indexed-DB</title>
+     </head>
+     <body>
+          <div class="container">
+               <!-- SECTION BOX-LEFT -->
+               <div class="container--left">
+                    <div class="title-box">
+                         <h1 class="u-title-first">crm</h1>
+                         <h2 class="u-title-second">indexed<span>db</span></h2>
+                    </div>
+                    <div class="button-box">
+                         <a href="#" class="btn clients-list-btn">clients</a>
+                         <a href="#" class="btn new-client-btn">new client</a>
+                    </div>
+               </div>
+               <!-- SECTION BOX-RIGHT -->
+               <div class="container--right">
+                    <h2 class="u-title-second" id="title-right">CLIENTS</h2>
+                    <div class="clients">
+                         <ul class="clients_title">
+                              <li class="u-title-third">name</li>
+                              <li class="u-title-third">email</li>
+                              <li class="u-title-third">tel</li>
+                              <li class="u-title-third">company</li>
+                         </ul>
+                         <div class="clients_empty"></div>
+                         <div class="clients_list">
+                              <!-- the new clients rows here -->
+                         </div>
+                    </div>
+                    <!-- SECTION FORM CLIENTS -->
+                    <div class="new-clients">
+                         <div class="form-box">
+                              <form action="#">
+                                   <div class="input-group">
+                                        <label for="name">Name</label>
+                                        <input
+                                             type="text"
+                                             id="name"
+                                             name="name"
+                                        />
+                                   </div>
+                                   <div class="input-group">
+                                        <label for="email">Email</label>
+                                        <input
+                                             type="text"
+                                             id="email"
+                                             name="email"
+                                        />
+                                   </div>
+                                   <div class="input-group">
+                                        <label for="phone">phone</label>
+                                        <input
+                                             type="text"
+                                             id="phone"
+                                             name="phone"
+                                        />
+                                   </div>
+                                   <div class="input-group">
+                                        <label for="company">Company</label>
+                                        <input
+                                             type="text"
+                                             id="company"
+                                             name="company"
+                                        />
+                                   </div>
+
+                                   <button
+                                        class="clients_btn form_btn"
+                                        type="submit"
+                                   >
+                                        add client
+                                   </button>
+                              </form>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </body>
+</html>
