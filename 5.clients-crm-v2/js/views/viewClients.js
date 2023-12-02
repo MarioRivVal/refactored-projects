@@ -4,6 +4,7 @@ class ViewClient {
           this.clientListEl = document.querySelector(".clients_list");
      }
      //----------------------------//
+
      toggleClientOptions(clientId) {
           const selectedBox = document.querySelector(
                `.clients_options[data-id="${clientId}"]`
@@ -13,7 +14,7 @@ class ViewClient {
 
           setTimeout(() => {
                selectedBox.classList.remove("clients_options--active");
-          }, 10000);
+          }, 5000);
      }
 
      //----------------------------//
@@ -78,11 +79,8 @@ class ViewClient {
      addHandlerClientsList(handler) {
           this.clientsBtn.addEventListener("click", handler);
      }
-
      //----------------------------//
-     // addHandlerClientsOptions(handler) {
-     //      this.clientListEl.addEventListener("click", handler);
-     // }
+
      addHandlerClientsEvents(handlers) {
           this.clientListEl.addEventListener("click", (e) => {
                handlers.forEach((handler) => handler(e));

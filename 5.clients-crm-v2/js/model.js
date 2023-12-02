@@ -1,6 +1,6 @@
 class State {
      constructor() {
-          this.newClient = {};
+          this.currentClient = {};
           this.allClients = [];
           this.db;
           this.clientId;
@@ -33,15 +33,14 @@ class State {
                };
           });
      }
-
      //----------------------------//
 
-     addClientDB(newClient) {
+     addClientDB() {
           const transaction = this.db.transaction("clients", "readwrite");
           const objectStore = transaction.objectStore("clients");
 
           return new Promise((resolve, reject) => {
-               const addRequest = objectStore.add(newClient);
+               const addRequest = objectStore.add(this.currentClient);
 
                addRequest.onsuccess = () => {
                     resolve(addRequest.result);
@@ -82,7 +81,38 @@ class State {
      //----------------------------//
 
      deleteClientDB() {
-          console.log("deleteClientDB");
+          const transaction = this.db.transaction("clients", "readwrite");
+          const objectStore = transaction.objectStore("clients");
+
+          return new Promise((resolve, reject) => {
+               const deleteRequest = objectStore.delete(this.clientId);
+
+               transaction.oncomplete = function () {
+                    resolve();
+               };
+
+               transaction.onerror = function () {
+                    reject(deleteRequest.error);
+               };
+          });
+     }
+
+     //----------------------------//
+     editClientDB() {
+          const transaction = this.db.transaction("clients", "readwrite");
+          const objectStore = transaction.objectStore("clients");
+
+          return new Promise((resolve, reject) => {
+               const editRequest = objectStore.put(this.currentClient);
+
+               transaction.oncomplete = function () {
+                    resolve();
+               };
+
+               transaction.onerror = function () {
+                    reject(editRequest.error);
+               };
+          });
      }
      //----------------------------//
      getClientId(e) {

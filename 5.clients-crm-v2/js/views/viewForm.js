@@ -1,13 +1,25 @@
 class ViewForm {
      constructor() {
-          this.newClientaBtn = document.querySelector(".new-client-btn");
+          this.newClientBtn = document.querySelector(".new-client-btn");
           this.newClientsBoxEl = document.querySelector(".new-clients");
           this.formEl = document.querySelector("form");
+          this.formBtnEl = document.querySelector(".form_btn");
+          this.editMode = false;
      }
      //----------------------------//
 
      toggleForm() {
-          this.newClientsBoxEl.classList.toggle("new-clients--active");
+          this.toggleFormBtn();
+          this.formEl.reset();
+
+          if (
+               this.newClientsBoxEl.classList.contains("new-clients--active") &&
+               this.editMode
+          ) {
+               this.newClientsBoxEl.classList.remove("new-clients--active");
+          } else {
+               this.newClientsBoxEl.classList.add("new-clients--active");
+          }
      }
      //----------------------------//
 
@@ -15,6 +27,7 @@ class ViewForm {
           this.newClientsBoxEl.classList.remove("new-clients--active");
      }
      //----------------------------//
+
      checkEmptyInput() {
           const inputs = [...this.formEl.elements];
           const emptyInputs = inputs.filter(
@@ -23,7 +36,7 @@ class ViewForm {
           return emptyInputs.length > 0;
      }
      //----------------------------//
-     //----------------------------//
+
      displayAlert() {
           const previousAlert = this.formEl.querySelector(".alert-message");
 
@@ -42,6 +55,7 @@ class ViewForm {
           }, 2000);
      }
      //----------------------------//
+
      getFormData() {
           const formData = new FormData(this.formEl);
           const objFormData = Object.fromEntries(formData);
@@ -60,10 +74,21 @@ class ViewForm {
           }, 3000);
      }
      //----------------------------//
+
+     toggleFormBtn() {
+          this.formBtnEl.textContent = this.editMode
+               ? "Edit Client"
+               : "Add Client";
+          this.formBtnEl.style.backgroundColor = this.editMode
+               ? "#f09d04"
+               : "#326c85";
+     }
+
      addHandlerNewClient(handler) {
-          this.newClientaBtn.addEventListener("click", handler);
+          this.newClientBtn.addEventListener("click", handler);
      }
      //----------------------------//
+
      addHandlerSubmit(handler) {
           this.formEl.addEventListener("submit", (e) => {
                e.preventDefault();

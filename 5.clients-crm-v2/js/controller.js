@@ -4,31 +4,48 @@ import state from "./model.js";
 
 //----------------------------//
 const controlSubmit = async function () {
-     if (viewForm.checkEmptyInput()) {
-          viewForm.displayAlert();
-          return;
-     }
+     if (viewForm.editMode) {
+          const editedFormData = viewForm.getFormData();
+          state.currentClient = { ...editedFormData, id: state.clientId };
 
-     const formData = viewForm.getFormData();
-     state.newClient = { ...formData, id: Date.now() };
-     // console.log(state.newClient); // CONSOLE
+          try {
+               await state.editClientDB();
 
-     try {
-          await state.addClientDB(state.newClient);
-          viewForm.displayMessage("added", "green");
-          viewForm.formEl.reset();
-     } catch (err) {
-          console.error("Error adding client:", err);
-          viewForm.displayMessage("no added", "red");
+               resetAllStates();
+          } catch (error) {
+               viewForm.displayMessage("no edited", "red");
+          }
+     } else {
+          if (viewForm.checkEmptyInput()) {
+               viewForm.displayAlert();
+               return;
+          }
+
+          const formData = viewForm.getFormData();
+          state.currentClient = { ...formData, id: Date.now() };
+
+          try {
+               await state.addClientDB();
+
+               resetAllStates();
+          } catch (err) {
+               console.error("Error adding client:", err);
+               viewForm.displayMessage("no added", "red");
+          }
      }
+};
+//----------------------------//
+
+const resetAllStates = async function () {
+     viewForm.formEl.reset();
+     viewForm.toggleForm();
      state.allClients = await state.getAllClients();
-     // console.log(state.allClients); // CONSOLE
-
      viewClients.renderClientsList(state.allClients);
 };
 //----------------------------//
 
 const controlNewClient = function () {
+     viewForm.editMode = false;
      viewForm.toggleForm();
 };
 //----------------------------//
@@ -36,6 +53,7 @@ const controlNewClient = function () {
 const controlClientsList = function () {
      viewForm.closeForm();
      viewForm.formEl.reset();
+     viewForm.editMode = false;
 };
 //----------------------------//
 
@@ -43,18 +61,45 @@ const controlClientOptions = function (e) {
      if (e.target.closest(".icon-box")) {
           state.getClientId(e);
 
-          console.log(state.clientId); // CONSOLE
-
           viewClients.toggleClientOptions(state.clientId);
      }
 };
 //----------------------------//
 
-const controlDeleteClient = function (e) {
+const controlDeleteClient = async function (e) {
      if (e.target.classList.contains("clients_btn--delete")) {
           state.getClientId(e);
-          state.deleteClientDB();
-          console.log(state.clientId); // CONSOLE
+
+          const confirmation = confirm(
+               "Do you really want to delete this client?"
+          );
+
+          if (confirmation) {
+               try {
+                    await state.deleteClientDB();
+                    state.allClients = await state.getAllClients();
+                    viewClients.renderClientsList(state.allClients);
+               } catch (error) {
+                    viewForm.displayMessage(" no deleted", "red");
+               }
+          }
+     }
+};
+//----------------------------//
+const controlEditClient = function (e) {
+     if (e.target.classList.contains("clients_btn--edit")) {
+          viewForm.editMode = true;
+
+          state.getClientId(e);
+          const client = state.allClients.find(
+               (client) => client.id === state.clientId
+          );
+
+          viewForm.toggleForm();
+          viewForm.formEl.name.value = client.name;
+          viewForm.formEl.email.value = client.email;
+          viewForm.formEl.phone.value = client.phone;
+          viewForm.formEl.company.value = client.company;
      }
 };
 //----------------------------//
@@ -66,12 +111,12 @@ const init = async function () {
      viewClients.addHandlerClientsEvents([
           controlClientOptions,
           controlDeleteClient,
+          controlEditClient,
      ]);
-     // viewClients.addHandlerClientsOptions(controlClientOptions);
-     // viewClients.addHandlerClientsOptions(controlDeleteClient);
 
      await state.createDB();
      state.allClients = await state.getAllClients();
      viewClients.renderClientsList(state.allClients);
 };
+
 init();
