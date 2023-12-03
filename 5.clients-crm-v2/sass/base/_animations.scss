@@ -1,31 +1,13 @@
-// @keyframes popScale {
-//     0% {
-//         opacity: 0;
-//         transform: scale(0.2);
-//     }
-
-//     100% {
-//         opacity: 1;
-//         transform: scale(1);
-//     }
-// }
-// @keyframes reduceScale {
-//     0% {
-//         opacity: 1;
-//         transform: scale(1);
-//     }
-
-//     100% {
-//         opacity: 0;
-//         transform: scale(0.2);
-//     }
-// }
-
 @keyframes appearRight {
      0% {
           width: 0; // 6rem
      }
      100% {
-          width: 6rem; // 6rem
+          width: 18rem; // 6rem
+          padding: 0.5rem;
+
+          @include respond(phone) {
+               width: 12rem; // 6rem
+          }
      }
 }

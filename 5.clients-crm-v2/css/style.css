@@ -2,7 +2,10 @@
   0% {
     width: 0; }
   100% {
-    width: 6rem; } }
+    width: 18rem;
+    padding: 0.5rem;
+    @media only screen and (max-width: 37.5em) {
+      width: 12rem; } } }
 
 *,
 *::before,
@@ -12,31 +15,10 @@
   box-sizing: inherit; }
 
 html {
-  font-size: 62.5%;
-  /*
-   @include respond(tab-land) {
-        // width < 1200?
-        font-size: 56.25%; //1 rem = 9px, 9/16 = 56.25%
-    }
-    @include respond(tab-port) {
-        // width < 900?
-        font-size: 50%; //1 rem = 8px, 8/16 = 50%
-    }
-  @include respond(phone) {
-         // width < 600?
-        font-size: 37.5%; //1 rem = 6px, 6/16 = 37.5%
-    }
-
-    @include respond(big-desktop) {
-        font-size: 75%; //1rem = 12, 12/16
-    }
-  */ }
+  font-size: 62.5%; }
   @media only screen and (max-width: 75em) {
     html {
       font-size: 56.25%; } }
-  @media only screen and (max-width: 56.25em) {
-    html {
-      font-size: 50%; } }
 
 body {
   box-sizing: border-box;
@@ -59,7 +41,7 @@ body {
     text-transform: uppercase; }
 
 .u-title-third {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   text-transform: uppercase; }
 
 .container {
@@ -70,7 +52,7 @@ body {
   margin: 0 auto; }
   @media only screen and (max-width: 56.25em) {
     .container {
-      grid-template-rows: 1fr 1fr;
+      grid-template-rows: 1fr 3fr;
       grid-template-columns: none; } }
   .container > * {
     padding: 4rem 2rem; }
@@ -114,7 +96,10 @@ body {
         box-shadow: 0px 4px 10px 0px #00000033; }
         .container--right .clients_title li {
           list-style: none;
-          font-size: 1.6rem; }
+          font-size: 1.8rem; }
+        @media only screen and (max-width: 37.5em) {
+          .container--right .clients_title {
+            display: none; } }
       .container--right .clients_empty {
         height: 2rem; }
       .container--right .clients_list {
@@ -134,18 +119,24 @@ body {
           background-color: #f0f0f0; }
         .container--right .clients_row .icon-box {
           position: absolute;
-          width: 2rem;
+          width: 3rem;
           height: 100%;
           top: 0;
           left: 0;
           background-color: #3a85a5;
           display: flex;
-          align-items: center;
           color: #fafafa;
           border-radius: 5px 0 0 5px;
           cursor: pointer; }
+          @media only screen and (max-width: 37.5em) {
+            .container--right .clients_row .icon-box {
+              width: 4rem; } }
+        @media only screen and (max-width: 37.5em) {
+          .container--right .clients_row {
+            display: flex;
+            flex-direction: column; } }
       .container--right .clients_data {
-        font-size: 1.4rem; }
+        font-size: 1.6rem; }
         .container--right .clients_data--name {
           font-weight: 600; }
         .container--right .clients_data--telephone, .container--right .clients_data--email {
@@ -156,24 +147,28 @@ body {
       .container--right .clients_options {
         position: absolute;
         display: flex;
-        flex-direction: column;
-        justify-content: space-around;
+        gap: 1rem;
+        justify-content: center;
         align-items: center;
         top: 0;
-        left: 2rem;
+        left: 3rem;
         height: 100%;
         width: 0rem;
-        background-color: #f0f0f0;
+        background-color: #fafafa;
         overflow: hidden; }
         .container--right .clients_options--active {
           animation: appearRight 0.3s;
           animation-fill-mode: forwards; }
+        @media only screen and (max-width: 37.5em) {
+          .container--right .clients_options {
+            flex-direction: column;
+            left: 4rem; } }
       .container--right .clients_btn {
         font-size: 1.2rem;
         text-transform: uppercase;
-        width: 90%;
+        width: 100%;
         border: none;
-        padding: 0.2rem;
+        padding: 1rem;
         border-radius: 5px;
         cursor: pointer;
         color: #fafafa;
@@ -216,11 +211,11 @@ body {
           flex-direction: column;
           margin-bottom: 1rem; }
         .container--right .new-clients form label {
-          font-size: 1.4rem;
+          font-size: 1.6rem;
           text-transform: uppercase; }
         .container--right .new-clients form input {
           color: inherit;
-          font-size: 1.4rem;
+          font-size: 1.6rem;
           padding: 0.5rem;
           border: none;
           border-bottom: 1px solid transparent;
@@ -240,7 +235,7 @@ body {
           margin-top: 4rem;
           transition: all 0.2s;
           height: 4rem;
-          font-size: 1.6rem; }
+          font-size: 1.8rem; }
           .container--right .new-clients form .form_btn:hover {
             background-color: #1f4353; }
       .container--right .new-clients .message-box {
@@ -258,7 +253,7 @@ body {
         animation: popScale 0.3s;
         animation-fill-mode: forwards; }
         .container--right .new-clients .message-box .p {
-          font-size: 1.6rem;
+          font-size: 1.8rem;
           text-transform: uppercase;
           color: #fafafa;
           padding: 0.5rem;
@@ -277,16 +272,21 @@ body {
   .container .btn {
     background-color: #326c85;
     width: 100%;
+    padding: 1rem 0;
     text-transform: uppercase;
     text-align: center;
     text-decoration: none;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color: inherit;
     border-radius: 5px;
     transition: all 0.2s; }
     @media only screen and (max-width: 56.25em) {
       .container .btn {
         width: 30%;
+        padding: 0.5rem 0; } }
+    @media only screen and (max-width: 37.5em) {
+      .container .btn {
+        width: 50%;
         padding: 0.5rem 0; } }
     .container .btn:hover {
       background-color: #1f4353; }

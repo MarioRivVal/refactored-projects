@@ -6,8 +6,7 @@
      margin: 0 auto;
 
      @include respond(tab-port) {
-          // grid-template-columns: 16rem 1fr;
-          grid-template-rows: 1fr 1fr;
+          grid-template-rows: 1fr 3fr;
           grid-template-columns: none;
      }
 
@@ -65,6 +64,10 @@
                          list-style: none;
                          font-size: $title-third;
                     }
+
+                    @include respond(phone) {
+                         display: none;
+                    }
                }
                &_empty {
                     height: 2rem;
@@ -93,16 +96,24 @@
 
                     .icon-box {
                          position: absolute;
-                         width: 2rem;
+                         width: 3rem;
                          height: 100%;
                          top: 0;
                          left: 0;
                          background-color: $color-primary;
                          display: flex;
-                         align-items: center;
                          color: $color-white;
                          border-radius: 5px 0 0 5px;
                          cursor: pointer;
+
+                         @include respond(phone) {
+                              width: 4rem;
+                         }
+                    }
+
+                    @include respond(phone) {
+                         display: flex;
+                         flex-direction: column;
                     }
                }
 
@@ -127,30 +138,34 @@
                &_options {
                     position: absolute;
                     display: flex;
-                    flex-direction: column;
-                    justify-content: space-around;
+                    gap: 1rem;
+                    justify-content: center;
                     align-items: center;
                     top: 0;
-                    left: 2rem; // 2rem
+                    left: 3rem;
                     height: 100%;
-                    width: 0rem; // 6rem
-                    // backdrop-filter: blur(10px);
-                    background-color: $color-grey-lighter;
+                    width: 0rem;
+
+                    background-color: $color-white;
                     overflow: hidden;
-                    // z-index: -1;
 
                     &--active {
                          animation: appearRight 0.3s;
                          animation-fill-mode: forwards;
+                    }
+
+                    @include respond(phone) {
+                         flex-direction: column;
+                         left: 4rem;
                     }
                }
 
                &_btn {
                     font-size: $paragraph-small;
                     text-transform: uppercase;
-                    width: 90%;
+                    width: 100%;
                     border: none;
-                    padding: 0.2rem;
+                    padding: 1rem;
                     border-radius: 5px;
                     cursor: pointer;
                     color: $color-white;
@@ -190,19 +205,7 @@
                opacity: 0;
                visibility: hidden;
 
-               //    opacity: 1;
-               //    visibility: visible;
                transition: all 0.2s;
-
-               //    &--active {
-               //         opacity: 1;
-               //         visibility: visible;
-               //    }
-
-               //    &--desabled {
-               //         opacity: 0;
-               //         visibility: hidden;
-               //    }
 
                .form-box {
                     position: absolute;
@@ -262,14 +265,6 @@
                          }
                     }
                }
-               //    .form--active {
-               //         animation: popScale 0.3s;
-               //         animation-fill-mode: forwards;
-               //    }
-               //    .form--desabled {
-               //         animation: reduceScale 0.3s;
-               //         animation-fill-mode: forwards;
-               //    }
 
                .message-box {
                     position: absolute;
@@ -317,6 +312,7 @@
      .btn {
           background-color: $color-primary-dark;
           width: 100%;
+          padding: 1rem 0;
           text-transform: uppercase;
           text-align: center;
           text-decoration: none;
@@ -324,10 +320,13 @@
           color: inherit;
           border-radius: 5px;
           transition: all 0.2s;
-          // pointer-events: none;
 
           @include respond(tab-port) {
                width: 30%;
+               padding: 0.5rem 0;
+          }
+          @include respond(phone) {
+               width: 50%;
                padding: 0.5rem 0;
           }
 
