@@ -1,0 +1,89 @@
+// @keyframes btnEffect {
+//      0% {
+//           background-image: linear-gradient(
+//                to right,
+//                $primary-tussock 0%,
+//                $primary-glacier 100%
+//           );
+//      }
+//      25% {
+//           background-image: linear-gradient(
+//                to right,
+//                $primary-tussock 25%,
+//                $primary-glacier 100%
+//           );
+//      }
+//      50% {
+//           background-image: linear-gradient(
+//                to right,
+//                $primary-tussock 50%,
+//                $primary-glacier 100%
+//           );
+//      }
+//      75% {
+//           background-image: linear-gradient(
+//                to right,
+//                $primary-tussock 75%,
+//                $primary-glacier 100%
+//           );
+//      }
+
+//      100% {
+//           background-image: linear-gradient(
+//                to right,
+
+//                $primary-tussock 100%,
+//                $primary-tussock 100%
+//           );
+//      }
+// }
+
+@keyframes moveBeforeElement {
+     0% {
+          clip-path: circle(15% at 0 10%);
+     }
+     25% {
+          clip-path: circle(18% at 92% 30%);
+     }
+     50% {
+          clip-path: circle(12% at 75% 90%);
+     }
+     75% {
+          clip-path: circle(18% at 20% 65%);
+     }
+     100% {
+          clip-path: circle(15% at 0 10%);
+     }
+}
+@keyframes moveAfterElement {
+     0% {
+          clip-path: circle(20% at 90% 75%);
+     }
+     25% {
+          clip-path: circle(7% at 76% 15%);
+     }
+     50% {
+          clip-path: circle(24% at 6% 94%);
+     }
+     75% {
+          clip-path: circle(12% at 65% 65%);
+     }
+     100% {
+          clip-path: circle(20% at 90% 75%);
+     }
+}
+
+@keyframes flash {
+     0% {
+          background-color: #fff2;
+          box-shadow: 32px 0 #fff2, -32px 0 #fff;
+     }
+     50% {
+          background-color: #fff;
+          box-shadow: 32px 0 #fff2, -32px 0 #fff2;
+     }
+     100% {
+          background-color: #fff2;
+          box-shadow: 32px 0 #fff, -32px 0 #fff2;
+     }
+}

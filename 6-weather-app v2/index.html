@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta
+               name="viewport"
+               content="width=device-width, initial-scale=1.0"
+          />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+               href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap"
+               rel="stylesheet"
+          />
+          <link rel="stylesheet" href="css/style.css" />
+          <script defer src="js/controler.js" type="module"></script>
+
+          <title>Weather FETCH API</title>
+     </head>
+     <body>
+          <span class="loader"></span>
+
+          <div class="container">
+               <!-- SECTION WEATHER -->
+               <div class="weather">
+                    <div class="weather-box">
+                         <div class="day-box">
+                              <p class="day" id="day">Thuesday</p>
+                              <p class="date" id="date">15 Jan 2023</p>
+                              <p class="location">
+                                   <span>
+                                        <svg class="icon location_icon">
+                                             <use
+                                                  xlink:href="svg/symbol-defs.svg#icon-map-pin"
+                                             ></use>
+                                        </svg> </span
+                                   ><span id="city">Roma</span>
+                                   <span class="country" id="country"
+                                        >, IT</span
+                                   >
+                              </p>
+                         </div>
+                         <div class="icon-box">
+                              <svg class="icon weather_icon" id="icon">
+                                   <use
+                                        xlink:href="svg/symbol-defs.svg#clear-sky"
+                                   ></use>
+                              </svg>
+                         </div>
+                         <div class="temp-box">
+                              <p class="temp" id="temp">28 C</p>
+                              <p class="details" id="details">Clear sky</p>
+                         </div>
+                    </div>
+
+                    <!-- SECTION INFO -->
+                    <div class="extra-box">
+                         <div class="info_box">
+                              <p class="info_description">min</p>
+                              <p class="info_value" id="temp-min">30 C</p>
+                              <p class="info_description">max</p>
+                              <p class="info_value" id="temp-max">40 C</p>
+                              <p class="info_description">wind</p>
+                              <p class="info_value" id="wind-speed">12 km/h</p>
+                              <p class="info_description">humidity</p>
+                              <p class="info_value" id="humidity">12%</p>
+                         </div>
+                         <button class="btn info_extra_btn">
+                              <span
+                                   ><svg class="icon btn_icon">
+                                        <use
+                                             xlink:href="svg/symbol-defs.svg#icon-map-pin"
+                                        ></use></svg></span
+                              >Change location
+                         </button>
+                    </div>
+               </div>
+          </div>
+          <!-- SECTION FORM -->
+          <div class="form">
+               <div class="close_btn">X</div>
+               <div class="input-group">
+                    <label for="selection-city"></label>
+                    <input type="text" id="selection-city" />
+               </div>
+               <div class="input-group">
+                    <select name="country" id="selection-country">
+                         <option disabled selected value="">
+                              -- Select Country --
+                         </option>
+                         <option value="AU">Australia</option>
+                         <option value="CO">Colombia</option>
+                         <option value="CR">Costa Rica</option>
+                         <option value="EC">Ecuador</option>
+                         <option value="ES">España</option>
+                         <option value="US">Estados Unidos</option>
+                         <option value="IT">Italia</option>
+                         <option value="MX">México</option>
+                         <option value="PE">Perú</option>
+                    </select>
+               </div>
+               <button class="btn form_btn" type="submit">Submit</button>
+               <!-- <div class="message">error message</div> -->
+          </div>
+     </body>
+     <!-- <svg class="icon">
+             <use xlink:href="svg/symbol-defs.svg#icon-cloudy"></use>
+        </svg> -->
+</html>

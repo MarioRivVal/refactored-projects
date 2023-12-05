@@ -1,0 +1,262 @@
+.container {
+     position: relative;
+     border-radius: 20px;
+     background-color: rgba(0, 0, 0, 0.13);
+     overflow: hidden;
+
+     @include respond(phone) {
+          grid-template-columns: 1fr;
+          grid-template-rows: repeat(2, 1fr);
+          overflow: hidden;
+     }
+
+     &::before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+
+          background-color: $primary-denin;
+          clip-path: circle(15% at 0 10%);
+          // animation-name: moveBeforeElement;
+          animation-duration: 60s;
+          animation-fill-mode: forwards;
+          animation-timing-function: ease;
+          animation-iteration-count: infinite;
+     }
+     &::after {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          z-index: -10;
+          background-color: $primary-denin;
+          clip-path: circle(20% at 90% 75%);
+          // animation-name: moveAfterElement;
+          animation-delay: 5s;
+          animation-duration: 60s;
+          animation-fill-mode: forwards;
+          animation-timing-function: ease;
+          animation-iteration-count: infinite;
+     }
+}
+
+// SECTION BUTTON
+.btn {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 0.5rem;
+     padding: 0.5rem 0;
+     border: none;
+     border-radius: 100px;
+     color: inherit;
+     font-size: 1.2rem;
+     letter-spacing: 1px;
+     cursor: pointer;
+     background-image: linear-gradient(
+          to right,
+          $primary-tussock 0%,
+          $primary-glacier 100%
+     );
+
+     &_icon {
+          width: 1.5rem;
+          height: 1.5rem;
+          fill: currentColor;
+     }
+}
+
+// SECTION FORM
+
+.form {
+     position: relative;
+     background-color: $primary-denin;
+     width: 46rem;
+     height: 22em;
+     border-radius: 0 20px 20px 20px;
+     place-items: center;
+     display: none;
+     // display: grid;
+
+     @include respond(phone) {
+          width: 80%;
+          height: 80%;
+     }
+
+     .input-group {
+          width: 80%;
+     }
+
+     input,
+     select {
+          width: 100%;
+          height: 3rem;
+          border-radius: 20px;
+          padding: 0 1rem;
+          outline: 1px solid $primary-denin;
+          border: 4px solid transparent;
+          color: $primary-toryBlue;
+     }
+
+     input:hover,
+     select:hover {
+          background-color: $white;
+     }
+
+     input:focus,
+     select:focus {
+          border-right: 4px solid $primary-tussock;
+          border-left: 4px solid $primary-tussock;
+     }
+
+     &_btn {
+          width: 50%;
+     }
+
+     .close_btn {
+          position: absolute;
+          right: 5%;
+          top: 5%;
+          font-size: 1.8rem;
+          font-weight: 500;
+          cursor: pointer;
+     }
+}
+
+.message-alert {
+     position: absolute;
+     bottom: 5%;
+     left: 50%;
+     transform: translateX(-50%);
+     width: 60%;
+     padding: 0.5rem;
+     font-size: 1.2rem;
+     text-align: center;
+     border-radius: 20px;
+     background-color: $primary-hippiePink;
+     z-index: 20;
+}
+
+.loader {
+     width: 16px;
+     height: 16px;
+     border-radius: 50%;
+     background-color: #fff;
+     box-shadow: 32px 0 #fff, -32px 0 #fff;
+     position: relative;
+     animation: flash 0.5s ease-out infinite alternate;
+
+     display: none; // TEST
+}
+
+// SECTION WEATHER BOX
+.weather {
+     // display: none; // TEST
+     display: flex;
+     backdrop-filter: blur(40px);
+     border-radius: 20px 0 0 20px;
+
+     .weather-box {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          padding: 3rem 2rem;
+          gap: 3rem;
+          background-color: rgba(0, 0, 0, 0.1);
+          border-radius: 20px 0 0 20px;
+          transition: all 0.3s;
+
+          @include respond(phone) {
+               &:hover {
+                    transform: initial;
+                    transform-origin: initial;
+               }
+          }
+
+          .day-box {
+               .day {
+                    font-size: 2.2rem;
+                    font-weight: 400;
+               }
+
+               .date,
+               .location {
+                    font-size: 1.2rem;
+                    color: $primary-glacier;
+               }
+
+               .location {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 1.5rem;
+                    gap: 0.5rem;
+
+                    .location_icon {
+                         width: 1.5rem;
+                         height: 1.5rem;
+                         fill: currentColor;
+                    }
+               }
+          }
+
+          .icon-box {
+               display: grid;
+               place-items: center;
+
+               .weather_icon {
+                    width: 6rem;
+                    height: 6rem;
+                    fill: currentColor;
+               }
+          }
+          .temp-box {
+               line-height: 1.2;
+               grid-column: span 2;
+               display: grid;
+               place-items: center;
+
+               .temp {
+                    font-size: 3.6rem;
+                    font-weight: 500;
+               }
+               .details {
+                    font-size: 1.2rem;
+               }
+          }
+     }
+}
+
+.extra-box {
+     display: flex;
+     flex-direction: column;
+     justify-content: space-around;
+     z-index: 10;
+     padding: 3rem 2rem;
+     font-size: 1.6rem;
+     backdrop-filter: blur(40px);
+     background-color: rgba(0, 0, 0, 0.034);
+     border-radius: 0 20px 20px 0;
+
+     // display: none; // TEST
+
+     .info_box {
+          display: grid;
+          column-gap: 2rem;
+          grid-template-columns: repeat(2, 1fr);
+
+          .info_description {
+               text-transform: uppercase;
+               padding: 0.2rem;
+          }
+          .info_value {
+               text-align: right;
+               padding: 0.2rem;
+          }
+     }
+
+     &_btn {
+          width: 100%;
+          margin-top: 4rem;
+     }
+}
