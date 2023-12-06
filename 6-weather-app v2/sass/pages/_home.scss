@@ -3,12 +3,8 @@
      border-radius: 20px;
      background-color: rgba(0, 0, 0, 0.13);
      overflow: hidden;
-
-     @include respond(phone) {
-          grid-template-columns: 1fr;
-          grid-template-rows: repeat(2, 1fr);
-          overflow: hidden;
-     }
+     display: none;
+     margin: 2rem;
 
      &::before {
           content: "";
@@ -125,7 +121,7 @@
      }
 }
 
-.message-alert {
+.alert-message {
      position: absolute;
      bottom: 5%;
      left: 50%;
@@ -155,8 +151,10 @@
 .weather {
      // display: none; // TEST
      display: flex;
-     backdrop-filter: blur(40px);
+     backdrop-filter: blur(20px);
+
      border-radius: 20px 0 0 20px;
+     margin: 1rem;
 
      .weather-box {
           display: grid;
@@ -168,6 +166,8 @@
           transition: all 0.3s;
 
           @include respond(phone) {
+               gap: 1rem;
+               border-radius: 20px 20px 0 0;
                &:hover {
                     transform: initial;
                     transform-origin: initial;
@@ -225,6 +225,11 @@
                }
           }
      }
+
+     @include respond(phone) {
+          display: grid;
+          grid-template-columns: 1fr;
+     }
 }
 
 .extra-box {
@@ -234,11 +239,19 @@
      z-index: 10;
      padding: 3rem 2rem;
      font-size: 1.6rem;
-     backdrop-filter: blur(40px);
-     background-color: rgba(0, 0, 0, 0.034);
+     // backdrop-filter: blur(40px);
+
+     background-color: rgba(0, 0, 0, 0.1);
+
+     // background-color: rgba(0, 0, 0, 0.034);
      border-radius: 0 20px 20px 0;
+     overflow: hidden;
 
      // display: none; // TEST
+
+     @include respond(phone) {
+          border-radius: 0 0 20px 20px;
+     }
 
      .info_box {
           display: grid;

@@ -55,5 +55,3 @@ export const getDate = function (currentLocale) {
 
      return new Intl.DateTimeFormat(currentLocale, options).format(new Date());
 };
-
-//*************************************//

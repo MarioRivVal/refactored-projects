@@ -62,7 +62,7 @@ html {
   */ }
   @media only screen and (max-width: 37.5em) {
     html {
-      font-size: 90%; } }
+      font-size: 65%; } }
 
 body {
   box-sizing: border-box;
@@ -77,12 +77,9 @@ body {
   position: relative;
   border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.13);
-  overflow: hidden; }
-  @media only screen and (max-width: 37.5em) {
-    .container {
-      grid-template-columns: 1fr;
-      grid-template-rows: repeat(2, 1fr);
-      overflow: hidden; } }
+  overflow: hidden;
+  display: none;
+  margin: 2rem; }
   .container::before {
     content: "";
     position: absolute;
@@ -167,7 +164,7 @@ body {
     font-weight: 500;
     cursor: pointer; }
 
-.message-alert {
+.alert-message {
   position: absolute;
   bottom: 5%;
   left: 50%;
@@ -192,8 +189,9 @@ body {
 
 .weather {
   display: flex;
-  backdrop-filter: blur(40px);
-  border-radius: 20px 0 0 20px; }
+  backdrop-filter: blur(20px);
+  border-radius: 20px 0 0 20px;
+  margin: 1rem; }
   .weather .weather-box {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -203,9 +201,12 @@ body {
     border-radius: 20px 0 0 20px;
     transition: all 0.3s; }
     @media only screen and (max-width: 37.5em) {
-      .weather .weather-box:hover {
-        transform: initial;
-        transform-origin: initial; } }
+      .weather .weather-box {
+        gap: 1rem;
+        border-radius: 20px 20px 0 0; }
+        .weather .weather-box:hover {
+          transform: initial;
+          transform-origin: initial; } }
     .weather .weather-box .day-box .day {
       font-size: 2.2rem;
       font-weight: 400; }
@@ -239,6 +240,10 @@ body {
         font-weight: 500; }
       .weather .weather-box .temp-box .details {
         font-size: 1.2rem; }
+  @media only screen and (max-width: 37.5em) {
+    .weather {
+      display: grid;
+      grid-template-columns: 1fr; } }
 
 .extra-box {
   display: flex;
@@ -247,9 +252,12 @@ body {
   z-index: 10;
   padding: 3rem 2rem;
   font-size: 1.6rem;
-  backdrop-filter: blur(40px);
-  background-color: rgba(0, 0, 0, 0.034);
-  border-radius: 0 20px 20px 0; }
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0 20px 20px 0;
+  overflow: hidden; }
+  @media only screen and (max-width: 37.5em) {
+    .extra-box {
+      border-radius: 0 0 20px 20px; } }
   .extra-box .info_box {
     display: grid;
     column-gap: 2rem;

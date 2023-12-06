@@ -1,5 +1,5 @@
-const containerEl = document.querySelector(".container");
-const loaderEl = document.querySelector(".loader");
+export const containerEl = document.querySelector(".container");
+export const loaderEl = document.querySelector(".loader");
 
 const dayEl = document.getElementById("day");
 const dateEl = document.getElementById("date");
@@ -11,8 +11,10 @@ const minTempEl = document.getElementById("temp-min");
 const maxTempEl = document.getElementById("temp-max");
 const windSpeedEl = document.getElementById("wind-speed");
 const humidityEl = document.getElementById("humidity");
+const iconEl = document.querySelector("#icon use");
 
-const iconEl = document.getElementById("icon");
+const changeLocationBtn = document.querySelector(".info_extra_btn");
+//*************************************//
 
 export const displayWeatherInfo = function (data) {
      const {
@@ -26,7 +28,7 @@ export const displayWeatherInfo = function (data) {
           humidity,
           speed,
           description,
-          icon,
+          usedIcon,
      } = data;
 
      dayEl.textContent = currentDay;
@@ -40,8 +42,19 @@ export const displayWeatherInfo = function (data) {
      maxTempEl.textContent = `${tempMaxC} ºC`;
      windSpeedEl.textContent = `${speed} km/h`;
      humidityEl.textContent = `${humidity} %`;
+     iconEl.setAttribute("xlink:href", `svg/symbol-defs.svg#${usedIcon}`);
+};
+//*************************************//
 
-     // const icon = description.replace(" ", "-");
-     console.log(icon); // CONSOLE
-     //  selectIcon(icon);
+export const elementMode = function (element, mode) {
+     mode === "open"
+          ? (element.style.display = "grid")
+          : (element.style.display = "none");
+};
+//*************************************//
+
+export const addHandlerChangeLocation = function (handler) {
+     changeLocationBtn.addEventListener("click", () => {
+          handler();
+     });
 };
