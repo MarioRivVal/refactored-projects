@@ -1,0 +1,17 @@
+.btn {
+     width: auto;
+     height: fit-content;
+     padding: 1rem 2rem;
+     background-color: $color-venus-light;
+     @include border-light;
+     color: inherit;
+     font-family: inherit;
+     text-transform: uppercase;
+     cursor: pointer;
+     font-size: inherit;
+
+     &:hover {
+          background-color: $color-eunry;
+          font-weight: 700;
+     }
+}

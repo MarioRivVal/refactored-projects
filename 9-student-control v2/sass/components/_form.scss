@@ -1,0 +1,202 @@
+.modal-box,
+.modal-payment {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100vw;
+     height: 100vh;
+     background-color: rgba(239, 230, 228, 0.5);
+     backdrop-filter: blur(10px);
+     transition: all 0.3s;
+     visibility: hidden;
+
+     .modal {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          padding: $padding-big;
+          background-color: white;
+          @include border-hard;
+          transition-delay: 0.2s;
+          transition: all 0.3s;
+
+          transform: translate(-50%, -50%) scale(0);
+          opacity: 0;
+
+          & form {
+               display: grid;
+               grid-template-columns: repeat(2, 1fr);
+               background-color: $color-clam-shell-light;
+               @include border-light;
+
+               & > :first-child,
+               & > :nth-child(2),
+               & > :nth-child(3),
+               & > :last-child {
+                    grid-column: 1/-1;
+               }
+
+               .form_group {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 1rem;
+
+                    & input {
+                         width: 100%;
+                         padding: 0.5rem;
+                         outline-color: $color-eunry;
+                         color: $color-river-bed;
+                         @include border-light;
+                    }
+
+                    & label {
+                         font-size: $font-medium;
+                         text-transform: uppercase;
+                    }
+               }
+
+               & .form_btns {
+                    width: 100%;
+                    display: flex;
+
+                    justify-content: space-around;
+                    margin: 2rem 0;
+               }
+          }
+     }
+}
+
+// SECTION INFO CLIENT
+
+.modal-info {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     min-width: 30%;
+     max-width: 50rem;
+     transform: translate(-50%, -50%) scale(0.2);
+     background-color: $color-clam-shell-light;
+     font-size: $font-medium;
+     padding: $padding-big;
+     transition: all 0.3s;
+     @include border-hard;
+
+     opacity: 0;
+     visibility: hidden;
+
+     .info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          &-group {
+               padding: $padding-small;
+               background-color: white;
+               @include border-light;
+
+               & p {
+                    font-weight: 700;
+                    line-height: 2rem;
+                    font-size: $font-small;
+               }
+          }
+     }
+
+     .info-buttons {
+          display: flex;
+          justify-content: space-between;
+
+          .btn {
+               padding: 0.5rem;
+               margin-bottom: 1rem;
+          }
+     }
+}
+
+// SECTION MODAL PAYMENT
+
+.payment {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 2rem;
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     width: 50rem;
+     background-color: white;
+
+     padding: $padding-big;
+     transform: translate(-50%, -50%) scale(0);
+     visibility: hidden;
+     opacity: 0;
+     transition: all 0.3s;
+     @include border-hard;
+
+     &_title-box {
+          width: 100%;
+          background-color: $color-clam-shell-light;
+
+          @include border-light;
+          & p {
+               font-size: $font-medium;
+               text-transform: uppercase;
+               text-align: center;
+               line-height: 2.5rem;
+          }
+     }
+     &_months {
+          width: 100%;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          place-items: center;
+          row-gap: 1rem;
+          padding: $padding-small;
+          background-color: $color-clam-shell-light;
+          @include border-light;
+
+          .month {
+               display: flex;
+               flex-direction: column;
+               justify-content: center;
+               align-items: center;
+               width: 100%;
+               gap: 0.5rem;
+               padding: $padding-small;
+
+               p {
+                    font-size: $font-small;
+                    text-transform: uppercase;
+               }
+          }
+          & div:not(:nth-last-child(-n + 3)) {
+               border-bottom: 1px solid $color-venus;
+          }
+          & div:not(:nth-child(-n + 3)) {
+               border-top: 1px solid $color-venus;
+          }
+     }
+}
+
+// SECTION FUNTIONALITY
+
+.modal-box-open,
+.modal-payment-open {
+     visibility: visible;
+     opacity: 1;
+}
+
+.modal-box-open .modal-open {
+     opacity: 1;
+     transform: translate(-50%, -50%) scale(1);
+}
+.open {
+     opacity: 1;
+     visibility: visible;
+     transform: translate(-50%, -50%) scale(1);
+}
+.payment .open {
+     opacity: 1;
+     visibility: visible;
+     transform: translate(-50%, -50%) scale(1);
+}

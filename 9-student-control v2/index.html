@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta
+               name="viewport"
+               content="width=device-width, initial-scale=1.0"
+          />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+               href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
+               rel="stylesheet"
+          />
+          <link rel="stylesheet" href="css/style.css" />
+          <script defer src="js/controler.js" type="module"></script>
+
+          <title>Control de Estudiantes</title>
+     </head>
+     <body>
+          <!-- SECTION MAIN WINDOW -->
+          <main class="main">
+               <div class="main_date">
+                    <div class="main_date-year">
+                         <select name="year" id="year-select"></select>
+                    </div>
+
+                    <div class="main_date-month">
+                         <select name="month" id="month-select">
+                              <option value="first">ene -- feb -- mar</option>
+                              <option value="second">abr -- may -- jun</option>
+                              <option value="third">jul -- ago -- sep</option>
+                              <option value="fourth">oct -- nov -- dic</option>
+                         </select>
+                    </div>
+                    <p>pagado</p>
+               </div>
+
+               <div class="main_title-box">
+                    <h1>Estudiante</h1>
+                    <button class="btn-title btn-sort">Nombre</button>
+                    <button class="btn-title btn-print">Imprimir</button>
+               </div>
+               <!-- SECTION CLIENTS LIST -->
+               <div class="main_clients-list"></div>
+               <button class="btn btn-new-client">Nuevo estudiante</button>
+          </main>
+          <!-- SECTION MODAL -->
+          <section class="modal-box">
+               <div class="modal">
+                    <form action="#">
+                         <div class="form_group">
+                              <label for="name">Nombre:</label>
+                              <input type="text" id="name" name="name" />
+                         </div>
+                         <div class="form_group">
+                              <label for="surname">Apellido:</label>
+                              <input type="text" id="surname" name="surname" />
+                         </div>
+                         <div class="form_group">
+                              <label for="address">Direccion:</label>
+                              <input type="text" id="address" name="address" />
+                         </div>
+                         <div class="form_group">
+                              <label for="dni">DNI:</label>
+                              <input type="text" id="dni" name="dni" />
+                         </div>
+                         <div class="form_group">
+                              <label for="city">Ciudad:</label>
+                              <input type="text" id="city" name="city" />
+                         </div>
+                         <div class="form_group">
+                              <label for="phone">Telefono:</label>
+                              <input type="text" id="phone" name="phone" />
+                         </div>
+                         <div class="form_group">
+                              <label for="quota">cuota:</label>
+                              <input type="text" id="quota" name="quota" />
+                         </div>
+                         <div class="form_btns">
+                              <button
+                                   class="btn form_new-client-btn"
+                                   type="submit"
+                              ></button>
+                              <button class="btn form_cancel-btn" type="reset">
+                                   Cancelar
+                              </button>
+                         </div>
+                    </form>
+               </div>
+          </section>
+          <!-- SECTION INFO CLIENT -->
+          <section class="modal-info">
+               <div class="info-buttons">
+                    <button class="btn btn-info-delete">Eliminar</button>
+                    <button class="btn btn-info-close">X</button>
+               </div>
+
+               <div class="info"></div>
+          </section>
+
+          <!-- SECTION PAYMENT -->
+          <section class="modal-payment">
+               <div class="payment">
+                    <div class="payment_title-box">
+                         <p class="payment-name">mario rivera</p>
+                         <p class="payment-year">2023</p>
+                    </div>
+                    <form action="#" class="payment_months">
+                         <div class="month" id="enero-box">
+                              <p>enero</p>
+                              <div class="checkbox-group">
+                                   <input
+                                        type="checkbox"
+                                        id="enero"
+                                        class="payment_checkbox-input"
+                                   />
+                                   <label for="enero" class="checkbox">
+                                        <span class="checkmark"></span>
+                                   </label>
+                              </div>
+                         </div>
+
+                         <div class="month" id="febrero-box">
+                              <p>febrero</p>
+                              <div class="checkbox-group">
+                                   <input
+                                        type="checkbox"
+                                        id="febrero"
+                                        class="payment_checkbox-input"
+                                   />
+                                   <label for="febrero" class="checkbox">
+                                        <span class="checkmark"></span>
+                                   </label>
+                              </div>
+                         </div>
+                         <div class="month" id="marzo-box">
+                              <p>marzo</p>
+                              <div class="checkbox-group">
+                                   <input
+                                        type="checkbox"
+                                        id="marzo"
+                                        class="payment_checkbox-input"
+                                   />
+                                   <label for="marzo" class="checkbox">
+                                        <span class="checkmark"></span>
+                                   </label>
+                              </div>
+                         </div>
+                         <div class="month" id="abril-box">
+                              <p>abril</p>
+                              <div class="checkbox-group">
+                                   <input
+                                        type="checkbox"
+                                        id="abril"
+                                        class="payment_checkbox-input"
+                                   />
+                                   <label for="abril" class="checkbox">
+                                        <span class="checkmark"></span>
+                                   </label>
+                              </div>
+                         </div>
+                         <div class="month" id="mayo-box">
+                              <p>mayo</p>
+                              <div class="checkbox-group">
+                                   <input
+                                        type="checkbox"
+                                        id="mayo"
+                                        class="payment_checkbox-input"
+                                   />
+                                   <label for="mayo" class="checkbox">
+                                        <span class="checkmark"></span>
+                                   </label>
+                              </div>
+                         </div>
+                         <div class="month" id="junio-box">
+                              <p>junio</p>
+                              <div class="checkbox-group">
+                                   <input
+                                        type="checkbox"
+                                        id="junio"
+                                        class="payment_checkbox-input"
+                                   />
+                                   <label for="junio" class="checkbox">
+                                        <span class="checkmark"></span>
+                                   </label>
+                              </div>
+                         </div>
+                         <div class="month" id="julio-box">
+                              <p>julio</p>
+                              <div class="checkbox-group">
+                                   <input
+                                        type="checkbox"
+                                        id="julio"
+                                        class="payment_checkbox-input"
+                                   />
+                                   <label for="julio" class="checkbox">
+                                        <span class="checkmark"></span>
+                                   </label>
+                              </div>
+                         </div>
+                         <div class="month" id="agosto-box">
+                              <p>agosto</p>
+                              <div class="checkbox-group">
+                                   <input
+                                        type="checkbox"
+                                        id="agosto"
+                                        class="payment_checkbox-input"
+                                   />
+                                   <label for="agosto" class="checkbox">
+                                        <span class="checkmark"></span>
+                                   </label>
+                              </div>
+                         </div>
+                         <div class="month" id="septiembre-box">
+                              <p>septiembre</p>
+                              <div class="checkbox-group">
+                                   <input
+                                        type="checkbox"
+                                        id="septiembre"
+                                        class="payment_checkbox-input"
+                                   />
+                                   <label for="septiembre" class="checkbox">
+                                        <span class="checkmark"></span>
+                                   </label>
+                              </div>
+                         </div>
+                         <div class="month" id="octubre-box">
+                              <p>octubre</p>
+                              <div class="checkbox-group">
+                                   <input
+                                        type="checkbox"
+                                        id="octubre"
+                                        class="payment_checkbox-input"
+                                   />
+                                   <label for="octubre" class="checkbox">
+                                        <span class="checkmark"></span>
+                                   </label>
+                              </div>
+                         </div>
+                         <div class="month" id="noviembre-box">
+                              <p>noviembre</p>
+                              <div class="checkbox-group">
+                                   <input
+                                        type="checkbox"
+                                        id="noviembre"
+                                        class="payment_checkbox-input"
+                                   />
+                                   <label for="noviembre" class="checkbox">
+                                        <span class="checkmark"></span>
+                                   </label>
+                              </div>
+                         </div>
+                         <div class="month" id="diciembre-box">
+                              <p>diciembre</p>
+                              <div class="checkbox-group">
+                                   <input
+                                        type="checkbox"
+                                        id="diciembre"
+                                        class="payment_checkbox-input"
+                                   />
+                                   <label for="diciembre" class="checkbox">
+                                        <span class="checkmark"></span>
+                                   </label>
+                              </div>
+                         </div>
+                    </form>
+                    <button class="btn payment-btn">Guardar</button>
+               </div>
+          </section>
+     </body>
+</html>

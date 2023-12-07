@@ -1,0 +1,37 @@
+.popup-message {
+    display: none;
+    place-content: center;
+    position: absolute;
+    padding: 2rem 3rem;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    @include border-hard;
+
+    & p {
+        font-size: $font-medium;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 2px;
+        word-spacing: 5px;
+        color: $color-clam-shell-light;
+    }
+}
+// SECTION INFO CLIENT
+.popup-options-client {
+    position: absolute;
+    top: 4rem;
+    right: -0.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1rem;
+    background-color: white;
+    z-index: 10;
+
+    & button {
+        padding: 0.5rem;
+        font-size: $font-small;
+    }
+}
