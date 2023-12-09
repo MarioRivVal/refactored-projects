@@ -8,7 +8,7 @@ class Model {
           this.year = null;
           this.month = "";
           this.selectedYear = null;
-          this.selectedMonth = "";
+          this.selectedMonths = "";
 
           this.elementsToPrint = [];
 
@@ -21,6 +21,8 @@ class Model {
                fourth: ["octubre", "noviembre", "diciembre"],
           };
           this.studentDataObj = {};
+
+          this.db = null;
      }
 
      //*****************//
@@ -36,7 +38,7 @@ class Model {
                request.onupgradeneeded = (e) => {
                     const db = e.target.result;
 
-                    const objectStore = db.createObjectStore("students", {
+                    const objectStore = db.createObjectStore("estudiantes", {
                          keyPath: "id",
                          autoIncrement: true,
                     });
@@ -48,6 +50,50 @@ class Model {
                request.onsuccess = () => {
                     this.db = request.result;
                     resolve(request.result);
+               };
+          });
+     }
+
+     //*****************//
+     addStudentDB() {
+          const transaction = this.db.transaction("estudiantes", "readwrite");
+          const objectStore = transaction.objectStore("estudiantes");
+
+          return new Promise((resolve, reject) => {
+               const addRequest = objectStore.add(this.studentDataObj);
+
+               addRequest.onsuccess = () => {
+                    resolve(addRequest.result);
+               };
+
+               addRequest.onerror = (e) => {
+                    reject(e.target.error);
+               };
+          });
+     }
+     //*****************//
+
+     getAllSudentsDB() {
+          const transaction = this.db.transaction("estudiantes", "readonly");
+          const objectStore = transaction.objectStore("estudiantes");
+
+          return new Promise((resolve, reject) => {
+               const request = objectStore.openCursor();
+               const students = [];
+
+               request.onsuccess = (e) => {
+                    const cursor = e.target.result;
+                    if (cursor) {
+                         students.push(cursor.value);
+                         cursor.continue();
+                    } else {
+                         resolve(students);
+                    }
+               };
+
+               request.onerror = (e) => {
+                    console.error("Error getting students:", e.target.error);
+                    reject(e.target.error);
                };
           });
      }

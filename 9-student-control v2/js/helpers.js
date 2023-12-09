@@ -20,6 +20,16 @@ class Helpers {
                year: "numeric",
           }).format(new Date());
      }
+     //*****************//
+
+     toggleWindow(action, elements) {
+          if (action === "open") {
+               elements.forEach((el) => el.classList.add("open"));
+               return;
+          }
+
+          elements.forEach((el) => el.classList.remove("open"));
+     }
 }
 
 export default new Helpers();

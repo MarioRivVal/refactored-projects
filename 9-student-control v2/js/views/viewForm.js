@@ -1,4 +1,5 @@
 //-----------------------------------------------//
+import helper from "../helpers.js";
 //-----------------------------------------------//
 class ViewForm {
      constructor() {
@@ -14,32 +15,11 @@ class ViewForm {
 
      //*****************//
 
-     toggleForm(isOpen) {
-          if (isOpen) {
-               this.openForm();
-               return;
-          }
-
-          this.closeForm();
-     }
-
      //*****************//
      switchBntText(editMode) {
           this.formSubmitBtnEl.textContent = !editMode ? "agregar" : "editar";
      }
 
-     //*****************//
-     openForm() {
-          this.modalBoxEl.classList.add("modal-box-open");
-          this.modalEl.classList.add("modal-open");
-     }
-     //*****************//
-     closeForm() {
-          this.modalBoxEl.classList.remove("modal-box-open");
-          this.modalEl.classList.remove("modal-open");
-
-          this.formEl.reset();
-     }
      //*****************//
      addHandlerSubmitForm(handler) {
           this.formEl.addEventListener("submit", (e) => {

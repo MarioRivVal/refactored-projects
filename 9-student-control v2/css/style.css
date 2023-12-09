@@ -210,21 +210,15 @@ body {
     .payment_months div:not(:nth-child(-n + 3)) {
       border-top: 1px solid #9a8d98; }
 
-.modal-box-open,
-.modal-payment-open {
-  visibility: visible;
-  opacity: 1; }
-
-.modal-box-open .modal-open {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1); }
-
 .open {
+  visibility: visible; }
+
+.modal.open,
+.info.open {
   opacity: 1;
-  visibility: visible;
   transform: translate(-50%, -50%) scale(1); }
 
-.payment .open {
+.payment.open {
   opacity: 1;
   visibility: visible;
   transform: translate(-50%, -50%) scale(1); }
@@ -248,7 +242,7 @@ body {
     word-spacing: 5px;
     color: #efe6e4; }
 
-.popup-options-client {
+.popup-options-student {
   position: absolute;
   top: 4rem;
   right: -0.3rem;
@@ -258,7 +252,7 @@ body {
   padding: 1rem;
   background-color: white;
   z-index: 10; }
-  .popup-options-client button {
+  .popup-options-student button {
     padding: 0.5rem;
     font-size: 1.2rem; }
 
@@ -369,35 +363,35 @@ body {
         background-color: #d4a5a5; }
     .main_date :not(:last-child) {
       margin-bottom: 0.5rem; }
-  .main_clients-list {
+  .main_students-list {
     height: 100%;
     grid-column: 1/-1;
     padding: 0.5rem;
     overflow-y: scroll;
     border: 2px solid #9a8d98;
     border-radius: 5px; }
-    .main_clients-list::-webkit-scrollbar {
+    .main_students-list::-webkit-scrollbar {
       width: 6px; }
-    .main_clients-list::-webkit-scrollbar-track {
+    .main_students-list::-webkit-scrollbar-track {
       background-color: #f5f4f5; }
-    .main_clients-list::-webkit-scrollbar-thumb {
+    .main_students-list::-webkit-scrollbar-thumb {
       background-color: #d4a5a5; }
-    .main_clients-list > :not(:last-child) {
+    .main_students-list > :not(:last-child) {
       margin-bottom: 0.5rem; }
-    .main_clients-list .client {
+    .main_students-list .student {
       display: grid;
       grid-template-columns: 20rem auto 10rem;
       border: 1px solid #9a8d98;
       border-radius: 5px; }
-      .main_clients-list .client_name {
+      .main_students-list .student_name {
         font-size: 1.6rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 1rem 0 1rem 1rem; }
-        .main_clients-list .client_name .client_buttons {
+        .main_students-list .student_name .student_buttons {
           position: relative; }
-  .main .btn-new-client {
+  .main .btn-new-student {
     grid-column: 1/-1;
     justify-self: center;
     align-self: center;
