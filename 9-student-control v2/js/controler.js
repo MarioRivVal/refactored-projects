@@ -4,6 +4,8 @@ import model from "./model.js";
 import helper from "./helpers.js";
 import viewApp from "./views/viewApp.js";
 import viewForm from "./views/viewForm.js";
+import viewInfo from "./views/viewInfo.js";
+import viewPayments from "./views/viewPayments.js";
 
 //*****************//
 
@@ -49,6 +51,9 @@ const controlSubmitForm = async function () {
      if (!model.editMode) {
           try {
                createNewStudentObj(getFormData());
+
+               // FIX
+
                await model.addStudentDB();
 
                model.Allstudents = await model.getAllSudentsDB();
@@ -80,34 +85,116 @@ const controlChangeMonths = function () {
 };
 
 //*****************//
-const controlToggleOptions = function (target) {
+const controlToggleOptions = async function (target) {
      const ref = target.closest(".student_name");
      const idClient = +ref.closest(".student").dataset.id;
 
      const optionExist = ref.querySelector(
           ".student_buttons .popup-options-student"
      );
-     const studentData = model.Allstudents.find(
-          (student) => student.id === idClient
-     );
 
      if (!optionExist) {
-          viewApp.toggleClientOptions(studentData, ref);
+          viewApp.toggleClientOptions(ref);
+
+          viewApp.btnInfoEl.onclick = () => {
+               model.studentDataObj = model.Allstudents.find(
+                    (student) => student.id === idClient
+               );
+               viewInfo.displayStudentInfo(model.studentDataObj);
+          };
+          viewApp.btnPaymentEl.onclick = () => {
+               model.studentDataObj = model.Allstudents.find(
+                    (student) => student.id === idClient
+               );
+               console.log(model.studentDataObj); //CONSOLE
+               model.studentDataObj = viewPayments.setPayments(
+                    model.studentDataObj,
+                    model.selectedYear
+               );
+               viewPayments.addHandlerMarkInput();
+               viewPayments.setAsPaid(model.studentDataObj, model.selectedYear);
+
+               helper.toggleWindow("open", [
+                    viewPayments.modalPaymentEl,
+                    viewPayments.paymentEl,
+               ]);
+
+               viewApp.studentOptions = document.querySelector(
+                    ".popup-options-student"
+               );
+               viewApp.studentOptions.remove();
+          };
      } else {
           optionExist.remove();
      }
 };
 //*****************//
+
+const controlDeleteStudent = async function (e) {
+     const studentId = +viewInfo.infoBoxEl.dataset.id;
+
+     try {
+          // FIX
+
+          await model.deleteStudentDB(studentId);
+          model.Allstudents = await model.getAllSudentsDB();
+          viewApp.displayStudentRows(
+               model.Allstudents,
+               model.selectedMonths,
+               model.selectedYear
+          );
+
+          helper.toggleWindow("close", [viewInfo.infoEl, viewForm.modalBoxEl]);
+     } catch (error) {
+          console.error("Error deleting student:", error);
+     }
+};
+//*****************//
+const controlSavePayment = async function () {
+     const allMonth = {};
+
+     viewPayments.allCheckboxesPaymentEl.forEach((input) => {
+          allMonth[input.id] = input.checked;
+     });
+
+     model.studentDataObj.payments[model.selectedYear] = allMonth;
+
+     try {
+          // FIX
+          await model.updateStudentDB();
+          model.Allstudents = await model.getAllSudentsDB();
+          viewApp.displayStudentRows(
+               model.Allstudents,
+               model.selectedMonths,
+               model.selectedYear
+          );
+
+          viewPayments.allCheckboxesPaymentEl.forEach((input) =>
+               viewPayments.markInput(input, "deactivate")
+          );
+
+          viewPayments.formMonthsPaymentEl.reset();
+
+          helper.toggleWindow("close", [
+               viewPayments.modalPaymentEl,
+               viewPayments.paymentEl,
+          ]);
+          console.log(model.Allstudents); //CONSOLE
+     } catch (error) {
+          console.error("Error saving payment:", error);
+     }
+};
+//*****************//
+
+//*****************//
 const init = async function () {
      await model.createDB();
      model.year = helper.getCurrentYear();
      model.month = helper.getCurrentMonth();
-     model.selectedYear = viewApp.readYearValue();
-     model.selectedMonths = viewApp.readMonthValue(model.quartersMonth);
 
      viewApp.createYearOptions();
-     viewApp.readCurrentYear(model.year);
-     viewApp.readCurrentMonths(model.month, model.quartersMonth);
+     viewApp.setCurrentYear(model.year);
+     viewApp.setCurrentMonths(model.month, model.quartersMonth);
      viewApp.addHandlerNewStudentBtn(controlNewStudent);
      viewApp.addHandlerChangeYear(controlChangeYear);
      viewApp.addHandlerChangeMonths(controlChangeMonths);
@@ -116,6 +203,13 @@ const init = async function () {
      viewForm.addHandlerCancelBtn(controlCancelForm);
      viewForm.addHandlerSubmitForm(controlSubmitForm);
 
+     viewInfo.addHandlerDeleteStudent(controlDeleteStudent);
+
+     viewPayments.addHelperToSavePaymentBtn(controlSavePayment);
+
+     model.selectedYear = viewApp.readYearValue();
+     model.selectedMonths = viewApp.readMonthValue(model.quartersMonth);
+
      model.Allstudents = await model.getAllSudentsDB();
      viewApp.displayStudentRows(
           model.Allstudents,
@@ -123,6 +217,6 @@ const init = async function () {
           model.selectedYear
      );
 
-     console.log(model); //CONSOLE
+     console.log("inicial:", model); //CONSOLE
 };
 init();

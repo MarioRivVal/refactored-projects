@@ -180,16 +180,18 @@
 
 // SECTION FUNTIONALITY
 
-.open {
+.modal-box.open,
+.modal-payment.open {
      // opacity: 1;
      visibility: visible;
 }
+// .modal.open {
+//      opacity: 1;
+//      transform: translate(-50%, -50%) scale(1);
+// }
+.payment.open,
 .modal.open,
-.info.open {
-     opacity: 1;
-     transform: translate(-50%, -50%) scale(1);
-}
-.payment.open {
+.modal-info.open {
      opacity: 1;
      visibility: visible;
      transform: translate(-50%, -50%) scale(1);

@@ -1,18 +1,23 @@
 //-----------------------------------------------//
 //-----------------------------------------------//
 import helper from "../helpers.js";
+import viewForm from "./viewForm.js";
+import viewApp from "./viewApp.js";
 //-----------------------------------------------//
 class ViewInfo {
      constructor() {
+          this.infoEl = document.querySelector(".modal-info");
           this.infoBoxEl = document.querySelector(".info");
+          this.infoCloseBntEl = document.querySelector(".btn-info-close");
+          this.infoDeleteBtnEl = document.querySelector(".btn-info-delete");
      }
 
      //*****************//
-     displayStudentInfo(studentDta) {
+     displayStudentInfo(studentData) {
           const { address, quota, city, dni, name, surname, phone, date, id } =
-               studentDta;
+               studentData;
 
-          // infoBoxEl.dataset.id = id;
+          this.infoBoxEl.dataset.id = id;
 
           this.infoBoxEl.innerHTML = "";
           const infoHTML = `
@@ -48,9 +53,24 @@ class ViewInfo {
    `;
 
           this.infoBoxEl.insertAdjacentHTML("afterbegin", infoHTML);
-          console.log(this.infoBoxEl); //CONSOLE
 
-          helper.toggleWindow("open", [this.infoBoxEl]);
+          viewApp.studentOptions = document.querySelector(
+               ".popup-options-student"
+          );
+          viewApp.studentOptions.remove();
+
+          helper.toggleWindow("open", [this.infoEl, viewForm.modalBoxEl]);
+          this.addHandlerCloseInfo();
+     }
+
+     addHandlerCloseInfo() {
+          this.infoCloseBntEl.addEventListener("click", () => {
+               helper.toggleWindow("close", [this.infoEl, viewForm.modalBoxEl]);
+          });
+     }
+     //*****************//
+     addHandlerDeleteStudent(handler) {
+          this.infoDeleteBtnEl.addEventListener("click", handler);
      }
 }
 

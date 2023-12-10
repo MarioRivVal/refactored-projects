@@ -8,7 +8,7 @@ class Model {
           this.year = null;
           this.month = "";
           this.selectedYear = null;
-          this.selectedMonths = "";
+          this.selectedMonths = null;
 
           this.elementsToPrint = [];
 
@@ -93,6 +93,40 @@ class Model {
 
                request.onerror = (e) => {
                     console.error("Error getting students:", e.target.error);
+                    reject(e.target.error);
+               };
+          });
+     }
+     //*****************//
+     deleteStudentDB(id) {
+          const transaction = this.db.transaction("estudiantes", "readwrite");
+          const objectStore = transaction.objectStore("estudiantes");
+
+          return new Promise((resolve, reject) => {
+               const request = objectStore.delete(id);
+
+               request.onsuccess = () => {
+                    resolve();
+               };
+
+               request.onerror = (e) => {
+                    reject(e.target.error);
+               };
+          });
+     }
+     //*****************//
+     updateStudentDB() {
+          const transaction = this.db.transaction("estudiantes", "readwrite");
+          const objectStore = transaction.objectStore("estudiantes");
+
+          return new Promise((resolve, reject) => {
+               const request = objectStore.put(this.studentDataObj);
+
+               request.onsuccess = () => {
+                    resolve();
+               };
+
+               request.onerror = (e) => {
                     reject(e.target.error);
                };
           });

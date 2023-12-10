@@ -2,6 +2,7 @@
 //-----------------------------------------------//
 
 import viewInfo from "./viewInfo.js";
+import viewPayments from "./viewPayments.js";
 
 //*****************//
 
@@ -12,6 +13,11 @@ class ViewApp {
           this.newStudentBtnEl = document.querySelector(".btn-new-student");
 
           this.studentsListEl = document.querySelector(".main_students-list");
+          this.studentOptions = null;
+
+          this.btnInfoEl = null;
+          this.btnPaymentEl = null;
+          this.btnEditEl = null;
      }
 
      //*****************//
@@ -26,7 +32,7 @@ class ViewApp {
           }
      }
      //*****************//
-     readCurrentYear(currentYear) {
+     setCurrentYear(currentYear) {
           this.yearSelectEl.querySelectorAll("option").forEach((opt) => {
                if (opt.value === currentYear) {
                     this.yearSelectEl.value = opt.value;
@@ -36,7 +42,7 @@ class ViewApp {
 
      //*****************//
 
-     readCurrentMonths(currentMonth, quartersMonth) {
+     setCurrentMonths(currentMonth, quartersMonth) {
           this.monthSelectEl.querySelectorAll("option").forEach((opt) => {
                if (quartersMonth[opt.value].includes(currentMonth)) {
                     this.monthSelectEl.value = opt.value;
@@ -158,36 +164,40 @@ class ViewApp {
           }
      }
      //*****************//
-     toggleClientOptions(studentData, ref) {
+     toggleClientOptions(ref) {
+          const anyOption = document.querySelector(
+               ".student_name .student_buttons .popup-options-student"
+          );
+
+          if (anyOption) anyOption.remove();
+
           const optionEl = document.createElement("DIV");
           optionEl.classList.add("popup-options-student");
 
-          const btnInfoEl = document.createElement("BUTTON");
-          btnInfoEl.classList.add("btn", "btn-info");
-          btnInfoEl.textContent = "info";
-          btnInfoEl.onclick = () => viewInfo.displayStudentInfo(studentData);
+          this.btnInfoEl = document.createElement("BUTTON");
+          this.btnInfoEl.classList.add("btn", "btn-info");
+          this.btnInfoEl.textContent = "info";
+          // this.btnInfoEl.onclick = () =>
+          //      viewInfo.displayStudentInfo(studentData);
 
-          const btnPaymentEl = document.createElement("BUTTON");
-          btnPaymentEl.classList.add("btn", "btn-payment");
-          btnPaymentEl.textContent = "pagos";
-          //    btnPaymentEl.onclick = () => {
-          //        getinfoClient(idClient, (dataClient) => {
-          //            setPayments(dataClient);
-          //        });
-          //    };
+          this.btnPaymentEl = document.createElement("BUTTON");
+          this.btnPaymentEl.classList.add("btn", "btn-payment");
+          this.btnPaymentEl.textContent = "pagos";
+          // this.btnPaymentEl.onclick = () =>
+          //      viewPayments.setPayments(studentData);
 
-          const btnEditEl = document.createElement("BUTTON");
-          btnEditEl.classList.add("btn", "btn-edit");
-          btnEditEl.textContent = "editar";
+          this.btnEditEl = document.createElement("BUTTON");
+          this.btnEditEl.classList.add("btn", "btn-edit");
+          this.btnEditEl.textContent = "editar";
           //    btnEditEl.onclick = () => {
           //        getinfoClient(idClient, (dataClient) => {
           //            displayClientEdit(dataClient);
           //        });
           //    };
 
-          optionEl.appendChild(btnInfoEl);
-          optionEl.appendChild(btnPaymentEl);
-          optionEl.appendChild(btnEditEl);
+          optionEl.appendChild(this.btnInfoEl);
+          optionEl.appendChild(this.btnPaymentEl);
+          optionEl.appendChild(this.btnEditEl);
 
           ref.querySelector(".student_buttons").appendChild(optionEl);
      }
@@ -219,6 +229,8 @@ class ViewApp {
                }
           });
      }
+     //*****************//
+     addHandlerDisplayInfo(handler) {}
 }
 
 export default new ViewApp();

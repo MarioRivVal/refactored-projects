@@ -210,15 +210,13 @@ body {
     .payment_months div:not(:nth-child(-n + 3)) {
       border-top: 1px solid #9a8d98; }
 
-.open {
+.modal-box.open,
+.modal-payment.open {
   visibility: visible; }
 
+.payment.open,
 .modal.open,
-.info.open {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1); }
-
-.payment.open {
+.modal-info.open {
   opacity: 1;
   visibility: visible;
   transform: translate(-50%, -50%) scale(1); }
