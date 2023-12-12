@@ -26,10 +26,21 @@ const createNewStudentObj = function (formData) {
 
           date: helper.createDate(),
      };
-     console.log(model.studentDataObj); //CONSOLE
 };
 
+//*****************//
+const upDateDisplay = async function () {
+     model.Allstudents = await model.getAllSudentsDB();
+     viewApp.displayStudentRows(
+          model.Allstudents,
+          model.selectedMonths,
+          model.selectedYear
+     );
+};
+//*****************//
 const controlNewStudent = function () {
+     console.log(model.editMode); //CONSOLE
+     model.editMode = false;
      viewForm.switchBntText(model.editMode);
      helper.toggleWindow("open", [viewForm.modalBoxEl, viewForm.modalEl]);
 };
@@ -52,22 +63,37 @@ const controlSubmitForm = async function () {
           try {
                createNewStudentObj(getFormData());
 
-               // FIX
-
                await model.addStudentDB();
+               upDateDisplay();
 
-               model.Allstudents = await model.getAllSudentsDB();
                console.log(model.Allstudents); //CONSOLE
-
-               viewForm.formEl.reset();
                viewApp.displayMessage("Agregado correctamente", "confirm");
-               viewApp.displayStudentRows(
-                    model.Allstudents,
-                    model.selectedMonths,
-                    model.selectedYear
-               );
+               viewForm.formEl.reset();
           } catch (error) {
                console.error("Error adding client:", error);
+          }
+     } else {
+          try {
+               model.editedStudentObj = model.studentDataObj;
+
+               viewForm.allInputsEl.forEach((el) => {
+                    model.editedStudentObj[el.id] = el.value;
+               });
+               console.log(model.editedStudentObj); //CONSOLE
+
+               await model.updateStudentDB(model.editedStudentObj);
+
+               upDateDisplay();
+               console.log(model.Allstudents); //CONSOLE
+
+               viewApp.displayMessage("Editado correctamente", "confirm");
+               viewForm.formEl.reset();
+
+               controlCancelForm();
+
+               model.editMode = false;
+          } catch (error) {
+               console.error("Error editing student:", error);
           }
      }
 };
@@ -75,19 +101,32 @@ const controlSubmitForm = async function () {
 const controlChangeYear = function () {
      model.selectedYear = viewApp.readYearValue();
      console.log(model.selectedYear); //CONSOLE
-     // viewApp.readCurrentMonths(model.month, model.quartersMonth);
+     viewApp.displayStudentRows(
+          model.Allstudents,
+          model.selectedMonths,
+          model.selectedYear
+     );
 };
 
 //*****************//
 const controlChangeMonths = function () {
      model.selectedMonths = viewApp.readMonthValue(model.quartersMonth);
      console.log(model.selectedMonths); //CONSOLE
+     viewApp.displayStudentRows(
+          model.Allstudents,
+          model.selectedMonths,
+          model.selectedYear
+     );
 };
 
 //*****************//
 const controlToggleOptions = async function (target) {
      const ref = target.closest(".student_name");
      const idClient = +ref.closest(".student").dataset.id;
+
+     model.studentDataObj = model.Allstudents.find(
+          (student) => student.id === idClient
+     );
 
      const optionExist = ref.querySelector(
           ".student_buttons .popup-options-student"
@@ -97,36 +136,51 @@ const controlToggleOptions = async function (target) {
           viewApp.toggleClientOptions(ref);
 
           viewApp.btnInfoEl.onclick = () => {
-               model.studentDataObj = model.Allstudents.find(
-                    (student) => student.id === idClient
-               );
                viewInfo.displayStudentInfo(model.studentDataObj);
           };
+
           viewApp.btnPaymentEl.onclick = () => {
-               model.studentDataObj = model.Allstudents.find(
-                    (student) => student.id === idClient
-               );
-               console.log(model.studentDataObj); //CONSOLE
-               model.studentDataObj = viewPayments.setPayments(
-                    model.studentDataObj,
-                    model.selectedYear
-               );
+               if (!model.studentDataObj.payments[model.selectedYear]) {
+                    model.studentDataObj = viewPayments.setPayments(
+                         model.studentDataObj,
+                         model.selectedYear
+                    );
+               } else {
+                    viewPayments.setAsPaid(
+                         model.studentDataObj,
+                         model.selectedYear
+                    );
+               }
+
                viewPayments.addHandlerMarkInput();
-               viewPayments.setAsPaid(model.studentDataObj, model.selectedYear);
 
                helper.toggleWindow("open", [
                     viewPayments.modalPaymentEl,
                     viewPayments.paymentEl,
                ]);
 
-               viewApp.studentOptions = document.querySelector(
-                    ".popup-options-student"
-               );
-               viewApp.studentOptions.remove();
+               viewApp.removeClientOptions();
+               console.log(model.studentDataObj); //CONSOLE
           };
-     } else {
-          optionExist.remove();
+
+          viewApp.btnEditEl.onclick = () => {
+               model.editMode = true;
+               viewForm.switchBntText(model.editMode);
+               viewForm.loadStudentEdit(model.studentDataObj);
+
+               helper.toggleWindow("open", [
+                    viewForm.modalBoxEl,
+                    viewForm.modalEl,
+               ]);
+
+               viewApp.removeClientOptions();
+
+               console.log(model.editMode); //CONSOLE
+          };
+
+          return;
      }
+     optionExist.remove();
 };
 //*****************//
 
@@ -134,15 +188,8 @@ const controlDeleteStudent = async function (e) {
      const studentId = +viewInfo.infoBoxEl.dataset.id;
 
      try {
-          // FIX
-
           await model.deleteStudentDB(studentId);
-          model.Allstudents = await model.getAllSudentsDB();
-          viewApp.displayStudentRows(
-               model.Allstudents,
-               model.selectedMonths,
-               model.selectedYear
-          );
+          upDateDisplay();
 
           helper.toggleWindow("close", [viewInfo.infoEl, viewForm.modalBoxEl]);
      } catch (error) {
@@ -154,20 +201,19 @@ const controlSavePayment = async function () {
      const allMonth = {};
 
      viewPayments.allCheckboxesPaymentEl.forEach((input) => {
-          allMonth[input.id] = input.checked;
+          if (input.checked) {
+               allMonth[input.id] = true;
+          } else {
+               allMonth[input.id] = false;
+          }
      });
 
      model.studentDataObj.payments[model.selectedYear] = allMonth;
 
      try {
-          // FIX
-          await model.updateStudentDB();
-          model.Allstudents = await model.getAllSudentsDB();
-          viewApp.displayStudentRows(
-               model.Allstudents,
-               model.selectedMonths,
-               model.selectedYear
-          );
+          await model.updateStudentDB(model.studentDataObj);
+
+          upDateDisplay();
 
           viewPayments.allCheckboxesPaymentEl.forEach((input) =>
                viewPayments.markInput(input, "deactivate")
@@ -179,7 +225,6 @@ const controlSavePayment = async function () {
                viewPayments.modalPaymentEl,
                viewPayments.paymentEl,
           ]);
-          console.log(model.Allstudents); //CONSOLE
      } catch (error) {
           console.error("Error saving payment:", error);
      }

@@ -1,5 +1,6 @@
 //-----------------------------------------------//
 import helper from "../helpers.js";
+import viewApp from "./viewApp.js";
 //-----------------------------------------------//
 class ViewForm {
      constructor() {
@@ -15,6 +16,20 @@ class ViewForm {
 
      //*****************//
 
+     loadStudentEdit(studentData) {
+          const entriesArr = Object.entries(studentData);
+
+          entriesArr.forEach((el) => {
+               const key = el[0];
+               const value = el[1];
+
+               this.allInputsEl.forEach((input) => {
+                    if (input.id === key) {
+                         input.value = value;
+                    }
+               });
+          });
+     }
      //*****************//
      switchBntText(editMode) {
           this.formSubmitBtnEl.textContent = !editMode ? "agregar" : "editar";

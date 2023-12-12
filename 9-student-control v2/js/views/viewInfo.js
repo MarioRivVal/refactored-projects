@@ -54,10 +54,7 @@ class ViewInfo {
 
           this.infoBoxEl.insertAdjacentHTML("afterbegin", infoHTML);
 
-          viewApp.studentOptions = document.querySelector(
-               ".popup-options-student"
-          );
-          viewApp.studentOptions.remove();
+          viewApp.removeClientOptions();
 
           helper.toggleWindow("open", [this.infoEl, viewForm.modalBoxEl]);
           this.addHandlerCloseInfo();

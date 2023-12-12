@@ -21,6 +21,7 @@ class Model {
                fourth: ["octubre", "noviembre", "diciembre"],
           };
           this.studentDataObj = {};
+          this.editedStudentObj = {};
 
           this.db = null;
      }
@@ -115,12 +116,12 @@ class Model {
           });
      }
      //*****************//
-     updateStudentDB() {
+     updateStudentDB(studentDataObj) {
           const transaction = this.db.transaction("estudiantes", "readwrite");
           const objectStore = transaction.objectStore("estudiantes");
 
           return new Promise((resolve, reject) => {
-               const request = objectStore.put(this.studentDataObj);
+               const request = objectStore.put(studentDataObj);
 
                request.onsuccess = () => {
                     resolve();

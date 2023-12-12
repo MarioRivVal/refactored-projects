@@ -57,8 +57,8 @@ class ViewPayments {
      }
      //*****************//
      setAsPaid(studentData, selectedYear) {
+          console.log(studentData); //CONSOLE
           const monthArr = Object.entries(studentData.payments[selectedYear]);
-          console.log(monthArr); //CONSOLE
 
           monthArr.forEach((el) => {
                const keyMonth = el[0];

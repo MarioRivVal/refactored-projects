@@ -127,11 +127,8 @@ class ViewApp {
      createCheckBoxesClient(student, selectedMonths, selectedYear) {
           let yearArray;
 
-          // if (!student.payments[year]) return;
-
-          // if (student.id === studentId) {
-          //      yearArray = Object.entries(student.payment[year]);
-          // }
+          if (student.payments[selectedYear])
+               yearArray = Object.entries(student.payments[selectedYear]);
 
           for (let i = 0; i < 3; i++) {
                let n = i + 1;
@@ -159,8 +156,9 @@ class ViewApp {
                divEl.appendChild(inputEl);
                divEl.appendChild(labelEl);
 
-               // if (yearArray) markIfPayed(inputEl, yearArray);
                document.querySelector(".checkboxes").appendChild(divEl);
+
+               if (yearArray) this.markIfPayed(inputEl, yearArray);
           }
      }
      //*****************//
@@ -177,29 +175,41 @@ class ViewApp {
           this.btnInfoEl = document.createElement("BUTTON");
           this.btnInfoEl.classList.add("btn", "btn-info");
           this.btnInfoEl.textContent = "info";
-          // this.btnInfoEl.onclick = () =>
-          //      viewInfo.displayStudentInfo(studentData);
 
           this.btnPaymentEl = document.createElement("BUTTON");
           this.btnPaymentEl.classList.add("btn", "btn-payment");
           this.btnPaymentEl.textContent = "pagos";
-          // this.btnPaymentEl.onclick = () =>
-          //      viewPayments.setPayments(studentData);
 
           this.btnEditEl = document.createElement("BUTTON");
           this.btnEditEl.classList.add("btn", "btn-edit");
           this.btnEditEl.textContent = "editar";
-          //    btnEditEl.onclick = () => {
-          //        getinfoClient(idClient, (dataClient) => {
-          //            displayClientEdit(dataClient);
-          //        });
-          //    };
 
           optionEl.appendChild(this.btnInfoEl);
           optionEl.appendChild(this.btnPaymentEl);
           optionEl.appendChild(this.btnEditEl);
 
           ref.querySelector(".student_buttons").appendChild(optionEl);
+     }
+     //*****************//
+     removeClientOptions() {
+          const anyOption = document.querySelector(
+               ".student_name .student_buttons .popup-options-student"
+          );
+
+          if (anyOption) anyOption.remove();
+     }
+     //*****************//
+     markIfPayed(input, yearArray) {
+          const inputMonth = input.dataset.month;
+
+          yearArray.forEach((el) => {
+               let keyMonth = el[0];
+               let valueBoolean = el[1];
+
+               if (inputMonth === keyMonth && valueBoolean === true) {
+                    viewPayments.markInput(input, "active");
+               }
+          });
      }
      //*****************//
      addHandlerNewStudentBtn(handler) {
@@ -230,7 +240,6 @@ class ViewApp {
           });
      }
      //*****************//
-     addHandlerDisplayInfo(handler) {}
 }
 
 export default new ViewApp();
