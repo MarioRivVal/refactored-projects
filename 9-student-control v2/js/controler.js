@@ -6,6 +6,7 @@ import viewApp from "./views/viewApp.js";
 import viewForm from "./views/viewForm.js";
 import viewInfo from "./views/viewInfo.js";
 import viewPayments from "./views/viewPayments.js";
+import viewPrint from "./views/viewPrint.js";
 
 //*****************//
 
@@ -36,6 +37,8 @@ const upDateDisplay = async function () {
           model.selectedMonths,
           model.selectedYear
      );
+
+     viewPrint.addHandlerSelectItems(controlSelectItemsToPrint);
 };
 //*****************//
 const controlNewStudent = function () {
@@ -66,7 +69,6 @@ const controlSubmitForm = async function () {
                await model.addStudentDB();
                upDateDisplay();
 
-               console.log(model.Allstudents); //CONSOLE
                viewApp.displayMessage("Agregado correctamente", "confirm");
                viewForm.formEl.reset();
           } catch (error) {
@@ -100,23 +102,15 @@ const controlSubmitForm = async function () {
 //*****************//
 const controlChangeYear = function () {
      model.selectedYear = viewApp.readYearValue();
-     console.log(model.selectedYear); //CONSOLE
-     viewApp.displayStudentRows(
-          model.Allstudents,
-          model.selectedMonths,
-          model.selectedYear
-     );
+
+     upDateDisplay();
 };
 
 //*****************//
 const controlChangeMonths = function () {
      model.selectedMonths = viewApp.readMonthValue(model.quartersMonth);
-     console.log(model.selectedMonths); //CONSOLE
-     viewApp.displayStudentRows(
-          model.Allstudents,
-          model.selectedMonths,
-          model.selectedYear
-     );
+
+     upDateDisplay();
 };
 
 //*****************//
@@ -230,7 +224,60 @@ const controlSavePayment = async function () {
      }
 };
 //*****************//
+const controlSelectItemsToPrint = function (e) {
+     const input = e.target;
+     const studentId = +input.closest(".student").dataset.id;
 
+     model.studentDataObj = model.Allstudents.find(
+          (student) => student.id === studentId
+     );
+     console.log(model.studentDataObj); //CONSOLE
+
+     const allMonthInputs = input
+          .closest(".student")
+          .querySelectorAll(".student_checkbox-input");
+
+     const paidMonths = Array.from(allMonthInputs)
+          .map((input) => {
+               if (input.checked) {
+                    return input.dataset.month;
+               }
+          })
+          .filter(Boolean);
+
+     if (input.checked) {
+          viewPayments.markInput(input, "active");
+
+          model.elementsToPrint = [
+               ...model.elementsToPrint,
+               {
+                    ...model.studentDataObj,
+                    year: model.selectedYear,
+                    paidMonths,
+               },
+          ];
+          // console.log(model.elementsToPrint); //CONSOLE
+     } else {
+          viewPayments.markInput(input, "deactivate");
+
+          model.elementsToPrint = model.elementsToPrint.filter(
+               (el) => el.id !== studentId
+          );
+          // console.log(model.elementsToPrint); //CONSOLE
+     }
+};
+
+//*****************//
+const controlLoadPrintPage = function () {
+     viewPrint.loadPrintPage(model.elementsToPrint);
+     model.elementsToPrint = [];
+     viewPrint.allCheckboxesPrintEl = document.querySelectorAll(
+          ".print_checkbox-input"
+     );
+     viewPrint.allCheckboxesPrintEl.forEach((input) => {
+          viewPayments.markInput(input, "deactivate");
+     });
+};
 //*****************//
 const init = async function () {
      await model.createDB();
@@ -252,15 +299,12 @@ const init = async function () {
 
      viewPayments.addHelperToSavePaymentBtn(controlSavePayment);
 
+     viewPrint.addHandlerPrint(controlLoadPrintPage);
+
      model.selectedYear = viewApp.readYearValue();
      model.selectedMonths = viewApp.readMonthValue(model.quartersMonth);
 
-     model.Allstudents = await model.getAllSudentsDB();
-     viewApp.displayStudentRows(
-          model.Allstudents,
-          model.selectedMonths,
-          model.selectedYear
-     );
+     upDateDisplay();
 
      console.log("inicial:", model); //CONSOLE
 };

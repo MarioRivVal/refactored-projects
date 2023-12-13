@@ -260,7 +260,7 @@ body {
   align-items: center; }
 
 .payment_checkbox-input,
-.client_checkbox-input,
+.student_checkbox-input,
 .print_checkbox-input {
   display: none; }
 
@@ -425,7 +425,7 @@ body {
   font-size: 1.6rem;
   font-weight: 700; }
 
-.client-info > * {
+.student-info > * {
   margin-bottom: 1rem;
   font-size: 1.6rem; }
 

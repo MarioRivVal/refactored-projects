@@ -1,11 +1,11 @@
 "use strict";
 
 import {
-    createDB,
-    addClientDB,
-    getinfoClient,
-    deleteClient,
-    editClient,
+     createDB,
+     addClientDB,
+     getinfoClient,
+     deleteClient,
+     editClient,
 } from "./indexedDB.js";
 
 let selectedYear, selectedMonths;
@@ -21,10 +21,10 @@ const currentMonth = new Date().toLocaleString("default", { month: "long" });
 const currentYear = new Date().getFullYear();
 
 const quartersMonth = {
-    first: ["enero", "febrero", "marzo"],
-    second: ["abril", "mayo", "junio"],
-    third: ["julio", "agosto", "septiembre"],
-    fourth: ["octubre", "noviembre", "diciembre"],
+     first: ["enero", "febrero", "marzo"],
+     second: ["abril", "mayo", "junio"],
+     third: ["julio", "agosto", "septiembre"],
+     fourth: ["octubre", "noviembre", "diciembre"],
 };
 
 //--------------------------------------------//
@@ -57,7 +57,7 @@ export const clientsListEl = document.querySelector(".main_clients-list");
 const formMonthsPaymentEl = document.querySelector(".payment_months");
 const savePaymentBtnEl = document.querySelector(".payment-btn");
 const allCheckboxesPaymentEl = document.querySelectorAll(
-    ".payment_checkbox-input"
+     ".payment_checkbox-input"
 );
 
 const btnPrintEl = document.querySelector(".btn-print");
@@ -67,128 +67,128 @@ const btnPrintEl = document.querySelector(".btn-print");
 //--------------------------------------------//
 
 const createYearOptions = function () {
-    const yearSelect = document.querySelector("#year-select");
-    for (let i = 0; i < 10; i++) {
-        const option = document.createElement("OPTION");
-        option.value = 2023 + i;
-        option.textContent = 2023 + i;
+     const yearSelect = document.querySelector("#year-select");
+     for (let i = 0; i < 10; i++) {
+          const option = document.createElement("OPTION");
+          option.value = 2023 + i;
+          option.textContent = 2023 + i;
 
-        yearSelect.appendChild(option);
-    }
+          yearSelect.appendChild(option);
+     }
 };
 
 //--------------------------------------------//
 
 const createDate = function () {
-    return new Intl.DateTimeFormat(navigator.language, {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-    }).format(new Date());
+     return new Intl.DateTimeFormat(navigator.language, {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+     }).format(new Date());
 };
 
 //--------------------------------------------//
 
 const readCurrentYear = function () {
-    yearSelectEl.querySelectorAll("option").forEach((opt) => {
-        if (opt.value === currentYear) {
-            yearSelectEl.value = opt.value;
-        }
-    });
+     yearSelectEl.querySelectorAll("option").forEach((opt) => {
+          if (opt.value === currentYear) {
+               yearSelectEl.value = opt.value;
+          }
+     });
 };
 
 //--------------------------------------------//
 
 const readCurrentMonths = function () {
-    monthSelectEl.querySelectorAll("option").forEach((opt) => {
-        if (quartersMonth[opt.value].includes(currentMonth)) {
-            monthSelectEl.value = opt.value;
-        }
-    });
+     monthSelectEl.querySelectorAll("option").forEach((opt) => {
+          if (quartersMonth[opt.value].includes(currentMonth)) {
+               monthSelectEl.value = opt.value;
+          }
+     });
 };
 
 //--------------------------------------------//
 
 const readYearValue = function () {
-    selectedYear = yearSelectEl.value;
-    displayClientRow(allClients);
+     selectedYear = yearSelectEl.value;
+     displayClientRow(allClients);
 };
 
 //--------------------------------------------//
 
 const readMonthsValue = function () {
-    selectedMonths = quartersMonth[monthSelectEl.value];
-    displayClientRow(allClients);
+     selectedMonths = quartersMonth[monthSelectEl.value];
+     displayClientRow(allClients);
 };
 
 //--------------------------------------------//
 
 export const openCloseModal = function (mode) {
-    formNewClientBtnEl.textContent = !editMode ? "agregar" : "editar";
+     formNewClientBtnEl.textContent = !editMode ? "agregar" : "editar";
 
-    if (mode === "open") {
-        modalBoxEl.classList.add("modal-box-open");
-        modalEl.classList.add("modal-open");
+     if (mode === "open") {
+          modalBoxEl.classList.add("modal-box-open");
+          modalEl.classList.add("modal-open");
 
-        infoEl.classList.remove("open");
-    } else {
-        modalBoxEl.classList.remove("modal-box-open");
-        modalEl.classList.remove("modal-open");
+          infoEl.classList.remove("open");
+     } else {
+          modalBoxEl.classList.remove("modal-box-open");
+          modalEl.classList.remove("modal-open");
 
-        formEl.reset();
-        editMode = false;
-    }
+          formEl.reset();
+          editMode = false;
+     }
 
-    const popupClient = document.querySelector(".popup-options-client");
-    if (popupClient) popupClient.remove();
+     const popupClient = document.querySelector(".popup-options-client");
+     if (popupClient) popupClient.remove();
 };
 
 //--------------------------------------------//
 
 const createNewClient = function () {
-    const emptyInput = Array.from(allInputsEl).some((el) => el.value === "");
+     const emptyInput = Array.from(allInputsEl).some((el) => el.value === "");
 
-    if (emptyInput) {
-        displayMessage("Todos los datos son necesarios", "alert");
-        return;
-    }
+     if (emptyInput) {
+          displayMessage("Todos los datos son necesarios", "alert");
+          return;
+     }
 
-    if (!editMode) {
-        newClientObj.id = Date.now();
-        newClientObj.years = {};
-        newClientObj.date = createDate();
+     if (!editMode) {
+          newClientObj.id = Date.now();
+          newClientObj.years = {};
+          newClientObj.date = createDate();
 
-        allInputsEl.forEach((el) => {
-            newClientObj[el.dataset.key] = el.value;
-        });
+          allInputsEl.forEach((el) => {
+               newClientObj[el.dataset.key] = el.value;
+          });
 
-        addClientDB(newClientObj);
-        newClientObj = {};
-    } else {
-        allInputsEl.forEach((el) => {
-            editedClientObj[el.dataset.key] = el.value;
-        });
+          addClientDB(newClientObj);
+          newClientObj = {};
+     } else {
+          allInputsEl.forEach((el) => {
+               editedClientObj[el.dataset.key] = el.value;
+          });
 
-        editClient(editedClientObj);
-        editMode = false;
-    }
+          editClient(editedClientObj);
+          editMode = false;
+     }
 
-    openCloseModal("close");
-    formEl.reset();
+     openCloseModal("close");
+     formEl.reset();
 };
 
 //--------------------------------------------//
 
 export const displayClientRow = function (dataClients) {
-    allClients = dataClients;
-    elementsToPrint = [];
+     allClients = dataClients;
+     elementsToPrint = [];
 
-    clientsListEl.innerHTML = "";
+     clientsListEl.innerHTML = "";
 
-    dataClients.forEach((client) => {
-        const { name, surname, id } = client;
+     dataClients.forEach((client) => {
+          const { name, surname, id } = client;
 
-        const clientRowHTML = `
+          const clientRowHTML = `
          <div class="client" data-id = "${id}">
         <div class="checkboxes"></div>
         <div class="client_name">
@@ -211,170 +211,170 @@ export const displayClientRow = function (dataClients) {
         </div>
     </div>
         `;
-        clientsListEl.insertAdjacentHTML("afterbegin", clientRowHTML);
-        checkboxesEl = document.querySelector(".checkboxes");
-        createCheckBoxesClient(id);
-    });
+          clientsListEl.insertAdjacentHTML("afterbegin", clientRowHTML);
+          checkboxesEl = document.querySelector(".checkboxes");
+          createCheckBoxesClient(id);
+     });
 
-    document.querySelectorAll(".client_buttons").forEach((el) => {
-        el.addEventListener("click", OptionsClient);
-    });
+     document.querySelectorAll(".client_buttons").forEach((el) => {
+          el.addEventListener("click", OptionsClient);
+     });
 
-    document.querySelectorAll(".print_checkbox-input").forEach((input) => {
-        input.addEventListener("click", selectItemsToPrint);
-    });
+     document.querySelectorAll(".print_checkbox-input").forEach((input) => {
+          input.addEventListener("click", selectItemsToPrint);
+     });
 };
 
 //--------------------------------------------//
 
 const createCheckBoxesClient = function (idClient) {
-    let year = selectedYear;
-    let yearArray;
+     let year = selectedYear;
+     let yearArray;
 
-    allClients.forEach((client) => {
-        if (!client.years[year]) return;
+     allClients.forEach((client) => {
+          if (!client.years[year]) return;
 
-        if (client.id === idClient) {
-            yearArray = Object.entries(client.years[year]);
-        }
-    });
+          if (client.id === idClient) {
+               yearArray = Object.entries(client.years[year]);
+          }
+     });
 
-    for (let i = 0; i < 3; i++) {
-        let n = i + 1;
+     for (let i = 0; i < 3; i++) {
+          let n = i + 1;
 
-        const divEl = document.createElement("DIV");
-        divEl.classList.add("checkbox-group");
+          const divEl = document.createElement("DIV");
+          divEl.classList.add("checkbox-group");
 
-        const inputEl = document.createElement("INPUT");
-        inputEl.type = "checkbox";
-        inputEl.id = `checkbox${idClient}-${n}`;
-        inputEl.classList.add("client_checkbox-input");
-        inputEl.dataset.year = selectedYear;
-        inputEl.dataset.month = selectedMonths[i];
-        inputEl.disabled = true;
+          const inputEl = document.createElement("INPUT");
+          inputEl.type = "checkbox";
+          inputEl.id = `checkbox${idClient}-${n}`;
+          inputEl.classList.add("client_checkbox-input");
+          inputEl.dataset.year = selectedYear;
+          inputEl.dataset.month = selectedMonths[i];
+          inputEl.disabled = true;
 
-        const labelEl = document.createElement("LABEL");
-        labelEl.htmlFor = `checkbox${idClient}-${n}`;
-        labelEl.classList.add("checkbox");
+          const labelEl = document.createElement("LABEL");
+          labelEl.htmlFor = `checkbox${idClient}-${n}`;
+          labelEl.classList.add("checkbox");
 
-        const spanEl = document.createElement("SPAN");
-        spanEl.classList.add("checkmark");
+          const spanEl = document.createElement("SPAN");
+          spanEl.classList.add("checkmark");
 
-        labelEl.appendChild(spanEl);
+          labelEl.appendChild(spanEl);
 
-        divEl.appendChild(inputEl);
-        divEl.appendChild(labelEl);
+          divEl.appendChild(inputEl);
+          divEl.appendChild(labelEl);
 
-        checkboxesEl.appendChild(divEl);
+          checkboxesEl.appendChild(divEl);
 
-        if (yearArray) markIfPayed(inputEl, yearArray);
-    }
+          if (yearArray) markIfPayed(inputEl, yearArray);
+     }
 };
 
 //--------------------------------------------//
 
 const markIfPayed = function (input, yearArray) {
-    const inputMonth = input.dataset.month;
+     const inputMonth = input.dataset.month;
 
-    yearArray.forEach((el) => {
-        let keyMonth = el[0];
-        let valueBoolean = el[1];
+     yearArray.forEach((el) => {
+          let keyMonth = el[0];
+          let valueBoolean = el[1];
 
-        if (inputMonth === keyMonth && valueBoolean === true) {
-            markInput(input, "active");
-        }
-    });
+          if (inputMonth === keyMonth && valueBoolean === true) {
+               markInput(input, "active");
+          }
+     });
 };
 
 //--------------------------------------------//
 
 export const displayMessage = function (message, type) {
-    const color = type === "alert" ? "#c92a2a" : "#087f5b";
+     const color = type === "alert" ? "#c92a2a" : "#087f5b";
 
-    const messageEl = document.createElement("DIV");
-    messageEl.classList.add("popup-message");
-    messageEl.style.backgroundColor = color;
-    messageEl.style.display = "grid";
+     const messageEl = document.createElement("DIV");
+     messageEl.classList.add("popup-message");
+     messageEl.style.backgroundColor = color;
+     messageEl.style.display = "grid";
 
-    const pEl = document.createElement("P");
-    pEl.textContent = message;
+     const pEl = document.createElement("P");
+     pEl.textContent = message;
 
-    messageEl.appendChild(pEl);
+     messageEl.appendChild(pEl);
 
-    document.querySelector("body").appendChild(messageEl);
+     document.querySelector("body").appendChild(messageEl);
 
-    setTimeout(() => {
-        messageEl.remove();
-    }, 3000);
+     setTimeout(() => {
+          messageEl.remove();
+     }, 3000);
 };
 //--------------------------------------------//
 
 const OptionsClient = function (e) {
-    const ref = e.target.closest(".client_name");
+     const ref = e.target.closest(".client_name");
 
-    const optionExist = ref.querySelector(
-        ".client_buttons .popup-options-client"
-    );
-    if (!optionExist) {
-        const idClient = ref.closest(".client").dataset.id;
-        const anyOption = document.querySelector(
-            ".client_name .client_buttons .popup-options-client"
-        );
+     const optionExist = ref.querySelector(
+          ".client_buttons .popup-options-client"
+     );
+     if (!optionExist) {
+          const idClient = ref.closest(".client").dataset.id;
+          const anyOption = document.querySelector(
+               ".client_name .client_buttons .popup-options-client"
+          );
 
-        if (anyOption) {
-            anyOption.remove();
-        }
+          if (anyOption) {
+               anyOption.remove();
+          }
 
-        const optionEl = document.createElement("DIV");
-        optionEl.classList.add("popup-options-client");
+          const optionEl = document.createElement("DIV");
+          optionEl.classList.add("popup-options-client");
 
-        const btnInfoEl = document.createElement("BUTTON");
-        btnInfoEl.classList.add("btn", "btn-info");
-        btnInfoEl.textContent = "info";
-        btnInfoEl.onclick = () => {
-            getinfoClient(idClient, (dataClient) => {
-                displayInfoClient(dataClient);
-            });
-        };
+          const btnInfoEl = document.createElement("BUTTON");
+          btnInfoEl.classList.add("btn", "btn-info");
+          btnInfoEl.textContent = "info";
+          btnInfoEl.onclick = () => {
+               getinfoClient(idClient, (dataClient) => {
+                    displayInfoClient(dataClient);
+               });
+          };
 
-        const btnPaymentEl = document.createElement("BUTTON");
-        btnPaymentEl.classList.add("btn", "btn-payment");
-        btnPaymentEl.textContent = "pagos";
-        btnPaymentEl.onclick = () => {
-            getinfoClient(idClient, (dataClient) => {
-                setPayments(dataClient);
-            });
-        };
+          const btnPaymentEl = document.createElement("BUTTON");
+          btnPaymentEl.classList.add("btn", "btn-payment");
+          btnPaymentEl.textContent = "pagos";
+          btnPaymentEl.onclick = () => {
+               getinfoClient(idClient, (dataClient) => {
+                    setPayments(dataClient);
+               });
+          };
 
-        const btnEditEl = document.createElement("BUTTON");
-        btnEditEl.classList.add("btn", "btn-edit");
-        btnEditEl.textContent = "editar";
-        btnEditEl.onclick = () => {
-            getinfoClient(idClient, (dataClient) => {
-                displayClientEdit(dataClient);
-            });
-        };
+          const btnEditEl = document.createElement("BUTTON");
+          btnEditEl.classList.add("btn", "btn-edit");
+          btnEditEl.textContent = "editar";
+          btnEditEl.onclick = () => {
+               getinfoClient(idClient, (dataClient) => {
+                    displayClientEdit(dataClient);
+               });
+          };
 
-        optionEl.appendChild(btnInfoEl);
-        optionEl.appendChild(btnPaymentEl);
-        optionEl.appendChild(btnEditEl);
+          optionEl.appendChild(btnInfoEl);
+          optionEl.appendChild(btnPaymentEl);
+          optionEl.appendChild(btnEditEl);
 
-        ref.querySelector(".client_buttons").appendChild(optionEl);
-    } else {
-        optionExist.remove();
-    }
+          ref.querySelector(".client_buttons").appendChild(optionEl);
+     } else {
+          optionExist.remove();
+     }
 };
 
 //--------------------------------------------//
 
 export const displayInfoClient = function (dataClient) {
-    const { address, quota, city, dni, name, surname, telephone, date, id } =
-        dataClient;
+     const { address, quota, city, dni, name, surname, telephone, date, id } =
+          dataClient;
 
-    infoBoxEl.dataset.id = id;
+     infoBoxEl.dataset.id = id;
 
-    infoBoxEl.innerHTML = "";
-    const infoHTML = `
+     infoBoxEl.innerHTML = "";
+     const infoHTML = `
    
    <div class="info-group">
                     <p>Nombre:</p>
@@ -406,198 +406,198 @@ export const displayInfoClient = function (dataClient) {
    
    `;
 
-    infoBoxEl.insertAdjacentHTML("afterbegin", infoHTML);
+     infoBoxEl.insertAdjacentHTML("afterbegin", infoHTML);
 
-    InfoClientModal("open");
+     InfoClientModal("open");
 };
 
 //--------------------------------------------//
 
 export const displayClientEdit = function (dataClient) {
-    editedClientObj = dataClient;
+     editedClientObj = dataClient;
 
-    const entriesArr = Object.entries(dataClient);
+     const entriesArr = Object.entries(dataClient);
 
-    entriesArr.forEach((el) => {
-        const key = el[0];
-        const value = el[1];
+     entriesArr.forEach((el) => {
+          const key = el[0];
+          const value = el[1];
 
-        allInputsEl.forEach((input) => {
-            if (input.dataset.key === key) {
-                input.value = value;
-            }
-        });
-    });
+          allInputsEl.forEach((input) => {
+               if (input.dataset.key === key) {
+                    input.value = value;
+               }
+          });
+     });
 
-    editMode = true;
-    InfoClientModal("close");
-    openCloseModal("open");
+     editMode = true;
+     InfoClientModal("close");
+     openCloseModal("open");
 };
 
 //--------------------------------------------//
 
 export const InfoClientModal = function (mode) {
-    const action = mode === "open" ? "add" : "remove";
-    infoEl.classList[action]("open");
+     const action = mode === "open" ? "add" : "remove";
+     infoEl.classList[action]("open");
 };
 //--------------------------------------------//
 const paymentsModal = function (mode) {
-    const action = mode === "open" ? "add" : "remove";
+     const action = mode === "open" ? "add" : "remove";
 
-    modalPaymentEl.classList[action]("modal-payment-open");
-    paymentEl.classList[action]("open");
+     modalPaymentEl.classList[action]("modal-payment-open");
+     paymentEl.classList[action]("open");
 };
 //--------------------------------------------//
 
 export const setPayments = function (dataClient) {
-    let year = selectedYear;
-    editedClientObj = dataClient;
+     let year = selectedYear;
+     editedClientObj = dataClient;
 
-    const { name, surname, years } = editedClientObj;
+     const { name, surname, years } = editedClientObj;
 
-    if (!years[year]) {
-        editedClientObj = {
-            ...editedClientObj,
-            years: { ...years, [year]: {} },
-        };
+     if (!years[year]) {
+          editedClientObj = {
+               ...editedClientObj,
+               years: { ...years, [year]: {} },
+          };
 
-        allCheckboxesPaymentEl.forEach((input) => {
-            const month = input.id;
+          allCheckboxesPaymentEl.forEach((input) => {
+               const month = input.id;
 
-            editedClientObj.years[year] = {
-                ...editedClientObj.years[year],
-                [month]: false,
-            };
-        });
-    } else {
-        readPayment(year);
-    }
+               editedClientObj.years[year] = {
+                    ...editedClientObj.years[year],
+                    [month]: false,
+               };
+          });
+     } else {
+          readPayment(year);
+     }
 
-    document.querySelector(
-        ".payment_title-box .payment-name"
-    ).textContent = `${name} ${surname}`;
+     document.querySelector(
+          ".payment_title-box .payment-name"
+     ).textContent = `${name} ${surname}`;
 
-    document.querySelector(".payment_title-box .payment-year").textContent =
-        selectedYear;
+     document.querySelector(".payment_title-box .payment-year").textContent =
+          selectedYear;
 
-    InfoClientModal("close");
-    paymentsModal("open");
+     InfoClientModal("close");
+     paymentsModal("open");
 };
 
 //--------------------------------------------//
 
 const readPayment = function (year) {
-    const monthArr = Object.entries(editedClientObj.years[year]);
+     const monthArr = Object.entries(editedClientObj.years[year]);
 
-    monthArr.forEach((el) => {
-        const keyMonth = el[0];
-        const valueBoolean = el[1];
+     monthArr.forEach((el) => {
+          const keyMonth = el[0];
+          const valueBoolean = el[1];
 
-        allCheckboxesPaymentEl.forEach((input) => {
-            if (valueBoolean === true && keyMonth === input.id) {
-                markInput(input, "active");
-            }
-        });
-    });
+          allCheckboxesPaymentEl.forEach((input) => {
+               if (valueBoolean === true && keyMonth === input.id) {
+                    markInput(input, "active");
+               }
+          });
+     });
 };
 
 //--------------------------------------------//
 
 const savePayments = function () {
-    const allMonth = {};
+     const allMonth = {};
 
-    allCheckboxesPaymentEl.forEach((input) => {
-        if (input.checked) {
-            allMonth[input.id] = true;
-        } else {
-            allMonth[input.id] = false;
-        }
-    });
+     allCheckboxesPaymentEl.forEach((input) => {
+          if (input.checked) {
+               allMonth[input.id] = true;
+          } else {
+               allMonth[input.id] = false;
+          }
+     });
 
-    editedClientObj.years[selectedYear] = allMonth;
-    editClient(editedClientObj);
+     editedClientObj.years[selectedYear] = allMonth;
+     editClient(editedClientObj);
 
-    allCheckboxesPaymentEl.forEach((input) => {
-        markInput(input, "deactivate");
-    });
+     allCheckboxesPaymentEl.forEach((input) => {
+          markInput(input, "deactivate");
+     });
 
-    formMonthsPaymentEl.reset();
-    editedClientObj = {};
-    paymentsModal("close");
+     formMonthsPaymentEl.reset();
+     editedClientObj = {};
+     paymentsModal("close");
 };
 
 //--------------------------------------------//
 
 const markInput = function (input, action) {
-    const checkmark = input.nextElementSibling.querySelector(".checkmark");
-    const label = input.nextElementSibling;
+     const checkmark = input.nextElementSibling.querySelector(".checkmark");
+     const label = input.nextElementSibling;
 
-    if (action === "active") {
-        checkmark.style.display = "block";
-        input.checked = true;
-        label.classList.add("checkbox-hover-effect");
-    } else {
-        checkmark.style.display = "none";
-        input.checked = false;
-        label.classList.remove("checkbox-hover-effect");
-    }
+     if (action === "active") {
+          checkmark.style.display = "block";
+          input.checked = true;
+          label.classList.add("checkbox-hover-effect");
+     } else {
+          checkmark.style.display = "none";
+          input.checked = false;
+          label.classList.remove("checkbox-hover-effect");
+     }
 };
 
 //--------------------------------------------//
 
 const selectItemsToPrint = function (e) {
-    const input = e.target;
-    const idClient = +input.closest(".client").dataset.id;
+     const input = e.target;
+     const idClient = +input.closest(".client").dataset.id;
 
-    getinfoClient(idClient, (dataClient) => {
-        const allInputs = input
-            .closest(".client")
-            .querySelectorAll(".client_checkbox-input");
+     getinfoClient(idClient, (dataClient) => {
+          const allInputs = input
+               .closest(".client")
+               .querySelectorAll(".client_checkbox-input");
 
-        const paidMonths = Array.from(allInputs)
-            .map((input) => {
-                if (input.checked) {
-                    return input.dataset.month;
-                }
-            })
-            .filter(Boolean);
+          const paidMonths = Array.from(allInputs)
+               .map((input) => {
+                    if (input.checked) {
+                         return input.dataset.month;
+                    }
+               })
+               .filter(Boolean);
 
-        if (input.checked) {
-            markInput(input, "active");
-            addObjToPrint(dataClient, paidMonths);
-        } else {
-            markInput(input, "deactivate");
-            removeObjFromPrint(idClient);
-        }
-    });
+          if (input.checked) {
+               markInput(input, "active");
+               addObjToPrint(dataClient, paidMonths);
+          } else {
+               markInput(input, "deactivate");
+               removeObjFromPrint(idClient);
+          }
+     });
 };
 
 //--------------------------------------------//
 
 const addObjToPrint = function (dataClient, paidMonths) {
-    elementsToPrint = [
-        ...elementsToPrint,
-        { ...dataClient, year: selectedYear, paidMonths },
-    ];
+     elementsToPrint = [
+          ...elementsToPrint,
+          { ...dataClient, year: selectedYear, paidMonths },
+     ];
 };
 
 //--------------------------------------------//
 
 const removeObjFromPrint = function (idClient) {
-    elementsToPrint = elementsToPrint.filter((el) => el.id !== idClient);
+     elementsToPrint = elementsToPrint.filter((el) => el.id !== idClient);
 };
 
 //--------------------------------------------//
 
 const loadPrintMode = function () {
-    const htmlToPrint = [];
+     const htmlToPrint = [];
 
-    elementsToPrint.forEach((el) => {
-        const { name, surname, city, quota, address, dni, year, paidMonths } =
-            el;
+     elementsToPrint.forEach((el) => {
+          const { name, surname, city, quota, address, dni, year, paidMonths } =
+               el;
 
-        for (let i = 0; i < paidMonths.length; i++) {
-            const billHTML = `
+          for (let i = 0; i < paidMonths.length; i++) {
+               const billHTML = `
             <div class="bill">
                     <div class="paid-month">
                         <p class="month">${paidMonths[i]}</p>
@@ -638,25 +638,25 @@ const loadPrintMode = function () {
 
             `;
 
-            htmlToPrint.push(billHTML);
-        }
-    });
+               htmlToPrint.push(billHTML);
+          }
+     });
 
-    if (htmlToPrint.length) printBills(htmlToPrint);
+     if (htmlToPrint.length) printBills(htmlToPrint);
 };
 
 //--------------------------------------------//
 
 const printBills = function (htmls) {
-    const headerContent = `<html><head><title>Print Bills</title><link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/><link rel="stylesheet" href="css/style.css" /></head><body><section class="all-bills">${htmls.join(
-        ""
-    )}</section></body></html>`;
+     const headerContent = `<html><head><title>Print Bills</title><link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/><link rel="stylesheet" href="css/style.css" /></head><body><section class="all-bills">${htmls.join(
+          ""
+     )}</section></body></html>`;
 
-    const printWindow = window.open();
-    printWindow.document.write(headerContent);
-    printWindow.document.close();
+     const printWindow = window.open();
+     printWindow.document.write(headerContent);
+     printWindow.document.close();
 
-    printWindow.print();
+     printWindow.print();
 };
 
 //--------------------------------------------//
@@ -672,32 +672,32 @@ savePaymentBtnEl.addEventListener("click", savePayments);
 btnPrintEl.addEventListener("click", loadPrintMode);
 
 newClientBtnEl.addEventListener("click", () => {
-    openCloseModal("open");
+     openCloseModal("open");
 });
 
 formCancelBtnEl.addEventListener("click", () => {
-    openCloseModal("close");
+     openCloseModal("close");
 });
 
 infoCloseBntEl.addEventListener("click", () => {
-    InfoClientModal("close");
+     InfoClientModal("close");
 });
 
 infoDeleteBtnEl.addEventListener("click", () => {
-    const idClient = +infoBoxEl.dataset.id;
-    deleteClient(idClient);
+     const idClient = +infoBoxEl.dataset.id;
+     deleteClient(idClient);
 });
 
 allCheckboxesPaymentEl.forEach((input) => {
-    input.addEventListener("click", (e) => {
-        const input = e.target;
+     input.addEventListener("click", (e) => {
+          const input = e.target;
 
-        if (input.checked) {
-            markInput(input, "active");
-        } else {
-            markInput(input, "deactivate");
-        }
-    });
+          if (input.checked) {
+               markInput(input, "active");
+          } else {
+               markInput(input, "deactivate");
+          }
+     });
 });
 
 //--------------------------------------------//

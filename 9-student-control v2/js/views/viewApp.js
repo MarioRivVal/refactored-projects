@@ -139,7 +139,7 @@ class ViewApp {
                const inputEl = document.createElement("INPUT");
                inputEl.type = "checkbox";
                inputEl.id = `checkbox${student.id}-${n}`;
-               inputEl.classList.add("client_checkbox-input");
+               inputEl.classList.add("student_checkbox-input");
                inputEl.dataset.year = selectedYear;
                inputEl.dataset.month = selectedMonths[i];
                inputEl.disabled = true;
@@ -239,6 +239,8 @@ class ViewApp {
                }
           });
      }
+     //*****************//
+
      //*****************//
 }
 
