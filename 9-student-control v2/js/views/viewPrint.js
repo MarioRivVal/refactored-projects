@@ -73,16 +73,42 @@ class ViewPrint {
      }
 
      //*****************//
+     // printBills(htmls) {
+     //      const headerContent = `<html><head><title>Print Bills</title><link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/><link rel="stylesheet" href="css/style.css" /></head><body><section class="all-bills">${htmls.join(
+     //           ""
+     //      )}</section></body></html>`;
+
+     //      const printWindow = window.open();
+     //      printWindow.document.write(headerContent);
+     //      printWindow.document.close();
+
+     //      printWindow.onload = function () {
+     //           printWindow.print();
+     //      };
+     // }
+
      printBills(htmls) {
           const headerContent = `<html><head><title>Print Bills</title><link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/><link rel="stylesheet" href="css/style.css" /></head><body><section class="all-bills">${htmls.join(
                ""
           )}</section></body></html>`;
 
-          const printWindow = window.open();
-          printWindow.document.write(headerContent);
-          printWindow.document.close();
+          try {
+               const printWindow = window.open();
+               if (printWindow) {
+                    printWindow.document.write(headerContent);
+                    printWindow.document.close();
 
-          printWindow.print();
+                    printWindow.onload = function () {
+                         printWindow.print();
+                    };
+               } else {
+                    // Popup was blocked
+                    alert("Please disable your popup blocker and try again");
+               }
+          } catch (error) {
+               // Log the error or handle it in another appropriate way
+               console.error("An error occurred while trying to print:", error);
+          }
      }
      //*****************//
      addHandlerPrint(handler) {

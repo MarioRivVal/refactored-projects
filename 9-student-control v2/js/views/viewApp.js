@@ -94,7 +94,13 @@ class ViewApp {
               <div class="student_name">
                   <p>${name} ${surname}</p>
                   <div class="student_buttons">
-                      <button class="btn student-btn">ver</button>
+                      <button class="btn-icon student-btn">
+                      <svg class="icon">
+                      <use
+                         xlink:href="img/svg/sprite.svg#arrow-left"
+                         ></use>
+                      </svg>
+                      </button>
                   </div>
               </div>
               <div class="checkboxes">
@@ -232,10 +238,10 @@ class ViewApp {
      //*****************//
      addHandlerToggleOptions(handler) {
           this.studentsListEl.addEventListener("click", (e) => {
-               const target = e.target;
+               const btn = e.target.closest(".student-btn");
 
-               if (target.classList.contains("student-btn")) {
-                    handler(target);
+               if (btn) {
+                    handler(btn);
                }
           });
      }

@@ -8,10 +8,23 @@
      font-family: inherit;
      text-transform: uppercase;
      cursor: pointer;
-     font-size: inherit;
+     // font-size: inherit;
 
      &:hover {
           background-color: $color-eunry;
           font-weight: 700;
+     }
+}
+
+.btn-icon {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     padding: 1rem 0;
+     cursor: pointer;
+
+     .icon {
+          width: 2rem;
+          height: 2rem;
      }
 }

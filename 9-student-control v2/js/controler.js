@@ -42,9 +42,9 @@ const upDateDisplay = async function () {
 };
 //*****************//
 const controlNewStudent = function () {
-     console.log(model.editMode); //CONSOLE
      model.editMode = false;
      viewForm.switchBntText(model.editMode);
+     viewApp.removeClientOptions();
      helper.toggleWindow("open", [viewForm.modalBoxEl, viewForm.modalEl]);
 };
 
@@ -73,6 +73,7 @@ const controlSubmitForm = async function () {
                viewForm.formEl.reset();
           } catch (error) {
                console.error("Error adding client:", error);
+               viewApp.displayMessage("Este DNI ya existe", "alert");
           }
      } else {
           try {
@@ -81,12 +82,10 @@ const controlSubmitForm = async function () {
                viewForm.allInputsEl.forEach((el) => {
                     model.editedStudentObj[el.id] = el.value;
                });
-               console.log(model.editedStudentObj); //CONSOLE
 
                await model.updateStudentDB(model.editedStudentObj);
 
                upDateDisplay();
-               console.log(model.Allstudents); //CONSOLE
 
                viewApp.displayMessage("Editado correctamente", "confirm");
                viewForm.formEl.reset();
@@ -96,6 +95,7 @@ const controlSubmitForm = async function () {
                model.editMode = false;
           } catch (error) {
                console.error("Error editing student:", error);
+               viewApp.displayMessage("Este DNI ya existe", "alert");
           }
      }
 };
@@ -306,6 +306,10 @@ const init = async function () {
 
      upDateDisplay();
 
-     console.log("inicial:", model); //CONSOLE
+     if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("/js/sw.js").then(function () {
+               console.log("Service Worker Registered");
+          });
+     }
 };
 init();

@@ -21,14 +21,15 @@
 // SECTION INFO CLIENT
 .popup-options-student {
      position: absolute;
-     top: 4rem;
-     right: -0.3rem;
+     top: 50%;
+     right: 3rem;
      display: flex;
-     flex-direction: column;
-     gap: 0.3rem;
-     padding: 1rem;
+     // flex-direction: column;
+     gap: 0.5rem;
+     // padding: 1rem;
      background-color: white;
      z-index: 10;
+     transform: translateY(-50%);
 
      & button {
           padding: 0.5rem;

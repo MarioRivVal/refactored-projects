@@ -1,0 +1,24 @@
+{
+     "lang": "en-US",
+     "name": "Student",
+     "short_name": "EST",
+     "description": "payment students control and bills printing",
+     "start_url": "/",
+     "background_color": "#4a4e68",
+     "theme_color": "#d4a5a5",
+     "orientation": "landscape",
+     "display": "standalone",
+     "icons": [
+          {
+               "src": "/img/stu-logo.png",
+               "type": "image/png",
+               "sizes": "250x250"
+          },
+          {
+               "src": "/img/stu-logo-large.png",
+               "type": "image/png",
+               "sizes": "520x520",
+               "purpose": "any maskable"
+          }
+     ]
+}
