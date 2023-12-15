@@ -63,8 +63,9 @@
      font-size: $font-small;
 }
 
-@media print {
-     .bill {
-          page-break-inside: avoid;
-     }
+// @media print {
+
+// }
+.bill {
+     page-break-inside: avoid;
 }

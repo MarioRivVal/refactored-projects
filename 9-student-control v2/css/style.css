@@ -459,6 +459,5 @@ body {
   text-align: center;
   font-size: 1.2rem; }
 
-@media print {
-  .bill {
-    page-break-inside: avoid; } }
+.bill {
+  page-break-inside: avoid; }

@@ -1,9 +1,9 @@
 {
-     "lang": "en-US",
      "name": "Student",
      "short_name": "EST",
+     "start_url": "/index.html",
+     "lang": "en-US",
      "description": "payment students control and bills printing",
-     "start_url": "/",
      "background_color": "#4a4e68",
      "theme_color": "#d4a5a5",
      "orientation": "landscape",

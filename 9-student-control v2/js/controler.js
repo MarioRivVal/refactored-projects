@@ -8,6 +8,14 @@ import viewInfo from "./views/viewInfo.js";
 import viewPayments from "./views/viewPayments.js";
 import viewPrint from "./views/viewPrint.js";
 
+window.addEventListener("DOMContentLoaded", () => {
+     if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("/sw.js").then(function () {
+               console.log("Service Worker Registered");
+          });
+     }
+});
+
 //*****************//
 
 const checkEmptyInput = function () {
@@ -305,11 +313,6 @@ const init = async function () {
      model.selectedMonths = viewApp.readMonthValue(model.quartersMonth);
 
      upDateDisplay();
-
-     if ("serviceWorker" in navigator) {
-          navigator.serviceWorker.register("/js/sw.js").then(function () {
-               console.log("Service Worker Registered");
-          });
-     }
 };
+
 init();
