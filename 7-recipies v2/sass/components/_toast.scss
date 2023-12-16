@@ -1,0 +1,31 @@
+.toast-box {
+    position: fixed;
+    top: 0;
+    z-index: 5;
+
+    @include respond(phone) {
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .toast {
+        width: 20rem;
+        height: 5.5rem;
+        position: relative;
+        overflow: hidden;
+
+        &-invisible {
+            width: 100%;
+            padding: 1rem 0;
+            position: absolute;
+            top: -100%;
+            left: 0;
+            text-align: center;
+            border-radius: 10px;
+            background-color: $primary-green;
+            color: $light-color;
+            font-size: $font-medium;
+            transition: top 0.3s;
+        }
+    }
+}

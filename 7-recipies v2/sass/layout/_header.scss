@@ -1,0 +1,118 @@
+.recipes-list {
+    display: grid;
+    gap: 1rem;
+    padding: 0 1rem;
+    background-color: $light-color;
+    grid-template-columns: repeat(2, 1fr);
+
+    @include respond(phone) {
+        grid-template-columns: 1fr;
+    }
+
+    .recipe {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, max-content);
+        column-gap: 2rem;
+        row-gap: 0.5rem;
+        padding: 2rem;
+        align-items: end;
+        background-color: $light-green;
+        border-radius: 10px;
+
+        &_img {
+            grid-row: 1/-1;
+            width: 20rem;
+            height: 20rem;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 10px;
+            border-left: 2px solid $primary-green;
+            border-top: 2px solid $primary-green;
+        }
+        &_img img {
+            padding: 3px;
+            border-radius: 10px;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        &_title {
+            height: 100%;
+            grid-column: 2/-1;
+
+            & h3 {
+                font-size: $font-small;
+            }
+        }
+        &_detail {
+            grid-column: 2/-1;
+
+            & p {
+                font-size: $font-smallest;
+                gap: 2rem;
+                display: flex;
+                align-items: center;
+
+                & span {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+
+        &_icon {
+            width: 3rem;
+            height: 3rem;
+            fill: none;
+            stroke: $primary-green;
+        }
+        &_btn {
+            position: relative;
+            grid-column: 2/-1;
+            height: 4rem;
+            width: 100%;
+            border-radius: 50px;
+            overflow: hidden;
+
+            &-layer {
+                position: absolute;
+                height: 100%;
+                width: 300%;
+                left: -100%;
+                background-image: linear-gradient(
+                    135deg,
+                    $primary-orange,
+                    $primary-green,
+                    $primary-orange,
+                    $primary-green
+                );
+                transition: all 0.4s ease;
+            }
+
+            & button {
+                position: relative;
+                height: 100%;
+                width: 100%;
+                background: none;
+                border: none;
+                outline: none;
+                color: $light-color;
+                font-weight: 500;
+                font-size: $font-small;
+                letter-spacing: 1px;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.recipe_btn:hover .recipe_btn-layer {
+    left: 0;
+}
+@include respond(phone) {
+    .recipe_btn:hover .recipe_btn-layer {
+        left: -100%;
+    }
+}

@@ -1,0 +1,79 @@
+.nav_bar {
+    width: 100%;
+    background-color: $primary-orange;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 3rem;
+    gap: 3rem;
+    border-radius: 10px;
+}
+
+.nav_bar-sticky {
+    position: fixed;
+    background-color: rgba(247, 165, 64, 0.9);
+    z-index: 2;
+}
+
+.icon-box {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $light-color;
+    width: 7rem;
+    height: 3rem;
+    border-radius: 100px;
+    .icon {
+        width: 3rem;
+        height: 3rem;
+        stroke: $primary-red;
+        fill: none;
+
+        transition: all 0.3s;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+
+        @include respond(phone) {
+            &:hover {
+                transform: initial;
+            }
+        }
+    }
+}
+
+#categories {
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    width: 70%;
+    text-align: center;
+    appearance: none;
+    font-family: inherit;
+    color: inherit;
+    font-weight: 400;
+    font-size: $font-medium;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all 0.3s;
+
+    &:hover {
+        border-radius: 10px;
+        transform: scale(1.05);
+        box-shadow: 1px 2px 4px $dark-orange;
+    }
+
+    @include respond(phone) {
+        width: 45%;
+        &:hover {
+            transform: none;
+            box-shadow: none;
+        }
+    }
+
+    option {
+        font-size: $font-small;
+    }
+}
