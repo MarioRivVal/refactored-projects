@@ -16,6 +16,7 @@
      align-items: center;
      justify-content: space-between;
      @include border-hard;
+     page-break-inside: avoid;
 
      & .paid {
           font-size: $font-medium;
@@ -31,6 +32,11 @@
      font-size: $font-medium;
      font-weight: 700;
 }
+
+.student-info {
+     align-self: flex-start;
+}
+
 .student-info > * {
      margin-bottom: 1rem;
      font-size: $font-medium;
@@ -61,11 +67,4 @@
 .date-box .date {
      text-align: center;
      font-size: $font-small;
-}
-
-// @media print {
-
-// }
-.bill {
-     page-break-inside: avoid;
 }

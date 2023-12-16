@@ -10,9 +10,7 @@ import viewPrint from "./views/viewPrint.js";
 
 window.addEventListener("DOMContentLoaded", () => {
      if ("serviceWorker" in navigator) {
-          navigator.serviceWorker.register("/sw.js").then(function () {
-               console.log("Service Worker Registered");
-          });
+          navigator.serviceWorker.register("/sw.js").then(function () {});
      }
 });
 
@@ -162,7 +160,6 @@ const controlToggleOptions = async function (target) {
                ]);
 
                viewApp.removeClientOptions();
-               console.log(model.studentDataObj); //CONSOLE
           };
 
           viewApp.btnEditEl.onclick = () => {
@@ -176,8 +173,6 @@ const controlToggleOptions = async function (target) {
                ]);
 
                viewApp.removeClientOptions();
-
-               console.log(model.editMode); //CONSOLE
           };
 
           return;
@@ -239,7 +234,6 @@ const controlSelectItemsToPrint = function (e) {
      model.studentDataObj = model.Allstudents.find(
           (student) => student.id === studentId
      );
-     console.log(model.studentDataObj); //CONSOLE
 
      const allMonthInputs = input
           .closest(".student")
@@ -264,14 +258,12 @@ const controlSelectItemsToPrint = function (e) {
                     paidMonths,
                },
           ];
-          // console.log(model.elementsToPrint); //CONSOLE
      } else {
           viewPayments.markInput(input, "deactivate");
 
           model.elementsToPrint = model.elementsToPrint.filter(
                (el) => el.id !== studentId
           );
-          // console.log(model.elementsToPrint); //CONSOLE
      }
 };
 

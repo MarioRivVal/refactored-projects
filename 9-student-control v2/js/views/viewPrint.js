@@ -4,12 +4,11 @@ class ViewPrint {
      constructor() {
           this.allCheckboxesPrintEl = null;
           this.btnPrintEl = document.querySelector(".btn-print");
+          this.printStyle =
+               "*,*::before,*::after {margin: 0;padding: 0;box-sizing: inherit;}html {font-size: 62.5%;@media only screen and (max-width: 56.25em){font-size: 50%;}@media only screen and (max-width:37.5em) {font-size: 37.5%;}}body{position: relative;box-sizing: border-box;display: flex;flex-direction: column;font-family:'lato',sans-serif;color: #4a4e68;background-color: #4a4e68;}.all-bills { display: grid;grid-template-columns: repeat(2, 1fr);grid-template-rows: repeat(4, 1fr);background-color: antiquewhite;width: 210mm;border: 1px solid black;}.bill {padding: 1.5rem;background-color: azure; display: flex;flex-direction: column;gap: 1rem; align-items: center;justify-content: space-between; border: 2px solid #9a8d98; border-radius: 5px;page-break-inside: avoid;}.bill .paid {font-size: 1.6rem;text-transform: uppercase;font-weight: 700;}.paid-month {display: flex;gap: 0.5rem;text-transform: uppercase;font-size: 1.6rem;font-weight: 700;}.student-info { align-self: flex-start;}.student-info > * {margin-bottom: 1rem;font-size:1.6rem;}.details { display: flex;gap: 0.5rem;}.footer { width: 100%;display: flex; justify-content: space-around;}.footer > div > p:last-child {padding: 0 2rem;font-size: 1.2rem;text-transform: uppercase;border-top: 1px solid #9a8d98;}.sign-box p {margin-top:14px;}.date-box .date {text-align: center;font-size: 1.2rem;}";
      }
      //*****************//
      loadPrintPage(elementsToPrint) {
-          // window.open("print.html", "_blank");
-          console.log("print");
-
           const htmlToPrint = [];
 
           elementsToPrint.forEach((el) => {
@@ -72,23 +71,10 @@ class ViewPrint {
           if (htmlToPrint.length) this.printBills(htmlToPrint);
      }
 
-     //*****************//
-     // printBills(htmls) {
-     //      const headerContent = `<html><head><title>Print Bills</title><link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/><link rel="stylesheet" href="css/style.css" /></head><body><section class="all-bills">${htmls.join(
-     //           ""
-     //      )}</section></body></html>`;
-
-     //      const printWindow = window.open();
-     //      printWindow.document.write(headerContent);
-     //      printWindow.document.close();
-
-     //      printWindow.onload = function () {
-     //           printWindow.print();
-     //      };
-     // }
-
      printBills(htmls) {
-          const headerContent = `<html><head><title>Print Bills</title><link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/><link rel="stylesheet" href="css/style.css" /></head><body><section class="all-bills">${htmls.join(
+          const headerContent = `<html><head><title>Print Bills</title><link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/><style>${
+               this.printStyle
+          }</style></head><body><section class="all-bills">${htmls.join(
                ""
           )}</section></body></html>`;
 
@@ -102,11 +88,9 @@ class ViewPrint {
                          printWindow.print();
                     };
                } else {
-                    // Popup was blocked
                     alert("Please disable your popup blocker and try again");
                }
           } catch (error) {
-               // Log the error or handle it in another appropriate way
                console.error("An error occurred while trying to print:", error);
           }
      }

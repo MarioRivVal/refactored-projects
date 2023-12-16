@@ -420,7 +420,8 @@ body {
   align-items: center;
   justify-content: space-between;
   border: 2px solid #9a8d98;
-  border-radius: 5px; }
+  border-radius: 5px;
+  page-break-inside: avoid; }
   .bill .paid {
     font-size: 1.6rem;
     text-transform: uppercase;
@@ -432,6 +433,9 @@ body {
   text-transform: uppercase;
   font-size: 1.6rem;
   font-weight: 700; }
+
+.student-info {
+  align-self: flex-start; }
 
 .student-info > * {
   margin-bottom: 1rem;
@@ -458,6 +462,3 @@ body {
 .date-box .date {
   text-align: center;
   font-size: 1.2rem; }
-
-.bill {
-  page-break-inside: avoid; }

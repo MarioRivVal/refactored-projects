@@ -1,6 +1,4 @@
 //-----------------------------------------------//
-import helper from "../helpers.js";
-import viewApp from "./viewApp.js";
 //-----------------------------------------------//
 class ViewForm {
      constructor() {

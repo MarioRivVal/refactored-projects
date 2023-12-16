@@ -1,7 +1,6 @@
 //-----------------------------------------------//
 //-----------------------------------------------//
 
-import viewInfo from "./viewInfo.js";
 import viewPayments from "./viewPayments.js";
 
 //*****************//
@@ -52,12 +51,10 @@ class ViewApp {
      //*****************//
      readYearValue() {
           return this.yearSelectEl.value;
-          // displayClientRow(allClients);
      }
      //*****************//
      readMonthValue(quartersMonth) {
           return quartersMonth[this.monthSelectEl.value];
-          // displayClientRow(allClients);
      }
      //*****************//
 
@@ -245,9 +242,6 @@ class ViewApp {
                }
           });
      }
-     //*****************//
-
-     //*****************//
 }
 
 export default new ViewApp();

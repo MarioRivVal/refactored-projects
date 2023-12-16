@@ -1,3 +1,5 @@
+//-----------------------------------------------//
+//-----------------------------------------------//
 class ViewPayments {
      constructor() {
           this.paymentStudentNameEl = document.querySelector(
@@ -57,7 +59,6 @@ class ViewPayments {
      }
      //*****************//
      setAsPaid(studentData, selectedYear) {
-          console.log(studentData); //CONSOLE
           const monthArr = Object.entries(studentData.payments[selectedYear]);
 
           monthArr.forEach((el) => {
