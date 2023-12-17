@@ -1,30 +1,35 @@
 /*****************************************/
 /*****************************************/
 import model from "./model.js";
+import view from "./views/view.js";
 import viewCategory from "./views/viewCategory.js";
+
 /*****************************************/
 
-const controlChangeCategory = async function () {
-     const valueCategory = e.target.value;
+////////////////////////////////////////////
+const controlChangeCategory = async function (e) {
+     const category = e.target.value;
 
-     return valueCategory !== "Menu";
+     if (category === "Menu") return;
+
+     await model.fetchRecipes(category);
+     viewCategory.renderRecipes(model.allRecipes);
+     viewCategory.containerEl.scrollIntoView({ behavior: "smooth" });
+
+     model.setInitialRecipes(model.allRecipes);
 };
 ////////////////////////////////////////////
 
 const init = async function () {
-     try {
-          // TEST mas adelante para ver si es necesario colocar un if si existe categoriesEl en favoritos
+     // TEST mas adelante para ver si es necesario colocar un if si existe categoriesEl en favoritos
+     await model.fetchCategories();
 
-          const data = await model.getApiCategories();
-
-          model.allCategories = data.categories.map((cat) => cat.strCategory);
-
-          viewCategory.renderCategories(model.allCategories);
-     } catch (error) {
-          console.error(error);
-     }
+     viewCategory.renderCategories(model.allCategories);
+     model.loadInitialRecipes();
+     viewCategory.renderRecipes(model.inicialRecipes);
 
      viewCategory.addHandlerChangeCategory(controlChangeCategory);
+     viewCategory.observeNavBar();
 };
 
 init();
