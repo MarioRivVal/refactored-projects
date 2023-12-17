@@ -6,9 +6,10 @@ import { API_URL } from "./config.js";
 class Model {
      constructor() {
           this.allRecipes = [];
-          this.inicialRecipes = [];
+
           this.allCategories = [];
           this.selectedRecipe = null;
+          this.favorites = [];
      }
      ////////////////////////////////////////////
 
@@ -52,18 +53,26 @@ class Model {
      }
      ////////////////////////////////////////////
 
-     setInitialRecipes = function (recipes) {
+     setInitialRecipes(recipes) {
           JSON.parse(localStorage.getItem("inicialRecipies")) ?? [];
 
           localStorage.setItem("inicialRecipes", JSON.stringify(recipes));
-     };
+     }
      ////////////////////////////////////////////
 
-     loadInitialRecipes = function () {
+     loadInitialRecipes() {
           const recipes = JSON.parse(localStorage.getItem("inicialRecipes"));
 
-          this.inicialRecipes = recipes;
-     };
+          this.allRecipes = recipes;
+     }
+     ////////////////////////////////////////////
+     isFavorite(id) {
+          // TEST MAS ADELANTE PARA CREAR UN ARRAY FAV EN MODEL
+          const favorities =
+               JSON.parse(localStorage.getItem("favorities")) ?? [];
+
+          return favorities.some((recipe) => recipe.id === id);
+     }
 }
 
 export default new Model();

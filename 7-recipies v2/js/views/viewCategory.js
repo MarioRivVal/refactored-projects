@@ -78,6 +78,13 @@ class ViewCategories extends view {
                handler(e);
           });
      }
+
+     ////////////////////////////////////////////
+     addHandlerClickRecipe(handler) {
+          this.recipesListEl.addEventListener("click", (e) => {
+               handler(e);
+          });
+     }
 }
 
 export default new ViewCategories();
