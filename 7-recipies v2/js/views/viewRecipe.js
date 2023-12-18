@@ -29,15 +29,12 @@ class viewRecipe extends view {
                strMealThumb: img,
           } = recipe;
 
-          console.log(recipe); // CONSOLE
-
           this.modalBoxEl.dataset.id = id;
 
           this.imgRecipeEl.src = `${img}`;
           this.imgRecipeEl.alt = `${name}`;
 
           this.nameRecipeEl.textContent = `${name}`;
-
           this.instructionsRecipeEl.textContent = `${instructions}`;
 
           this.clearElements(this.ingredientsEl);
@@ -58,32 +55,37 @@ class viewRecipe extends view {
                }
           }
      }
+
      ////////////////////////////////////////////
      togglePopUp() {
           const bodyEl = document.querySelector("body");
           this.modalContainerEl.classList.toggle("modal_container-open");
           this.modalBoxEl.classList.toggle("modal-box-open");
 
-          if (
-               this.modalContainerEl.classList.contains("modal_container-open")
-          ) {
-               bodyEl.style.overflow = "hidden";
-          } else {
-               bodyEl.style.overflow = "auto";
-          }
+          this.modalContainerEl.classList.contains("modal_container-open")
+               ? (bodyEl.style.overflow = "hidden")
+               : (bodyEl.style.overflow = "auto");
      }
+
      ////////////////////////////////////////////
      clearElements(element) {
           while (element.firstChild) {
                element.removeChild(element.firstChild);
           }
      }
+
      ////////////////////////////////////////////
      toggleAddRemoveBnt = function (mode) {
           this.btnAddRemove.textContent = mode === true ? "Remove" : "Add";
           this.btnAddRemove.style.backgroundColor =
                mode === true ? "#e94e4e" : "#8bc926";
      };
+
+     ////////////////////////////////////////////
+     addHandlerClickAddRemove(handler) {
+          this.btnAddRemove.addEventListener("click", handler);
+     }
+
      ////////////////////////////////////////////
 
      addHandlerClickClosePopUp() {

@@ -1,174 +1,169 @@
 .modal_container {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    background-color: rgba(25, 25, 24, 0.3);
-    backdrop-filter: blur(10px);
-    transition: all 0.2s;
-    z-index: 3;
+     position: fixed;
+     width: 100%;
+     height: 100vh;
+     top: 0;
+     left: 0;
+     background-color: rgba(25, 25, 24, 0.3);
+     backdrop-filter: blur(10px);
+     transition: all 0.2s;
+     z-index: 3;
 
-    // hidding the popup
-    visibility: hidden;
-    opacity: 0;
+     // hidding the popup
+     visibility: hidden;
+     opacity: 0;
 
-    .modal-box {
-        width: 40rem;
-        border-radius: 10px;
-        padding: 2rem 0 2rem 2rem;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        background-color: $light-green;
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.2);
-        transition: all 0.5s 0.2s;
+     .modal-box {
+          width: 40rem;
+          border-radius: 10px;
+          padding: 2rem 0 2rem 2rem;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          background-color: $light-green;
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.2);
+          transition: all 0.5s 0.2s;
 
-        @include respond(tab-port) {
-            width: 60%;
-        }
+          @include respond(tab-port) {
+               width: 60%;
+          }
 
-        @include respond(phone) {
-            width: 90vw;
-            // height: 90vh;
-        }
-    }
+          @include respond(phone) {
+               width: 90vw;
+          }
+     }
 
-    .modal {
-        height: 80vh;
-        padding-right: 2rem;
-        overflow-y: scroll;
+     .modal {
+          height: 80vh;
+          padding-right: 2rem;
+          overflow-y: scroll;
 
-        @include respond(phone) {
-            // height: 90vh;
-        }
+          &::-webkit-scrollbar {
+               width: 4px;
+          }
+          &::-webkit-scrollbar-track {
+               background-color: $light-green;
+          }
+          &::-webkit-scrollbar-thumb {
+               background-color: $primary-green;
+               border-radius: 6px;
+          }
 
-        &::-webkit-scrollbar {
-            width: 4px;
-        }
-        &::-webkit-scrollbar-track {
-            background-color: $light-green;
-        }
-        &::-webkit-scrollbar-thumb {
-            background-color: $primary-green;
-            border-radius: 6px;
-        }
+          & > *:not(:last-child) {
+               margin-bottom: 1rem;
+          }
 
-        & > *:not(:last-child) {
-            margin-bottom: 1rem;
-        }
+          &_img {
+               border-top: 2px solid $primary-orange;
+               border-left: 2px solid $primary-orange;
+               border-radius: 10px;
+               overflow: hidden;
+               & img {
+                    width: 100%;
+                    display: block;
+                    padding: 3px;
+                    border-radius: 10px;
+               }
+          }
 
-        &_img {
-            border-top: 2px solid $primary-orange;
-            border-left: 2px solid $primary-orange;
-            border-radius: 10px;
-            overflow: hidden;
-            & img {
-                width: 100%;
-                display: block;
-                padding: 3px;
-                border-radius: 10px;
-            }
-        }
+          &_title {
+               font-size: $font-medium;
+               line-height: 24px;
+               text-align: justify;
+          }
 
-        &_title {
-            font-size: $font-medium;
-            line-height: 24px;
-            text-align: justify;
-        }
+          & h4 {
+               margin-top: 2rem;
+               font-size: $font-smallest;
+               font-weight: 600;
+               color: $primary-green;
+          }
 
-        & h4 {
-            margin-top: 2rem;
-            font-size: $font-smallest;
-            font-weight: 600;
-            color: $primary-green;
-        }
+          &_instructions {
+               font-size: $font-smallest;
+          }
 
-        &_instructions {
-            font-size: $font-smallest;
-        }
+          &_ingredients {
+               display: grid;
+               grid-template-columns: repeat(2, 1fr);
+               background-color: $light-color;
+               border-radius: 10px;
+               overflow: hidden;
 
-        &_ingredients {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            background-color: $light-color;
-            border-radius: 10px;
-            overflow: hidden;
+               & ul {
+                    list-style: none;
+                    background-color: azure;
+                    padding: 1rem;
 
-            & ul {
-                list-style: none;
-                background-color: azure;
-                padding: 1rem;
+                    & > *:not(:last-child) {
+                         border-bottom: 1px solid $primary-green;
+                         margin-bottom: 3px;
+                    }
+               }
+          }
+     }
+     .btns {
+          display: flex;
+          gap: 2rem;
+          padding: 1rem 2rem 0 0;
 
-                & > *:not(:last-child) {
-                    border-bottom: 1px solid $primary-green;
-                    margin-bottom: 3px;
-                }
-            }
-        }
-    }
-    .btns {
-        display: flex;
-        gap: 2rem;
-        padding: 1rem 2rem 0 0;
+          .modal_btn {
+               padding: 1rem;
+               color: $light-color;
+               border: none;
+               outline: none;
+               border-radius: 10px;
+               font-size: $font-small;
+               letter-spacing: 0.5px;
+               cursor: pointer;
+               transition: width 0.3s ease;
+          }
+          .btn-close {
+               width: 50%;
+               background-color: $primary-orange;
 
-        .modal_btn {
-            padding: 1rem;
-            color: $light-color;
-            border: none;
-            outline: none;
-            border-radius: 10px;
-            font-size: $font-small;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            transition: width 0.3s ease;
-        }
-        .btn-close {
-            width: 50%;
-            background-color: $primary-orange;
+               &:hover {
+                    width: 65%;
+                    box-shadow: -5px 2px 7px #bababa;
+                    transition: all 0.2s ease;
+               }
 
-            &:hover {
-                width: 65%;
-                box-shadow: -5px 2px 7px #bababa;
-                transition: all 0.2s ease;
-            }
+               @include respond(phone) {
+                    &:hover {
+                         width: 50%;
+                         box-shadow: none;
+                         transition: none;
+                    }
+               }
+          }
+          .btn-add-remove {
+               width: 50%;
+               background-color: $primary-green;
 
-            @include respond(phone) {
-                &:hover {
-                    width: 50%;
-                    box-shadow: none;
-                    transition: none;
-                }
-            }
-        }
-        .btn-add-remove {
-            width: 50%;
-            background-color: $primary-green;
+               &:hover {
+                    width: 65%;
+                    box-shadow: 5px 2px 7px #bababa;
+                    transition: width 0.2s ease;
+               }
 
-            &:hover {
-                width: 65%;
-                box-shadow: 5px 2px 7px #bababa;
-                transition: width 0.2s ease;
-            }
-
-            @include respond(phone) {
-                &:hover {
-                    width: 50%;
-                    box-shadow: none;
-                    transition: none;
-                }
-            }
-        }
-    }
+               @include respond(phone) {
+                    &:hover {
+                         width: 50%;
+                         box-shadow: none;
+                         transition: none;
+                    }
+               }
+          }
+     }
 }
 
 .modal_container-open {
-    visibility: visible;
-    opacity: 1;
+     visibility: visible;
+     opacity: 1;
 }
 
 .modal_container-open .modal-box-open {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+     opacity: 1;
+     transform: translate(-50%, -50%) scale(1);
 }

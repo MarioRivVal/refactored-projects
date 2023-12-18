@@ -8,7 +8,6 @@ class ViewCategories extends view {
      }
      ////////////////////////////////////////////
      renderRecipes(recipes) {
-          console.log(recipes); // CONSOLE
           this.recipesListEl.innerHTML = "";
 
           recipes.forEach((recipe) => {
@@ -24,7 +23,6 @@ class ViewCategories extends view {
                       <div class="recipe_title">
                           <h3>${recipe.strMeal ?? recipe.name}</h3>
                       </div>
-  
                       <div class="recipe_detail">
                           <p>
                               <span
@@ -67,7 +65,6 @@ class ViewCategories extends view {
                optionEl.value = category;
                optionEl.textContent = category;
 
-               // TEST mas adelante para ver si es necesario el if
                if (this.categoriesEl) this.categoriesEl.appendChild(optionEl);
           });
      }

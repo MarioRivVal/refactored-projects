@@ -1,13 +1,11 @@
 /*****************************************/
 /*****************************************/
 import model from "./model.js";
-import view from "./views/view.js";
 import viewCategory from "./views/viewCategory.js";
 import viewRecipe from "./views/viewRecipe.js";
 
 /*****************************************/
 
-////////////////////////////////////////////
 const controlChangeCategory = async function (e) {
      const category = e.target.value;
 
@@ -19,6 +17,7 @@ const controlChangeCategory = async function (e) {
 
      model.setInitialRecipes(model.allRecipes);
 };
+
 ////////////////////////////////////////////
 const controlSelectRecipe = function (e) {
      const btnEl = e.target.closest(".recipe_btn");
@@ -33,13 +32,28 @@ const controlSelectRecipe = function (e) {
      viewRecipe.toggleAddRemoveBnt(model.isFavorite(id));
      viewRecipe.togglePopUp();
 };
+
+////////////////////////////////////////////
+const controlAddRemoveFavorite = function () {
+     const id = model.selectedRecipe.idMeal;
+
+     model.isFavorite(id) ? model.removeFavorite(id) : model.addFavorite();
+
+     const mode = model.isFavorite(id);
+     viewRecipe.toggleAddRemoveBnt(mode);
+     viewRecipe.displayMessage(mode);
+};
+
 ////////////////////////////////////////////
 
 const init = async function () {
-     // TEST mas adelante para ver si es necesario colocar un if si existe categoriesEl en favoritos
      await model.fetchCategories();
 
      model.loadInitialRecipes();
+
+     if (viewCategory.favoritesListEl)
+          viewCategory.renderRecipe(model.getFavorites());
+
      viewCategory.renderCategories(model.allCategories);
      viewCategory.renderRecipes(model.allRecipes);
 
@@ -48,6 +62,7 @@ const init = async function () {
      viewCategory.observeNavBar();
 
      viewRecipe.addHandlerClickClosePopUp();
+     viewRecipe.addHandlerClickAddRemove(controlAddRemoveFavorite);
 };
 
 init();

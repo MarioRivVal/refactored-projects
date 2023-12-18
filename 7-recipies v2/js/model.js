@@ -9,10 +9,9 @@ class Model {
 
           this.allCategories = [];
           this.selectedRecipe = null;
-          this.favorites = [];
      }
-     ////////////////////////////////////////////
 
+     ////////////////////////////////////////////
      async fetchCategories() {
           try {
                const resp = await fetch(`${API_URL}categories.php`);
@@ -32,7 +31,6 @@ class Model {
           try {
                const resp = await fetch(`${API_URL}filter.php?c=${category}`);
                const data = await resp.json();
-
                const ids = data.meals.map((meal) => meal.idMeal);
 
                const promises = ids.map((id) => {
@@ -40,9 +38,7 @@ class Model {
                });
 
                const responses = await Promise.all(promises);
-
                const dataPromises = responses.map((resp) => resp.json());
-
                const recipes = await Promise.all(dataPromises);
 
                this.allRecipes = recipes.map((recipe) => recipe.meals[0]);
@@ -65,12 +61,44 @@ class Model {
 
           this.allRecipes = recipes;
      }
-     ////////////////////////////////////////////
-     isFavorite(id) {
-          // TEST MAS ADELANTE PARA CREAR UN ARRAY FAV EN MODEL
-          const favorities =
-               JSON.parse(localStorage.getItem("favorities")) ?? [];
 
+     ////////////////////////////////////////////
+     getFavorites() {
+          return JSON.parse(localStorage.getItem("favorities")) ?? [];
+     }
+     ////////////////////////////////////////////
+
+     addFavorite() {
+          const {
+               idMeal: id,
+               strArea: origen,
+               strCategory: category,
+               strMeal: name,
+               strMealThumb: img,
+          } = this.selectedRecipe;
+
+          const favorities = this.getFavorites();
+
+          localStorage.setItem(
+               "favorities",
+               JSON.stringify([
+                    ...favorities,
+                    { id, origen, category, name, img },
+               ])
+          );
+     }
+     ////////////////////////////////////////////
+
+     removeFavorite(id) {
+          const favorities = this.getFavorites();
+          const newFavorities = favorities.filter((recipe) => recipe.id !== id);
+
+          localStorage.setItem("favorities", JSON.stringify(newFavorities));
+     }
+     ////////////////////////////////////////////
+
+     isFavorite(id) {
+          const favorities = this.getFavorites();
           return favorities.some((recipe) => recipe.id === id);
      }
 }
