@@ -20,10 +20,8 @@ class ViewPayments {
 
      //*****************//
      setPayments(studentData, selectedYear) {
-          const { name, surname, payments } = studentData;
-
-          this.paymentStudentNameEl.textContent = `${name} ${surname}`;
-          this.paymentStudentYearEl.textContent = selectedYear;
+          const { payments } = studentData;
+          console.log(studentData); // CONSOLE
 
           const newStudentPayments = {
                ...studentData,
@@ -41,6 +39,13 @@ class ViewPayments {
 
           return newStudentPayments;
      }
+
+     //*****************//
+     displayPlayingStudent(name, surname, year) {
+          this.paymentStudentNameEl.textContent = `${name} ${surname}`;
+          this.paymentStudentYearEl.textContent = year;
+     }
+
      //*****************//
      markInput(inputEl, action) {
           const checkmark =

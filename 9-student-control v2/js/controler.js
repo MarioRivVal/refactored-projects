@@ -140,6 +140,8 @@ const controlToggleOptions = async function (target) {
           };
 
           viewApp.btnPaymentEl.onclick = () => {
+               console.log(model.selectedYear); // CONSOLE
+
                if (!model.studentDataObj.payments[model.selectedYear]) {
                     model.studentDataObj = viewPayments.setPayments(
                          model.studentDataObj,
@@ -151,6 +153,12 @@ const controlToggleOptions = async function (target) {
                          model.selectedYear
                     );
                }
+
+               viewPayments.displayPlayingStudent(
+                    model.studentDataObj.name,
+                    model.studentDataObj.surname,
+                    model.selectedYear
+               );
 
                viewPayments.addHandlerMarkInput();
 
