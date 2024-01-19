@@ -14,8 +14,19 @@ class ViewInfo {
 
      //*****************//
      displayStudentInfo(studentData) {
-          const { address, quota, city, dni, name, surname, phone, date, id } =
-               studentData;
+          console.log(studentData); // CONSOLE
+          const {
+               address,
+               quota,
+               city,
+               dni,
+               name,
+               surname,
+               phone,
+               date,
+               id,
+               reason,
+          } = studentData;
 
           this.infoBoxEl.dataset.id = id;
 
@@ -46,7 +57,11 @@ class ViewInfo {
                 </div>
                 <div class="info-group">
                     <p>Cuota:</p>
-                    <span class="info-date">${quota}€</span>
+                    <span class="info-quota">${quota}€</span>
+                </div>
+                <div class="info-group">
+                    <p>Concepto:</p>
+                    <span class="info-reason">${reason}</span>
                 </div>
              
    

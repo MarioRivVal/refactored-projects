@@ -19,10 +19,8 @@
           text-transform: uppercase;
           font-weight: 300;
           @include border-hard;
-
-          & h1 {
-               grid-column: 1/-1;
-               background-color: $color-venus-light;
+          background-color: $color-venus-light & h1 {
+               grid-column: 1/2;
                border-bottom: 1px solid $color-venus;
                border-top-right-radius: 5px;
                border-top-left-radius: 5px;
@@ -42,7 +40,7 @@
                text-transform: uppercase;
                font-family: inherit;
                border: none;
-               background-color: none;
+
                cursor: pointer;
           }
           & .btn-print {
@@ -51,6 +49,15 @@
 
           & .btn-title:hover {
                background-color: $color-eunry;
+          }
+
+          & .icon-conf {
+               display: inline-block;
+               width: 1em;
+               height: 1em;
+               stroke-width: 0;
+               stroke: currentColor;
+               fill: currentColor;
           }
      }
 

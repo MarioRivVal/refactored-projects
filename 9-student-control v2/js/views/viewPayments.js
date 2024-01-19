@@ -21,7 +21,6 @@ class ViewPayments {
      //*****************//
      setPayments(studentData, selectedYear) {
           const { payments } = studentData;
-          console.log(studentData); // CONSOLE
 
           const newStudentPayments = {
                ...studentData,

@@ -11,6 +11,7 @@ class Model {
           this.selectedMonths = null;
 
           this.elementsToPrint = [];
+          this.billNumber = 0;
 
           this.editMode = false;
 
@@ -46,7 +47,18 @@ class Model {
 
                     objectStore.createIndex("dni", "dni", { unique: true });
                     objectStore.createIndex("id", "id", { unique: true });
+
+                    ///////////////////////////
+                    // Create a separate object store for the bill number
+                    const billStore = db.createObjectStore("billNumber", {
+                         autoIncrement: true,
+                    });
+
+                    // Add the initial bill number
+                    billStore.add({ number: 0 });
                };
+
+               ///////////////////////
 
                request.onsuccess = () => {
                     this.db = request.result;
@@ -55,6 +67,7 @@ class Model {
           });
      }
 
+     // STUDENTS DATA
      //*****************//
      addStudentDB() {
           const transaction = this.db.transaction("estudiantes", "readwrite");
@@ -128,6 +141,67 @@ class Model {
                };
 
                request.onerror = (e) => {
+                    reject(e.target.error);
+               };
+          });
+     }
+
+     // BILL NUMBER VALUE
+     //*****************//
+
+     updateBillNumber(newNumber) {
+          const transaction = this.db.transaction("billNumber", "readwrite");
+          const objectStore = transaction.objectStore("billNumber");
+
+          return new Promise((resolve, reject) => {
+               const request = objectStore.openCursor();
+
+               request.onsuccess = (e) => {
+                    const cursor = e.target.result;
+                    if (cursor) {
+                         const updatedData = {
+                              ...cursor.value,
+                              number: newNumber,
+                         };
+                         const updateRequest = cursor.update(updatedData);
+
+                         updateRequest.onsuccess = () => {
+                              resolve(updatedData.number);
+                         };
+
+                         updateRequest.onerror = (e) => {
+                              reject(e.target.error);
+                         };
+                    } else {
+                         reject(new Error("No bill number found"));
+                    }
+               };
+
+               request.onerror = (e) => {
+                    reject(e.target.error);
+               };
+          });
+     }
+
+     //*****************//
+     getBillNumber() {
+          const transaction = this.db.transaction("billNumber", "readonly");
+          const objectStore = transaction.objectStore("billNumber");
+
+          return new Promise((resolve, reject) => {
+               const request = objectStore.openCursor();
+
+               request.onsuccess = (e) => {
+                    const cursor = e.target.result;
+                    if (cursor) {
+                         resolve(cursor.value.number);
+                    } else {
+                         reject(new Error("No bill number found"));
+                    }
+               };
+
+               request.onerror = (e) => {
+                    console.error("Error getting bill number:", e.target.error);
                     reject(e.target.error);
                };
           });

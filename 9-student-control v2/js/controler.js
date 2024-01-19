@@ -7,6 +7,7 @@ import viewForm from "./views/viewForm.js";
 import viewInfo from "./views/viewInfo.js";
 import viewPayments from "./views/viewPayments.js";
 import viewPrint from "./views/viewPrint.js";
+import viewConf from "./views/viewConf.js";
 
 window.addEventListener("DOMContentLoaded", () => {
      if ("serviceWorker" in navigator) {
@@ -70,6 +71,7 @@ const controlSubmitForm = async function () {
 
      if (!model.editMode) {
           try {
+               console.log(getFormData()); // CONSOLE
                createNewStudentObj(getFormData());
 
                await model.addStudentDB();
@@ -140,8 +142,6 @@ const controlToggleOptions = async function (target) {
           };
 
           viewApp.btnPaymentEl.onclick = () => {
-               console.log(model.selectedYear); // CONSOLE
-
                if (!model.studentDataObj.payments[model.selectedYear]) {
                     model.studentDataObj = viewPayments.setPayments(
                          model.studentDataObj,
@@ -264,6 +264,7 @@ const controlSelectItemsToPrint = function (e) {
                     ...model.studentDataObj,
                     year: model.selectedYear,
                     paidMonths,
+                    // billsNumber: paidMonths.length,
                },
           ];
      } else {
@@ -276,8 +277,15 @@ const controlSelectItemsToPrint = function (e) {
 };
 
 //*****************//
-const controlLoadPrintPage = function () {
-     viewPrint.loadPrintPage(model.elementsToPrint);
+const controlLoadPrintPage = async function () {
+     model.billNumber = await model.getBillNumber();
+
+     console.log(model.elementsToPrint); // CONSOLE
+     viewPrint.loadPrintPage(
+          model.elementsToPrint,
+          model.billNumber,
+          model.updateBillNumber.bind(model)
+     );
      model.elementsToPrint = [];
      viewPrint.allCheckboxesPrintEl = document.querySelectorAll(
           ".print_checkbox-input"
@@ -286,6 +294,14 @@ const controlLoadPrintPage = function () {
           viewPayments.markInput(input, "deactivate");
      });
 };
+
+//*****************//
+const controlChangeBillNumber = async function () {
+     helper.toggleWindow("open", [viewConf.confBoxEl, viewConf.confEl]);
+     const billNumber = await model.getBillNumber();
+     viewConf.displayBillNumber(billNumber);
+};
+
 //*****************//
 const init = async function () {
      await model.createDB();
@@ -299,6 +315,7 @@ const init = async function () {
      viewApp.addHandlerChangeYear(controlChangeYear);
      viewApp.addHandlerChangeMonths(controlChangeMonths);
      viewApp.addHandlerToggleOptions(controlToggleOptions);
+     viewApp.addHandlerChangeBillNumberBnt(controlChangeBillNumber);
 
      viewForm.addHandlerCancelBtn(controlCancelForm);
      viewForm.addHandlerSubmitForm(controlSubmitForm);
@@ -311,6 +328,7 @@ const init = async function () {
 
      model.selectedYear = viewApp.readYearValue();
      model.selectedMonths = viewApp.readMonthValue(model.quartersMonth);
+     // model.billNumber = await model.getBillNumber();
 
      upDateDisplay();
 };

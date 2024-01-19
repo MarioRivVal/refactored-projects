@@ -28,3 +28,20 @@
           height: 2rem;
      }
 }
+
+.btn-edit-bill {
+     width: fit-content;
+     height: fit-content;
+     padding: 1rem;
+     @include border-light;
+     font-family: inherit;
+     cursor: pointer;
+     background-color: $color-eunry;
+     color: inherit;
+     justify-self: center;
+     align-self: center;
+
+     &:hover {
+          background-color: $color-venus-light;
+     }
+}

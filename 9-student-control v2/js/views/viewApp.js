@@ -10,6 +10,7 @@ class ViewApp {
           this.yearSelectEl = document.querySelector("#year-select");
           this.monthSelectEl = document.querySelector("#month-select");
           this.newStudentBtnEl = document.querySelector(".btn-new-student");
+          this.changeBillNumberBtnEl = document.querySelector(".btn-edit-bill");
 
           this.studentsListEl = document.querySelector(".main_students-list");
           this.studentOptions = null;
@@ -33,7 +34,7 @@ class ViewApp {
      //*****************//
      setCurrentYear(currentYear) {
           this.yearSelectEl.querySelectorAll("option").forEach((opt) => {
-               if (opt.value === currentYear) {
+               if (+opt.value === currentYear) {
                     this.yearSelectEl.value = opt.value;
                }
           });
@@ -229,6 +230,12 @@ class ViewApp {
      //*****************//
      addHandlerChangeMonths(handler) {
           this.monthSelectEl.addEventListener("change", () => {
+               handler();
+          });
+     }
+     //*****************//
+     addHandlerChangeBillNumberBnt(handler) {
+          this.changeBillNumberBtnEl.addEventListener("click", () => {
                handler();
           });
      }

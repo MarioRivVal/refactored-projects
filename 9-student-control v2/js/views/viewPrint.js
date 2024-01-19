@@ -1,14 +1,17 @@
 import helper from "../helpers.js";
+// import model from "../model.js";
 
 class ViewPrint {
      constructor() {
           this.allCheckboxesPrintEl = null;
           this.btnPrintEl = document.querySelector(".btn-print");
           this.printStyle =
-               "*,*::before,*::after {margin: 0;padding: 0;box-sizing: inherit;}html {font-size: 62.5%;@media only screen and (max-width: 56.25em){font-size: 50%;}@media only screen and (max-width:37.5em) {font-size: 37.5%;}}body{position: relative;box-sizing: border-box;display: flex;flex-direction: column;font-family:'lato',sans-serif;color: #4a4e68;background-color: #4a4e68;}.all-bills { display: grid;grid-template-columns: repeat(2, 1fr);grid-template-rows: repeat(4, 1fr);background-color: antiquewhite;width: 210mm;border: 1px solid black;}.bill {padding: 1.5rem;background-color: azure; display: flex;flex-direction: column;gap: 1rem; align-items: center;justify-content: space-between; border: 2px solid #9a8d98; border-radius: 5px;page-break-inside: avoid;}.bill .paid {font-size: 1.6rem;text-transform: uppercase;font-weight: 700;}.paid-month {display: flex;gap: 0.5rem;text-transform: uppercase;font-size: 1.6rem;font-weight: 700;}.student-info { align-self: flex-start;}.student-info > * {margin-bottom: 1rem;font-size:1.6rem;}.details { display: flex;gap: 0.5rem;}.footer { width: 100%;display: flex; justify-content: space-around;}.footer > div > p:last-child {padding: 0 2rem;font-size: 1.2rem;text-transform: uppercase;border-top: 1px solid #9a8d98;}.sign-box p {margin-top:14px;}.date-box .date {text-align: center;font-size: 1.2rem;}";
+               "*,*::before,*::after {margin: 0;padding: 0;box-sizing: inherit;}html {font-size: 62.5%;@media only screen and (max-width: 56.25em){font-size: 50%;}@media only screen and (max-width:37.5em) {font-size: 37.5%;}}body{position: relative;box-sizing: border-box;display: flex;flex-direction: column;font-family:'lato',sans-serif;color: #4a4e68;background-color: #4a4e68;}.all-bills { display: grid;grid-template-columns: repeat(2, 1fr);grid-template-rows: repeat(3, 1fr);background-color: antiquewhite;width: 210mm;border: 1px solid black;}.bill {padding: 1.5rem;background-color: azure; display: flex;flex-direction: column;gap: 1rem; align-items: center;justify-content: space-between; border: 2px solid #9a8d98; border-radius: 5px;page-break-inside: avoid;}.bill .paid {font-size: 1.6rem;text-transform: uppercase;font-weight: 700;}.paid-month {display: flex;gap: 0.5rem;text-transform: uppercase;font-size: 1.6rem;font-weight: 700;}.student-info { align-self: flex-start;}.student-info > * {margin-bottom: 1rem;font-size:1.6rem;}.details { display: flex;gap: 0.5rem;}.footer { width: 100%;display: flex; justify-content: space-around;}.footer > div > p:last-child {padding: 0 2rem;font-size: 1.2rem;text-transform: uppercase;border-top: 1px solid #9a8d98;}.sign-box p {margin-top:14px;}.date-box .date {text-align: center;font-size: 1.2rem;}";
      }
      //*****************//
-     loadPrintPage(elementsToPrint) {
+     loadPrintPage(elementsToPrint, billNumber, updateBillNumberFunc) {
+          let newBillNumber = billNumber;
+          console.log(billNumber); // CONSOLE
           const htmlToPrint = [];
 
           elementsToPrint.forEach((el) => {
@@ -21,14 +24,17 @@ class ViewPrint {
                     dni,
                     year,
                     paidMonths,
+                    reason,
                } = el;
 
                for (let i = 0; i < paidMonths.length; i++) {
+                    newBillNumber = billNumber++;
                     const billHTML = `
             <div class="bill">
                     <div class="paid-month">
                         <p class="month">${paidMonths[i]}</p>
                         <p class="year">${year}</p>
+                        <p class="bill-number"> -- N: ${newBillNumber + 1}</p>
                     </div>
                     <div class="student-info">
                         <div>
@@ -48,6 +54,10 @@ class ViewPrint {
                             <p class="address">${address}</p>
                             <p class="city">${city}</p>
                             </div>
+                        </div>
+                        <div>
+                            <h4>Concepto:</h4>
+                            <p class="reason">${reason}</p>           
                         </div>
                     </div>
                     
@@ -69,6 +79,8 @@ class ViewPrint {
                }
           });
           if (htmlToPrint.length) this.printBills(htmlToPrint);
+
+          updateBillNumberFunc(newBillNumber + 1);
      }
 
      printBills(htmls) {
