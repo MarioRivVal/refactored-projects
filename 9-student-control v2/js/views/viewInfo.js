@@ -14,7 +14,6 @@ class ViewInfo {
 
      //*****************//
      displayStudentInfo(studentData) {
-          console.log(studentData); // CONSOLE
           const {
                address,
                quota,

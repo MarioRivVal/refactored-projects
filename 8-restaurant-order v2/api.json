@@ -1,0 +1,304 @@
+{
+    "items": [
+        {
+            "id": "001",
+            "name": "Bruschetta",
+            "price": 5.99,
+            "category": "starters"
+        },
+        {
+            "id": "002",
+            "name": "Caprese Salad",
+            "price": 6.99,
+            "category": "starters"
+        },
+        {
+            "id": "003",
+            "name": "Garlic Bread",
+            "price": 4.99,
+            "category": "starters"
+        },
+        {
+            "id": "004",
+            "name": "Minestrone Soup",
+            "price": 5.99,
+            "category": "starters"
+        },
+        {
+            "id": "005",
+            "name": "Calamari",
+            "price": 8.99,
+            "category": "starters"
+        },
+        {
+            "id": "006",
+            "name": "Antipasto Platter",
+            "price": 9.99,
+            "category": "starters"
+        },
+        {
+            "id": "007",
+            "name": "Margherita Pizza",
+            "price": 10.99,
+            "category": "pizzas"
+        },
+        {
+            "id": "008",
+            "name": "Pepperoni Pizza",
+            "price": 12.99,
+            "category": "pizzas"
+        },
+        {
+            "id": "009",
+            "name": "Quattro Formaggi Pizza",
+            "price": 13.99,
+            "category": "pizzas"
+        },
+        {
+            "id": "010",
+            "name": "Capricciosa Pizza",
+            "price": 11.99,
+            "category": "pizzas"
+        },
+        {
+            "id": "011",
+            "name": "Carbonara",
+            "price": 14.99,
+            "category": "pasta"
+        },
+        {
+            "id": "012",
+            "name": "Bolognese",
+            "price": 12.99,
+            "category": "pasta"
+        },
+        {
+            "id": "013",
+            "name": "Aglio e Olio",
+            "price": 11.99,
+            "category": "pasta"
+        },
+        {
+            "id": "014",
+            "name": "Pesto",
+            "price": 13.99,
+            "category": "pasta"
+        },
+        {
+            "id": "015",
+            "name": "Tiramisu",
+            "price": 7.99,
+            "category": "desserts"
+        },
+        {
+            "id": "016",
+            "name": "Cannoli",
+            "price": 6.99,
+            "category": "desserts"
+        },
+        {
+            "id": "017",
+            "name": "Panna Cotta",
+            "price": 8.99,
+            "category": "desserts"
+        },
+        {
+            "id": "018",
+            "name": "Gelato",
+            "price": 5.99,
+            "category": "desserts"
+        },
+        {
+            "id": "019",
+            "name": "Espresso",
+            "price": 2.99,
+            "category": "drinks"
+        },
+        {
+            "id": "020",
+            "name": "Cappuccino",
+            "price": 3.99,
+            "category": "drinks"
+        },
+        {
+            "id": "021",
+            "name": "Limoncello",
+            "price": 4.99,
+            "category": "drinks"
+        },
+        {
+            "id": "022",
+            "name": "Chianti",
+            "price": 29.99,
+            "category": "drinks"
+        },
+        {
+            "id": "023",
+            "name": "Cesar Salad",
+            "price": 7.99,
+            "category": "starters"
+        },
+        {
+            "id": "024",
+            "name": "Mushroom Risotto",
+            "price": 13.99,
+            "category": "pasta"
+        },
+        {
+            "id": "025",
+            "name": "Penne Arrabbiata",
+            "price": 10.99,
+            "category": "pasta"
+        },
+        {
+            "id": "026",
+            "name": "Cannelloni",
+            "price": 11.99,
+            "category": "pasta"
+        },
+        {
+            "id": "027",
+            "name": "Peach Melba",
+            "price": 6.99,
+            "category": "desserts"
+        },
+        {
+            "id": "028",
+            "name": "Tartufo",
+            "price": 8.99,
+            "category": "desserts"
+        },
+        {
+            "id": "029",
+            "name": "Limoncello Sorbet",
+            "price": 5.99,
+            "category": "desserts"
+        },
+        {
+            "id": "030",
+            "name": "Peroni",
+            "price": 4.99,
+            "category": "drinks"
+        },
+        {
+            "id": "031",
+            "name": "Negroni",
+            "price": 6.99,
+            "category": "drinks"
+        },
+        {
+            "id": "032",
+            "name": "Prosecco",
+            "price": 24.99,
+            "category": "drinks"
+        },
+        {
+            "id": "033",
+            "name": "Focaccia",
+            "price": 5.99,
+            "category": "starters"
+        },
+        {
+            "id": "034",
+            "name": "Ravioli",
+            "price": 12.99,
+            "category": "pasta"
+        },
+        {
+            "id": "035",
+            "name": "Linguine Vongole",
+            "price": 14.99,
+            "category": "pasta"
+        },
+        {
+            "id": "036",
+            "name": "Lasagna",
+            "price": 11.99,
+            "category": "pasta"
+        },
+        {
+            "id": "037",
+            "name": "Cannoli Siciliani",
+            "price": 7.99,
+            "category": "desserts"
+        },
+        {
+            "id": "038",
+            "name": "Torta della Nonna",
+            "price": 9.99,
+            "category": "desserts"
+        },
+        {
+            "id": "039",
+            "name": "Affogato",
+            "price": 6.99,
+            "category": "desserts"
+        },
+        {
+            "id": "040",
+            "name": "Aperol Spritz",
+            "price": 5.99,
+            "category": "drinks"
+        },
+        {
+            "id": "041",
+            "name": "Limoncello Spritz",
+            "price": 6.99,
+            "category": "drinks"
+        },
+        {
+            "id": "042",
+            "name": "Barolo",
+            "price": 49.99,
+            "category": "drinks"
+        },
+        {
+            "id": "043",
+            "name": "Insalata Caprese",
+            "price": 8.99,
+            "category": "starters"
+        },
+        {
+            "id": "044",
+            "name": "Gnocchi",
+            "price": 11.99,
+            "category": "pasta"
+        },
+        {
+            "id": "045",
+            "name": "Spaghetti Carbonara",
+            "price": 13.99,
+            "category": "pasta"
+        },
+        {
+            "id": "046",
+            "name": "Tortellini",
+            "price": 12.99,
+            "category": "pasta"
+        },
+        {
+            "id": "047",
+            "name": "Cannoli alla Nutella",
+            "price": 8.99,
+            "category": "desserts"
+        },
+        {
+            "id": "048",
+            "name": "Tiramisu al Cioccolato",
+            "price": 9.99,
+            "category": "desserts"
+        },
+        {
+            "id": "049",
+            "name": "Gelato al Pistacchio",
+            "price": 6.99,
+            "category": "desserts"
+        },
+        {
+            "id": "050",
+            "name": "Limoncello Martini",
+            "price": 7.99,
+            "category": "drinks"
+        }
+    ]
+}

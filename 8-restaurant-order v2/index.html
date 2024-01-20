@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta
+               name="viewport"
+               content="width=device-width, initial-scale=1.0"
+          />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+               href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;500;700&family=Dancing+Script:wght@700&family=Source+Code+Pro:wght@300;400;500;600&display=swap"
+               rel="stylesheet"
+          />
+          <link rel="stylesheet" href="css/style.css" />
+          <script defer src="js/controler.js" type="module"></script>
+
+          <title>Restaurant Order and Tips</title>
+     </head>
+     <body>
+          <!--SECTION INITIAL -->
+          <div class="container">
+               <div class="title">
+                    <h1>- That' s Amore -</h1>
+               </div>
+               <div class="select-table">
+                    <p class="select-table">Select a table</p>
+               </div>
+
+               <div class="date-box">
+                    <p class="current-date"></p>
+                    <p class="current-time"></p>
+               </div>
+
+               <div class="tables">
+                    <span class="table table-round table-1" data-num="1"
+                         >1</span
+                    >
+                    <span class="table table-round table-2" data-num="2"
+                         >2</span
+                    >
+                    <span class="table table-round table-3" data-num="3"
+                         >3</span
+                    >
+                    <span class="table table-round table-4" data-num="4"
+                         >4</span
+                    >
+                    <span class="table table-round table-5" data-num="5"
+                         >5</span
+                    >
+                    <span class="bar"></span>
+                    <span class="table table-round table-6" data-num="6"
+                         >6</span
+                    >
+                    <span class="table table-square table-7" data-num="7"
+                         >7</span
+                    >
+                    <span class="table table-square table-8" data-num="8"
+                         >8</span
+                    >
+                    <span class="table table-square table-9" data-num="9"
+                         >9</span
+                    >
+                    <span class="table table-square table-10" data-num="10"
+                         >10</span
+                    >
+               </div>
+
+               <!-- SECTION MODAL -->
+               <div class="modal-container">
+                    <div class="modal">
+                         <div class="modal_date-box">
+                              <p class="current-date"></p>
+                              <p class="current-time"></p>
+                         </div>
+
+                         <div class="main-box">
+                              <!-- SECTION CATEGORIES -->
+                              <div class="categories">
+                                   <div class="category category-starters">
+                                        <h2
+                                             class="secondary-title category_title"
+                                        >
+                                             Starters
+                                        </h2>
+
+                                        <ul class="category_list"></ul>
+                                   </div>
+                                   <div class="category category-pasta">
+                                        <h2
+                                             class="secondary-title category_title"
+                                        >
+                                             Pasta
+                                        </h2>
+                                        <ul class="category_list"></ul>
+                                   </div>
+
+                                   <div class="category category-pizzas">
+                                        <h2
+                                             class="secondary-title category_title"
+                                        >
+                                             Pizza
+                                        </h2>
+                                        <ul class="category_list"></ul>
+                                   </div>
+                                   <div class="category category-desserts">
+                                        <h2
+                                             class="secondary-title category_title"
+                                        >
+                                             Desserts
+                                        </h2>
+                                        <ul class="category_list"></ul>
+                                   </div>
+                                   <div class="category category-drinks">
+                                        <h2
+                                             class="secondary-title category_title"
+                                        >
+                                             Drinks
+                                        </h2>
+                                        <ul class="category_list"></ul>
+                                   </div>
+                              </div>
+                              <!-- SECTION ORDER -->
+                              <div class="order">
+                                   <h2 class="secondary-title">Order</h2>
+                                   <ul class="order_list"></ul>
+                              </div>
+                              <!-- SECTION ALERT -->
+
+                              <div class="alert-box">
+                                   <div class="alert">
+                                        <p class="alert-text">Add an order</p>
+                                   </div>
+                              </div>
+                              <!-- SECTION TIPS -->
+                              <div class="tips">
+                                   <h2 class="secondary-title">Add a tip</h2>
+
+                                   <form action="#" class="tips_options">
+                                        <div class="option">
+                                             <input
+                                                  id="0"
+                                                  type="radio"
+                                                  name="tip"
+                                                  value="0"
+                                                  checked
+                                             />
+                                             <label for="0">0%</label>
+                                        </div>
+                                        <div class="option">
+                                             <input
+                                                  id="10"
+                                                  type="radio"
+                                                  name="tip"
+                                                  value="10"
+                                             />
+                                             <label for="10">10%</label>
+                                        </div>
+                                        <div class="option">
+                                             <input
+                                                  id="25"
+                                                  type="radio"
+                                                  name="tip"
+                                                  value="25"
+                                             />
+                                             <label for="25">25%</label>
+                                        </div>
+                                        <div class="option">
+                                             <input
+                                                  id="50"
+                                                  type="radio"
+                                                  name="tip"
+                                                  value="50"
+                                             />
+                                             <label for="50">50%</label>
+                                        </div>
+                                   </form>
+                              </div>
+
+                              <!-- SECTION BILL -->
+                              <div class="bill">
+                                   <h2 class="secondary-title">Bill</h2>
+                                   <div
+                                        class="bill_box"
+                                        id="bill_print-section"
+                                   >
+                                        <div class="bill_restaurant">
+                                             <h3>That's Amore</h3>
+                                             <div>
+                                                  <p>Via Ana Roscia, 15</p>
+                                                  <p>22690</p>
+                                                  <p>Roma</p>
+                                             </div>
+                                        </div>
+
+                                        <div class="bill_title">
+                                             <h3>Bill</h3>
+                                        </div>
+
+                                        <div class="bill_date-box">
+                                             <div>
+                                                  <p class="bill_date"></p>
+                                                  <p class="bill_time"></p>
+                                             </div>
+                                             <p class="bill_table">Table</p>
+                                        </div>
+
+                                        <div class="bill_items-box">
+                                             <div class="bill_titles">
+                                                  <h3>N.</h3>
+                                                  <h3>Products</h3>
+                                                  <h3>Price</h3>
+                                                  <h3>Total</h3>
+                                             </div>
+
+                                             <div class="bill_items"></div>
+                                        </div>
+
+                                        <div class="bill_tips">
+                                             <div class="tip">
+                                                  <p class="tip_percentual">
+                                                       tip(%):
+                                                  </p>
+                                                  <p class="tip_amount"></p>
+                                             </div>
+
+                                             <p class="total">
+                                                  Total: <span></span>
+                                             </p>
+                                        </div>
+
+                                        <div class="bill_full-total">
+                                             <p>Total: <span></span></p>
+                                        </div>
+
+                                        <h3 class="bill_bye">Arrivederci</h3>
+                                   </div>
+
+                                   <button class="btn btn-green bill_button">
+                                        Print bill
+                                   </button>
+                              </div>
+                         </div>
+
+                         <div class="modal_btns">
+                              <button class="btn btn-red btn-cancel">
+                                   Cancel
+                              </button>
+                              <button class="btn btn-green btn-confirm">
+                                   Confirm
+                              </button>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </body>
+</html>

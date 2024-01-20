@@ -224,6 +224,10 @@
           align-items: center;
           gap: 1rem;
 
+          & label {
+               font-size: $font-small;
+          }
+
           & input {
                width: 8rem;
                padding: 0.5rem;

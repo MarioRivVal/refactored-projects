@@ -1,0 +1,164 @@
+.modal-container {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.336);
+    backdrop-filter: blur(10px);
+    transition: all 0.2s;
+    opacity: 0;
+    visibility: hidden;
+}
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50rem;
+    border-radius: 5px;
+    background-color: $color-white-light;
+    transform: translate(-50%, -50%) scale(0.2);
+    transition: all 0.3s;
+    transition-delay: 0.2s;
+
+    @include respond(phone) {
+        width: 90%;
+    }
+}
+
+.modal_date-box {
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+.main-box {
+    position: relative;
+    height: 80vh;
+    border: 1px solid $color-green;
+    border-radius: 5px;
+    margin: 1rem;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: $color-white-light;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: $color-green;
+        border-radius: 6px;
+    }
+
+    .category {
+        border-bottom: 1px solid $color-green;
+        cursor: pointer;
+
+        &:nth-child(odd) {
+            background-color: $color-green-light-1;
+        }
+        &:nth-child(even) {
+            background-color: $color-green-light-2;
+        }
+
+        &_list {
+            max-height: 0px;
+            overflow: hidden;
+            transition: all 0.3s ease-in;
+
+            font-size: $font-medium;
+            background-color: $color-white-light;
+
+            & > *:not(:last-child) {
+                margin-bottom: 1rem;
+            }
+        }
+        &_product {
+            display: flex;
+            justify-content: space-between;
+            border-left: 2px solid $color-green;
+            padding-left: 0.5rem;
+
+            &:active {
+                background-color: $color-orange;
+            }
+        }
+    }
+}
+
+.order {
+    position: relative;
+    padding: 2rem 0;
+    border-bottom: 1px solid $color-green;
+
+    &_list {
+        padding-left: 1rem;
+
+        & > *:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+    }
+
+    &_item {
+        display: grid;
+        grid-template-columns: 3fr 1fr 1fr;
+        justify-items: center;
+        align-items: center;
+        border-left: 2px solid $color-green;
+        padding-left: 0.5rem;
+
+        & > *:first-child {
+            justify-self: left;
+        }
+
+        & p,
+        & span {
+            font-size: $font-medium;
+        }
+    }
+}
+
+.tips {
+    padding: 2rem 0;
+    border-bottom: 1px solid $color-green;
+
+    &_options {
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-around;
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: $font-medium;
+        }
+    }
+}
+
+.modal_btns {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+}
+
+// SECTION FUNCTIONALITY
+
+.category .list-open {
+    max-height: 100vh;
+    padding: 1rem;
+}
+
+.modal-container-open {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-container-open .modal-open {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+@media print {
+    #bill_print-section {
+        margin: 5px;
+    }
+}

@@ -30,7 +30,7 @@ class Model {
      //*****************//
      createDB() {
           return new Promise((resolve, reject) => {
-               const request = window.indexedDB.open("control estudiantes", 1);
+               const request = window.indexedDB.open("control estudiantes", 2);
 
                request.onerror = (e) => {
                     console.error("Error opening database:", e.target.error);
@@ -40,25 +40,29 @@ class Model {
                request.onupgradeneeded = (e) => {
                     const db = e.target.result;
 
-                    const objectStore = db.createObjectStore("estudiantes", {
-                         keyPath: "id",
-                         autoIncrement: true,
-                    });
+                    if (!db.objectStoreNames.contains("estudiantes")) {
+                         const objectStore = db.createObjectStore(
+                              "estudiantes",
+                              {
+                                   keyPath: "id",
+                                   autoIncrement: true,
+                              }
+                         );
 
-                    objectStore.createIndex("dni", "dni", { unique: true });
-                    objectStore.createIndex("id", "id", { unique: true });
+                         objectStore.createIndex("dni", "dni", {
+                              unique: true,
+                         });
+                         objectStore.createIndex("id", "id", { unique: true });
+                    }
 
-                    ///////////////////////////
-                    // Create a separate object store for the bill number
-                    const billStore = db.createObjectStore("billNumber", {
-                         autoIncrement: true,
-                    });
+                    if (!db.objectStoreNames.contains("billNumber")) {
+                         const billStore = db.createObjectStore("billNumber", {
+                              autoIncrement: true,
+                         });
 
-                    // Add the initial bill number
-                    billStore.add({ number: 0 });
+                         billStore.add({ number: 0 });
+                    }
                };
-
-               ///////////////////////
 
                request.onsuccess = () => {
                     this.db = request.result;

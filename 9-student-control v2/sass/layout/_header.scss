@@ -19,7 +19,9 @@
           text-transform: uppercase;
           font-weight: 300;
           @include border-hard;
-          background-color: $color-venus-light & h1 {
+          background-color: $color-venus-light;
+
+          & h1 {
                grid-column: 1/2;
                border-bottom: 1px solid $color-venus;
                border-top-right-radius: 5px;

@@ -1,5 +1,4 @@
 import helper from "../helpers.js";
-// import model from "../model.js";
 
 class ViewPrint {
      constructor() {
@@ -11,7 +10,7 @@ class ViewPrint {
      //*****************//
      loadPrintPage(elementsToPrint, billNumber, updateBillNumberFunc) {
           let newBillNumber = billNumber;
-          console.log(billNumber); // CONSOLE
+
           const htmlToPrint = [];
 
           elementsToPrint.forEach((el) => {
@@ -34,7 +33,9 @@ class ViewPrint {
                     <div class="paid-month">
                         <p class="month">${paidMonths[i]}</p>
                         <p class="year">${year}</p>
-                        <p class="bill-number"> -- N: ${newBillNumber + 1}</p>
+                        <p class="bill-number"> -- Factura N: ${
+                             newBillNumber + 1
+                        }</p>
                     </div>
                     <div class="student-info">
                         <div>

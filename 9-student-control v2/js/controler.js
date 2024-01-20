@@ -21,8 +21,8 @@ const checkEmptyInput = function () {
      return Array.from(viewForm.allInputsEl).some((el) => el.value === "");
 };
 //*****************//
-const getFormData = function () {
-     const formData = new FormData(viewForm.formEl);
+const getFormData = function (element) {
+     const formData = new FormData(element);
      return Object.fromEntries(formData);
 };
 //*****************//
@@ -71,8 +71,7 @@ const controlSubmitForm = async function () {
 
      if (!model.editMode) {
           try {
-               console.log(getFormData()); // CONSOLE
-               createNewStudentObj(getFormData());
+               createNewStudentObj(getFormData(viewForm.formEl));
 
                await model.addStudentDB();
                upDateDisplay();
@@ -280,7 +279,6 @@ const controlSelectItemsToPrint = function (e) {
 const controlLoadPrintPage = async function () {
      model.billNumber = await model.getBillNumber();
 
-     console.log(model.elementsToPrint); // CONSOLE
      viewPrint.loadPrintPage(
           model.elementsToPrint,
           model.billNumber,
@@ -297,9 +295,28 @@ const controlLoadPrintPage = async function () {
 
 //*****************//
 const controlChangeBillNumber = async function () {
+     viewApp.removeClientOptions();
      helper.toggleWindow("open", [viewConf.confBoxEl, viewConf.confEl]);
      const billNumber = await model.getBillNumber();
      viewConf.displayBillNumber(billNumber);
+};
+
+//*****************//
+const controlCancelConf = function () {
+     helper.toggleWindow("close", [viewConf.confBoxEl, viewConf.confEl]);
+};
+
+//*****************//
+const controlSubmitConf = async function (e) {
+     e.preventDefault();
+
+     const formData = getFormData(viewConf.formEl);
+     const value = +formData.billNumber;
+
+     await model.updateBillNumber(value);
+
+     helper.toggleWindow("close", [viewConf.confBoxEl, viewConf.confEl]);
+     viewConf.formEl.reset();
 };
 
 //*****************//
@@ -321,6 +338,9 @@ const init = async function () {
      viewForm.addHandlerSubmitForm(controlSubmitForm);
 
      viewInfo.addHandlerDeleteStudent(controlDeleteStudent);
+
+     viewConf.addHandlerCancelBtn(controlCancelConf);
+     viewConf.addHandlerSubmitBtn(controlSubmitConf);
 
      viewPayments.addHelperToSavePaymentBtn(controlSavePayment);
 

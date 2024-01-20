@@ -1,0 +1,130 @@
+.bill {
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &_box {
+        width: 60%;
+        padding: 1rem;
+        box-shadow: 0 0 10px -5px $color-black-dark;
+
+        font-family: "Source Code Pro", monospace;
+
+        @include respond(phone) {
+            width: 85%;
+        }
+    }
+
+    &_restaurant {
+        padding: 2rem 0;
+        border-bottom: 1px dashed $color-black-light;
+
+        & h3 {
+            font-family: "Dancing Script", cursive;
+            text-align: center;
+            font-size: 3.2rem;
+            letter-spacing: 1px;
+        }
+
+        & div {
+            display: flex;
+            justify-content: space-around;
+        }
+    }
+
+    &_title {
+        @include bill_section;
+
+        & h3 {
+            font-size: $font-small;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
+
+    &_date-box {
+        @include bill_section;
+        display: flex;
+        justify-content: space-between;
+
+        & div {
+            display: flex;
+            gap: 1rem;
+        }
+    }
+
+    &_items-box {
+        @include bill_section;
+
+        & ul {
+            display: grid;
+            grid-template-columns: 1fr 8fr 2fr 2fr;
+            justify-items: end;
+            gap: 0.5rem;
+            list-style: none;
+
+            & li:nth-child(-n + 2) {
+                justify-self: left;
+            }
+        }
+
+        & * h3 {
+            font-size: $font-smallest;
+            font-weight: 600;
+        }
+    }
+
+    &_titles {
+        display: grid;
+        grid-template-columns: 1fr 8fr 2fr 2fr;
+        gap: 0.5rem;
+        padding-bottom: 0.8rem;
+        border-bottom: 1px dashed $color-black-light;
+
+        & h3:nth-last-child(-n + 2) {
+            justify-self: right;
+        }
+    }
+
+    &_items {
+        padding-top: 0.8rem;
+    }
+
+    &_tips {
+        @include bill_section;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.8rem 0;
+
+        .tip {
+            display: flex;
+            gap: 0.5rem;
+        }
+    }
+
+    &_full-total {
+        @include bill-section;
+
+        & p {
+            font-size: $font-medium;
+            padding: 0.8rem 0;
+            text-align: right;
+        }
+    }
+
+    &_bye {
+        font-family: "Dancing Script", cursive;
+        font-size: $font-medium;
+        text-align: center;
+        padding: 2rem 0;
+        border-top: 1px dashed $color-black-light;
+    }
+
+    &_button {
+        width: fit-content;
+        height: fit-content;
+        margin-top: 2rem;
+    }
+}
