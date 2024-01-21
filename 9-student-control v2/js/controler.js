@@ -351,6 +351,7 @@ const init = async function () {
      // model.billNumber = await model.getBillNumber();
 
      upDateDisplay();
+     console.log("version 2");
 };
 
 init();

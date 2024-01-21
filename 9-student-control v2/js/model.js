@@ -30,7 +30,7 @@ class Model {
      //*****************//
      createDB() {
           return new Promise((resolve, reject) => {
-               const request = window.indexedDB.open("control estudiantes", 2);
+               const request = window.indexedDB.open("control estudiantes", 3);
 
                request.onerror = (e) => {
                     console.error("Error opening database:", e.target.error);

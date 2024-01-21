@@ -1,3 +1,4 @@
+// VERSION 2
 const staticCacheName = "site-static";
 const assets = [
      "/",
@@ -7,6 +8,7 @@ const assets = [
      "/js/helpers.js",
      "/js/model.js",
      "/js/views/viewApp.js",
+     "/js/views/viewConf.js",
      "/js/views/viewForm.js",
      "/js/views/viewInfo.js",
      "/js/views/viewPayments.js",
@@ -18,23 +20,18 @@ const assets = [
      "https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh7USSwaPGR_p.woff2",
 ];
 
-// installin service worker
 self.addEventListener("install", (evt) => {
-     // console.log("service worker has been installed");
-
      evt.waitUntil(
           caches.open(staticCacheName).then((cache) => {
                cache.addAll(assets);
           })
      );
+
+     self.skipWaiting();
 });
 
-// activate event
-self.addEventListener("active", (evt) => {
-     // console.log('service worker has been activated');
-});
+self.addEventListener("active", (evt) => {});
 
-// fetch event
 self.addEventListener("fetch", (evt) => {
      evt.respondWith(
           caches.match(evt.request).then((cacheRes) => {
